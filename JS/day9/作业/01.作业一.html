@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 200px;
+            background-color: #EAECF3;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-evenly;
+            padding: 5px 0;
+            border: 1px solid #000;
+        }
+
+        #box input {
+            width: 180px;
+            height: 50px;
+        }
+
+        #box .btn {
+            width: 180px;
+        }
+
+        #box .btn button {
+            width: 40px;
+            height: 40px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <p>实现+,-,*,/,%</p>
+    <div id="box">
+        <input type="text" id="result" value="0">
+        <div class="btn">
+            <button id="zuo">(</button>
+            <button id="you">)</button>
+            <button id="mo">%</button>
+            <button id="ac">AC</button>
+            <button id="n7">7</button>
+            <button id="n8">8</button>
+            <button id="n9">9</button>
+            <button id="chu">/</button>
+            <button id="n4">4</button>
+            <button id="n5">5</button>
+            <button id="n6">6</button>
+            <button id="cheng">*</button>
+            <button id="n1">1</button>
+            <button id="n2">2</button>
+            <button id="n3">3</button>
+            <button id="jian">-</button>
+            <button id="n0">0</button>
+            <button id="dian">.</button>
+            <button id="deng">=</button>
+            <button id="jia">+</button>
+        </div>
+    </div>
+    <script>
+        let num = ''
+        let res = 0;
+        let ys = ''
+        n0.onclick = function () {
+            num += '0'
+            result.value = num
+        }
+        n1.onclick = function () {
+            num += '1'
+            result.value = num
+        }
+        n2.onclick = function () {
+            num += '2'
+            result.value = num
+        }
+        n3.onclick = function () {
+            num += '3'
+            result.value = num
+        }
+        n4.onclick = function () {
+            num += '4'
+            result.value = num
+        }
+        n5.onclick = function () {
+            num += '5'
+            result.value = num
+        }
+        n6.onclick = function () {
+            num += '6'
+            result.value = num
+        }
+        n7.onclick = function () {
+            num += '7'
+            result.value = num
+        }
+        n8.onclick = function () {
+            num += '8'
+            result.value = num
+        }
+        n9.onclick = function () {
+            num += '9'
+            result.value = num
+        }
+        zuo.onclick = function () {
+            num += '('
+            result.value = num
+        }
+        you.onclick = function () {
+            num += ')'
+            result.value = num
+        }
+        chu.onclick = function () {
+            num += '/'
+            ys='/'
+            result.value = numd
+        }
+        cheng.onclick = function () {
+            num += '*'
+            ys = '*'
+            result.value = num
+        }
+        jia.onclick = function () {
+            num += '+'
+            ys = '+'
+            result.value = num
+        }
+        jian.onclick = function () {
+            num += '-'
+            ys = '-'
+            result.value = num
+        }
+        mo.onclick = function () {
+            num = '%';
+            ys = '%'
+            result.value = num
+        }
+        dian.onclick = function () {
+            num += '.'
+            result.value = num
+        }
+        ac.onclick = function () {
+            num = 0;
+            result.value = num
+        }
+        deng.onclick = function () {
+            //    res=eval(num)
+            //    result.value=res
+            //    num=''
+            let arr;
+            switch (ys) {
+                case '+':
+                    arr = num.split('+')
+                    res = +arr[0] + +arr[1]
+                    break;
+                case '-':
+                    arr = num.split('-')
+                    res = +arr[0] - +arr[1]
+                    break;
+                case '*':
+                    arr = num.split('*')
+                    res = +arr[0] * +arr[1]
+                    break;
+                case '/':
+                    arr = num.split('/')
+                    res = +arr[0]/+arr[1]
+                    break;
+                case '%':
+                    res = +arr[0] % +arr[1]
+                    arr = num.split('%')
+                    break;
+                default:
+                    console.log('输入数字');
+                    break;
+            }
+            result.value = res;
+            res=0;
+            num=''
+        }
+
+    </script>
+</body>
+
+</html>

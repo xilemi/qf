@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .father{
+            width: 300px;
+            /* height: 200px; */
+            background-color: antiquewhite;
+        }
+        .son{
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+            float: left;
+        }
+        /* .clearfix{
+            clear: both;
+        } */
+        /* .clearfix::after{
+            content: "";
+            display: block;
+            clear: both;
+            height: 0;
+            visibility: hidden;
+        } */
+        .clearfix::before,
+        .clearfix::after{
+            content: "";
+            display: table;
+        }
+        .clearfix::after{
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <!-- 清除浮动带来的高度塌陷的方法
+        问题的产生原因  父元素没有设置高度 ，由子元素进行撑开高度，子元素浮动脱离文档流 导致父元素高度塌陷
+        1.设置父级元素的高度
+        2.在高度塌陷的元素后添加空白元素，然后添加 clear：both属性
+        3.单伪元素清除，和2一样，只是添加元素的方式变成伪元素添加的方式
+        4.双伪元素，在元素前后添加table的伪元素，再对后面的伪元素clearboth
+
+
+        浮动的元素不会有高度塌陷和外边距塌陷
+
+
+
+        触发bfc
+        1.浮动
+        2.定位
+        3.overflow hidden auto
+        4.html根元素
+        5转成行内块
+
+    -->
+    <div class="father clearfix">
+        <div class="son"></divc>
+    </div>
+    <!-- <div class="clearfix"></div> -->
+</body>
+</html>

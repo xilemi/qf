@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+        欢迎。在这个型中，要求您对数字的每个数字进行平方并将它们连接起来。
+
+比如我们通过函数运行9119，就会出来811181，因为9 2就是81，1 2就是1。(81-1-1-81)
+
+示例 #2：765 的输入将/应该返回 493625，因为 7 2是 49，6 2是 36，而 5 2是 25。(49-36-25)
+
+注意：该函数接受一个整数并返回一个整数。
+
+快乐编码！ */
+        // 先拆分数字 再对数字进行平方 转成string后 进行拼接
+        function squareDigits(num) {
+            let arr=[];
+            while(num>0){
+                arr.push(num%10)
+                num=parseInt(num/10)
+            }
+            // 返回颠倒后的数组
+            arr.reverse() 
+            let num1=''
+            for(let item of arr){
+                console.log(item*item);
+                num1+=(item*item).toString()
+            }
+            return  +num1
+        }
+        console.log(squareDigits(3212));
+    </script>
+</body>
+
+</html>

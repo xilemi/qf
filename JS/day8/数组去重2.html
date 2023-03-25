@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 倒循环
+        // 先对数组进行排序，再相邻两个元素比较，从最后一个往前面比（i，i-1），有相同的删除i
+        function fn(arr){
+            arr.sort((a,b)=>{return a-b})
+            for(let i=arr.length-1;i>0;i--){
+                if(arr[i]==arr[i-1]){
+                    arr.splice(i,1)
+                }
+            }
+            return arr
+        }
+        let arr=[4357,4,4,6,26,1,1,21,1,1,1,1,1,1,1,266,234,64,762,2,45,26,46,324,62362]
+        console.log(fn(arr));
+    </script>
+</body>
+</html>

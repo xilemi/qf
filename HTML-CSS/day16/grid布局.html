@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        ul{
+            width: 300px;
+            height: 300px;
+            display: grid;
+            border: 1px solid;
+            /* grid-template-columns: 100px 100px 100px 100px 100px 100px; */
+            /* grid-template-columns: repeat(3,100px 100px 100px 100px); */
+            /* fr 片段  将父级元素进行划分 */
+            grid-template-columns: repeat(3,80px);
+            /* 等价于 100px 2fr 100px 2fr 100px 2fr  这里fr 将剩余的200px进行平分  */
+
+            /* grid-template-rows: 100px 100px; */
+            /* grid-template-rows: repeat(3,100px); */
+            /* 先将100px和 没有设置到的行的高度减掉 再来分fr */
+            grid-template-rows: repeat(3,80px);
+            /* grid-column-gap: 10px;
+            grid-row-gap: 10px; */
+            /* 如果设置固定的行高列高 不会影响子元素的大小 */
+            /* grid-gap: 10px; */
+            /* 元素在网格线内的位置 */
+            /* justify-items:stretch;
+              align-items: stretch; */
+            /* justify-items: center; */
+            /* align-items: center; */
+            /* 连写方式，先垂直后水平 */
+            /* place-items:center end ; */
+            /* 元素在父元素中的位置 */
+            /* place-content:end end; */
+            /* 操控元素 */
+            grid-template-areas: 
+                'a a a'
+                'd e f'
+                'g e i'
+            ;
+        }
+        /* 将第二个元素的位置搬到 i的位置 后面的依次向前 html结构不会变 */
+        /* ul>li:nth-of-type(2){
+            grid-area: i;
+        } */
+        /* 当两个元素都到同样的位置  显示结构在后面的元素 */
+        /* ul>li:nth-of-type(4){
+            grid-area: i;
+        }
+        ul>li:nth-of-type(1){
+            grid-area: f;
+        } */
+        /* 元素的合并 将元素固定 需要合并的元素设置为相同名字 注释掉多余的元素 会改变结构*/
+        /* ul>li:nth-of-type(1){
+            grid-area: a;
+        }
+        ul>li:nth-of-type(3){
+            grid-area: e;
+            place-self: end center;
+        } */
+        /* 写目标元素的行线列线开始和结束的时候  */
+        ul>li:nth-of-type(2){
+            /* width: 100px;
+            height: 100px; */
+            grid-area: 1/2/4/4;
+            place-self: center;
+        }
+        /* 行线开始/列线开始/行线结束/列线结束 换位置 直接开始加一 */
+        /* ul>li:nth-of-type(2){
+            grid-area: 3/2/4/3;
+        }
+        ul>li:nth-of-type(6){
+        grid-area: 2/1/3/2;
+        } */
+        li{
+            /* 可单独设置子元素的宽高样式 */
+            /* width: 50px;
+            height: 50px; */
+            list-style: none;
+        }
+        span{
+            background-color: blueviolet;
+        }
+    </style>
+</head>
+<body>
+    <!-- 1.确定行数和列数 
+         2.网格线条数为n+1，分水平和垂直方向
+         3.父元素的属性
+            1.display:grid 设置grid布局/inline-grid将父元素转行为行内网格 容易出现对齐问题（字号大小）
+                A.子集拉伸占满父级元素 默认 可自定义设置宽高
+                B.垂直排列(显示模式转换为block)，宽度占满父级元素 
+                C.放不下不压缩，和flex布局不同   
+            2.设置列宽 grid-template-columns:
+                grid-template-columns:100px 100px 几个值几列
+                grid-template-columns:repeat(3,100px 10%) 第一个参数重复的次数 第二个参数 重复的内容  百分比是相对父级的
+                fr单位  一份 1fr 2fr 1r 分三列 总共4份
+            3.设置行高 grid-template-rows:
+                grid-template-rows:100px 100px 几个值几列
+                grid-template-rows:repeat(3,100px 10%) 第一个参数重复的次数 第二个参数 重复的内容  百分比是相对父级的
+                fr单位  一份 1fr 2fr 1r 分三列 总共4份
+    
+            4.place-content place-items place-self 都是默认拉伸的 
+    
+    -->
+    <ul>
+        <li class="item item1">1</li>
+        <li class="item item2">2你哈你好年后你好你好你好你好</li>
+        <!-- <li class="item item3">3</li> -->
+        <li class="item item4">4</li>
+        <!-- <li class="item item5">5</li>
+        <li class="item item6">6</li> -->
+        <li class="item item7">7</li>
+        <!-- <li class="item item8">8</li>
+        <li class="item item9">9</li> -->
+        <!-- <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span> -->
+    </ul>
+    <script src="./getrandomcolor.js"></script> 
+</body>
+</html>

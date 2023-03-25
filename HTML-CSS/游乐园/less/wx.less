@@ -1,0 +1,45 @@
+@import "./common.less";
+@size:(1/37.5rem);
+
+section{
+    margin: 0 30*@size;
+    .imgs{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 36*@size 0 34*@size;
+        img{
+            width: 75*@size;
+            height: 75*@size;
+            margin-bottom: 13*@size;
+        }
+        p{
+            font-size: 18*@size;
+        }
+    }
+    &>p:nth-of-type(1){
+        width: 301*@size;
+        height: 48*@size;
+        font-size: 17*@size;
+        margin-bottom: 17*@size;
+    }
+    &>p:nth-of-type(2){
+        margin-left: 7*@size;
+        font-size: 15*@size;
+        margin-bottom: 48*@size;
+        color: #979797 ;
+        span{
+            font-size: 20*@size;
+            margin-right: 16*@size;
+        }
+    }
+    button{
+        width: 313*@size;
+        height: 47*@size;
+        background-color: #02BE00;
+        font-size: 18*@size;
+        color: #ffffff;
+        border: 0;
+        border-radius: 5*@size;
+    }
+}

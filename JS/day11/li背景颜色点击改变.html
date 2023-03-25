@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        li{
+            height: 50px;
+            background-color:bisque;
+        }
+        li.active{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li class="active">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+    </ul>
+    <script>
+        let lis=document.querySelectorAll('ul>li')
+        for(let i=0;i<lis.length;i++){
+            lis[i].onmouseenter=function(){
+                /* for(let j=0;j<lis.length;j++){
+                    lis[j].classList.remove('active')
+                } */
+                document.querySelector('li.active').classList.remove('active')
+                this.classList.add('active')
+            }
+        }
+    </script>
+</body>
+</html>

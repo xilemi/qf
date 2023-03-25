@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .box{
+            width: 1226px;
+            height: 614px;
+        }
+        .left{
+            width: 234px;
+            height: 614px;
+            float: left;
+            background-color: antiquewhite;
+            margin-right: 14px;
+        }
+        ul{
+            width: 978px;
+            height: 614px;
+            /* background-color: palegreen; */
+            list-style: none;
+            float: left;
+        }
+        li{
+            width: 234px;
+            height: 300px;
+            background-color: blue;
+            float: left;
+            margin-right: 14px;
+
+        }
+        ul :nth-child(4n){
+            margin-right: 0;
+        }
+        ul :nth-child(-n+4){
+            margin-bottom: 14px;
+        }
+       
+    </style>
+</head>
+<body>
+    <!-- 先分左右两块 右边的再分为8个小块 -->
+    <div class='box'>
+        <div class="left"></div>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+        
+</body>
+</html>

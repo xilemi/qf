@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 球球下落高度h 弹起系数 bounce  窗户高度window 球下落大于窗户高度可以看到 弹起的高度超过窗户也算可以看到，记录可以看到的次数
+        // 那么可以认为  球弹起只要超过窗户的高度，次数+2 ,下落为第一次
+        // 参数要求 h>0 bounc>0 bounce<1 window<h
+        function bouncingBall(h, bounce, window) {
+            let count = 1
+            if (h > 0 && (bounce > 0 && bounce < 1) && window < h) {
+                let res = h * bounce;
+                while (res > window) {
+                    count += 2;
+                    h = res;
+                    continue;
+                }
+            }
+            else {
+                return -1
+            }
+            return count
+        }
+        console.log(bouncingBall(3, 0.66, 1.5));
+
+
+    </script>
+</body>
+
+</html>

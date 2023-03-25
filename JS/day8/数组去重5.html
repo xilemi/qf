@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 使用Set()内置构造函数 不能有重复的 返回的伪数组 利用三点运算 转换为数组
+        let arr = [4357, 4, 4, 6, 26, 1, 1, 21, 1, 1, 1, 1, 1, 1, 1, 266, 234, 64, 762, 2, 45, 26, 46, 324, 62362]
+        let res=new Set(arr)
+        console.log([...res]);
+    </script>
+</body>
+
+</html>

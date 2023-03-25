@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+     let arr = new Array(5)
+        for(let i=0;i<arr.length;i++){
+            let temp = +prompt('输入数字')
+            if(isNaN(temp)){
+                alert('请输入数字')
+                i--
+            }
+            else{
+                arr[i]=temp
+            }
+        }
+    console.log(arr);
+        // let max1=arr[0];
+        // for(let i=1;i<arr.length;i++){
+        //     if(max1<arr[i]){
+        //         max1=arr[i]
+        //     }
+        // }
+        // console.log(arr);
+
+    let max=arr[0]
+    for(let i=1;i<arr.length;i++){
+        if(arr[i]>max){
+            max=arr[i]
+        }
+    }
+    console.log(max);
+    let sum=0;
+    for(let i=0;i<arr.length;i++){
+        sum+=arr[i]
+    }
+    console.log('数组的平均数为:',sum/arr.length);
+    console.log('数组的和为:',sum);
+    let temp
+    for(let i=0;i<arr.length-1;i++){
+        for(let j=0;j<arr.length-1-i;j++){
+            if(arr[j]>arr[j+1]){
+                temp=arr[j+1];
+                arr[j+1]=arr[j];
+                arr[j]=temp;
+            }
+        }
+    }
+    console.log('小到大排序为:',arr);
+    let newArr=[]
+    for(let i=0;i<arr.length;i++){
+        // indexOf找不到返回-1 找到返回下标(首次出现的下标)
+      if(arr.indexOf(arr[i])===-1){
+        newArr.push(arr[i])
+      }
+    }
+    // 去重
+    console.log('去重后:',newArr);
+   </script>
+</body>
+</html>

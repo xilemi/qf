@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 思路
+            第一个盒子 用作可视窗口
+            第二个盒子用于横向存放图片
+            移动第一个盒子的位置 达到轮播图的效果
+        
+        
+        */
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        div{
+            width: 160px;
+            height: 90px;
+            background-color: aquamarine;
+            border: 1px solid orange;
+            margin: 50px auto;
+            overflow: hidden;
+        }
+        ul{
+            width: 1120px;
+            animation: move 5s steps(7) infinite;
+            /* animation: move 2s  infinite; */
+        }
+        li{
+            float: left;
+        }
+        li img{
+            width: 160px;
+            height: 90px;
+        }
+        @keyframes move{
+            to{
+                transform: translateX(-1120px);
+            }
+        }
+        div:hover ul{
+            animation-play-state: paused;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <ul>
+            <li><img src="img/1.jpg" alt=""></li>
+            <li><img src="img/2.jpg" alt=""></li>
+            <li><img src="img/3.jpg" alt=""></li>
+            <li><img src="img/4.jpg" alt=""></li>
+            <li><img src="img/5.jpg" alt=""></li>
+            <li><img src="img/6.jpg" alt=""></li>
+            <li><img src="img/7.jpg" alt=""></li>
+            <!-- <li><img src="img/1.jpg" alt=""></li>
+            <li><img src="img/2.jpg" alt=""></li>
+            <li><img src="img/3.jpg" alt=""></li>
+        </ul> -->
+    </div>
+</body>
+</html>

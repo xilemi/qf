@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // let a = 1234;
+        // NaN 是number类型的值
+        console.log(typeof +true);
+        let c;
+        console.log(typeof c);
+        console.log(typeof null);
+        console.log(10 > true);
+        let k = -2;
+        console.log(++k);
+        console.log(k++);
+        // 此时k变为0
+        // console.log(++k);
+        // console.log(k);
+        // console.log(Boolean(-1));
+        let a = 1;
+        // const res = a > 0 ? 'aaa': 'bbb';
+        // console.log(res);
+        console.log(a>10? a++:a--);
+        console.log(a++? a++:a--);
+                    // 1 true 2 
+        // console.log(Boolean(''));
+        // const res =null||'aaa'
+        // console.log(res);
+        var score=77;
+        if(score>=90){
+            console.log('A');
+        }
+        else if(score>=80){
+            console.log('B');
+        }
+        else if(score>=70){
+            console.log('C');
+        }
+        else if(score>=60){
+            console.log('D');
+        }
+        else{
+            console.log('false');
+        }
+        // 三种弹窗 都会阻止代码运行 
+        // 返回值为 undefined
+        // console.log(alert(111)); 
+        //  确认返回 true 取消返回 false
+        // console.log(confirm('aaa'));
+        // 输入内容返回 内容 为string类型  取消返回null
+        console.log(prompt('2222'));
+    </script>
+</body>
+
+</html>

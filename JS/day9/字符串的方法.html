@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let str=' hd fjs adh 34y3wiy '
+        console.log(str);
+        console.log(str.charAt(1));
+        console.log(str.charCodeAt(1));
+        console.log(str.toLowerCase());
+        console.log(str.toUpperCase());
+        console.log(str.substr(0,4));
+        // 截取包前不包后
+        console.log(str.substring(0,4)); 
+        // 从下标开始到最后  
+        console.log(str.slice(1));
+        // 包前不包后 
+        console.log(str.slice(1,4));
+        // 负数表示 到倒数第几个
+        console.log(str.slice(1,-2));
+        // 查找 indexOf icludes 区分大小写
+        console.log(str.indexOf('f'));
+        console.log(str.lastIndexOf('r'));
+        console.log(str.includes('g'));
+        console.log(str.replace('d','666'));
+        console.log(str.replaceAll('d','666'));
+        console.log(str.repeat(2));
+        console.log(str.trim());
+        console.log(str.trimStart());
+        console.log(str.trimEnd());
+        console.log(str.trimLeft());
+        console.log(str.trimRight());
+        console.log(str.startsWith(' h'));
+        console.log(str.endsWith(''));
+    </script>
+    
+</body>
+</html>

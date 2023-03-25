@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+        function diffTime(t1) {
+            let d1 = +new Date(t1)
+            let now = +new Date()
+            console.log(new Date());
+            let res = (d1 - now) / 1000;
+            let day = parseInt(res / 3600 / 24);
+            let hours = parseInt((res % (3600 * 24)) / 3600);
+            let min = parseInt((res % 3600) / 60);
+            let sec = parseInt(res % 60);
+            let obj={
+                day,
+                hours,
+                min,
+                sec
+            }
+            // 写等于0是有问题
+            if (res > 0) {
+                return box.innerHTML = `${day}天${hours}时${min}分${sec}秒`
+            }
+            else {
+                clearInterval(timer)
+                return box.innerHTML = `时间到了`
+            }
+        }
+        let timer = setInterval(function () {
+            diffTime('2025-3-23 18:39')
+        }, 1000)
+
+    </script>
+</body>
+
+</html>

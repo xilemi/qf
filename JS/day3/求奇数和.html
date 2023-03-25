@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var index = 1;
+        var sum = 0;
+        do {
+            if (index % 2 == 1) {
+                sum += index;
+            }
+            index++;
+        } while (index <= 100);
+        console.log(sum);
+        // 无论第一次的条件是否满足，都会执行一次
+
+        let num1={
+            a:1,
+            b:2,
+            c:3,
+        }
+        console.log(num1.a);
+        let num2=[1,2,3,4,5,77]
+        for(let i in num1){
+            console.log(i);
+        }
+        for(let item of num2){
+            console.log(item);
+        }
+
+    </script>
+</body>
+
+</html>

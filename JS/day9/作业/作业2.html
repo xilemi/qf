@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 将 `username=admin&password=123456&id=111` 转换成 `{username:'admin',password:'123456'}`
+        // 将 `{username:'admin',password:'123456'}` 转换成`username=admin&password=123456`
+        // 先分割& 得到username=admin再将这个分割为对象
+        let str = 'username=admin&password=123456&id=129183';
+        function fn(str, key) {
+            let arr1 = str.split('&');
+            let obj = {}
+            arr1.forEach(function (item) {
+                let i = item.split('=')
+                obj[i[0]] = i[1]
+            })
+            return obj[key]
+        }
+        console.log(fn(str, 'username'));
+        let obj1 = { username: 'admin', password: '123456', id: '1213', gender: '1213' };
+        let str2 = '';
+        for (let i in obj1) {
+            str2 += `${i}=${obj1[i]}&`
+        }
+        console.log(str2.slice(0, -1));
+    </script>
+</body>
+
+</html>

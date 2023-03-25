@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .box{
+            width: 100%;
+            height: 500px;
+            background-color: aquamarine;
+            display: flex;
+            /* 元素之间的距离相等 */
+            /* justify-content: space-between; */
+            /*  元素左右边的距离相等*/
+            /* justify-content: space-around; */
+            /* 弹性盒子与容器间的距离相等(等间距) */
+            /* justify-content: space-evenly; */
+            /* 中部 */
+            /* justify-content: center; */
+
+            flex-wrap: wrap;
+        }
+        .box>div{
+            width: 100px;
+            background-color: blue;
+        }
+        /* 
+        1.子元素不设置宽高由内容撑开
+        2.多行排列，侧轴如何对齐
+        3.子元素 使用了flex属性后如何设置间距
+        */
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div>1www</div>
+        <div>2www</div>
+        <div>3www</div>
+        <div>4www</div>
+        <div>4www</div>
+        <div>4www</div>
+        <div>4www</div>
+        <div>4www</div>
+        <div>4www</div>
+        <div>4www</div>
+        <div>4www</div>
+        <div>4www</div>
+        <div>4www</div>
+        <div>4www</div>
+        <div>4www</div>
+        <div>4www</div>
+        <div>4www</div>
+        
+        
+    </div>
+</body>
+</html>

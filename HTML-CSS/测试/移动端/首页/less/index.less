@@ -1,0 +1,192 @@
+@import "./normalize.less";
+@import "./base.less";
+
+*{
+    padding: 0;
+    margin: 0;
+}
+html,body{
+    width: 100%;
+    height: 100%;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    background-color: #F0F0F0;
+}
+ 
+::-webkit-scrollbar{
+    display: none;
+}
+
+
+header{
+    height: 12vw;
+    background-color: #ff7238;
+    padding: 0 3.7333vw;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &>p:nth-of-type(1){
+        position: relative;
+        span{
+            position: absolute;
+            top: 50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+            font-size: 4vw;
+        }
+        input{
+            width: 80.8vw;
+            height: 8.1333vw;
+            border-radius: 4vw;
+            border: 0;
+        }
+    }
+    &>p:nth-of-type(2){
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 2.4vw;
+        height: 8.1333vw;
+        color: #ffffff;
+        &::before{
+            font-size: 6vw;
+        }
+    }
+    
+}
+section{
+    flex: 1;
+    overflow: auto;
+    .nav{
+        display: flex;
+        justify-content: space-between;
+        height: 9.6vw;
+        background-color: #ffffff;
+        align-items: center;
+        ul{
+            display: flex;
+            justify-content: space-between;
+            overflow: auto;
+            li{
+                margin: 0 2.6667vw;
+                flex-shrink: 0;
+                font-size: 4vw;
+                line-height: 6.6667vw;
+            }
+            &>li:hover{
+                border-bottom: 2px solid #ff1f1f;
+            }
+        }
+        span{
+            width: 9.6vw;
+            font-size: 5.3333vw;
+            color: #ff1f1f;
+            font-weight: 700;
+        }
+    }
+    .banner{
+        img{
+            width: 100%;
+        }
+    }
+    .advertise{
+        display: grid;
+        grid-template-columns: 37.0667vw 31.7333vw 31.7333vw;
+        grid-template-rows: 28.5333vw 22.4vw;
+        grid-gap: 1px;
+        margin-bottom: 1.3333vw;
+        .item{
+            background-color: #ff1f1f;
+            img{
+                width: 100%;
+                height: 100%;
+            }
+        }
+        &>div:nth-of-type(1){
+            grid-area: 1/1/3/2;
+        }
+        &>div:nth-of-type(2){
+            grid-area: 1/2/2/4;
+        }
+    }
+    
+    .items{
+        background-color: #ffffff;
+        .title{
+            padding: 3.0667vw 0;
+            p{
+                width: 34.1333vw;
+                height: 6.6667vw;
+                line-height: 6.6667vw;
+                background-color: #ff1f1f;
+                color: #ffffff;
+                border-radius: 0 3.3333vw 3.3333vw 0;
+            }
+        }
+        .item{
+            display: flex;
+            &>img{
+                width: 37.3333vw;
+            }
+            .content{
+                padding: 3.3333vw 2.6667vw .6667vw;
+                &>p:nth-of-type(1){
+                    font-size: 4vw;
+                    line-height: 5.3333vw;
+                }
+                &>p:nth-of-type(2){
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 3.2vw;
+                    color: #d1d1d1;
+                    margin-top: 10.6667vw;
+                }
+                &>div{
+                    display: flex;
+                    height: 8vw;
+                    line-height: 8vw;
+                    justify-content: space-between;
+                    img{
+                        width: 17.0667vw;
+                        height: 6.6667vw;
+                    }
+                    button{
+                        width: 9.3333vw;
+                        height: 2.6667vw;
+                        background-color: #ff1f1f;
+                        color: #ffffff;
+                        font-size: 1.8667vw;
+                        line-height: 2.6667vw;
+                        border: 0;
+                        border-radius: 3px;
+                        vertical-align: middle;
+                    }
+                }
+            }
+        }
+    }
+}
+footer{
+    height: 13.3333vw;  
+    background-color: #ffffff;
+    ul{
+        display: flex;
+        justify-content: space-around;
+        li{
+            a{
+                height: 13.3333vw;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                color: #7f7f7f;
+            }
+        }
+        &>li:hover a{
+            color: #ff1f1f;
+        }
+    }
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 距离昨天,已经过去了多少秒
+        function getMin(){
+            // 获取当前时间
+            let now=new Date()
+            let old=new Date()
+            old.setDate(now.getDate()-1);
+            old.setHours(12);
+            old.setMinutes(0)
+            old.setSeconds(0)
+            return (now-old)/1000
+        }
+        console.log(getMin());
+    </script>
+</body>
+</html>

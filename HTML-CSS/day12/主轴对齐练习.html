@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 400px;
+            height: 1200px;
+            margin: auto;
+            border: 2px solid;
+        }
+        .title{
+            width: 100%;
+            height: 100px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .content{
+            width: 100%;
+            display: flex;
+            /* 换轴的方向 默认为水平方向*/
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            /* gap:属性; */
+            /* gap: 30px; */
+        }
+        .content>div{
+           width: 345px;
+           /* flex: 1; */
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="title">
+            <p>企业新闻</p>
+            <p>更多</p>
+        </div>
+        <div class="content">
+            <div>
+                <img src="./images/news.png" alt="">
+                <p>抖音美好奇妙夜:60位明星和131位抖音创作者...</p>
+                <p>[2020年抖音美好奇妙夜] 结束了。这个一年一度的盛会在被疫情影响的今年显得尤为不易，但...2020.10.16</p>
+            </div>
+            <div>
+                <img src="./images/news.png" alt="">
+                <p>抖音美好奇妙夜:60位明星和131位抖音创作者...</p>
+                <p>[2020年抖音美好奇妙夜] 结束了。这个一年一度的盛会在被疫情影响的今年显得尤为不易，但...2020.10.16</p>
+            </div>
+            <div>
+                <img src="./images/news.png" alt="">
+                <p>抖音美好奇妙夜:60位明星和131位抖音创作者...</p>
+                <p>[2020年抖音美好奇妙夜] 结束了。这个一年一度的盛会在被疫情影响的今年显得尤为不易，但...2020.10.16</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

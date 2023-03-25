@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // var sum=0;
+        // function add(a,b){
+        //     for(let i=a;i<=b;i++){
+        //         sum+=i;
+        //     }
+        //     console.log(sum);
+        // }
+        // 用递归函数写
+        function add(n,m) {
+            // 传递进来的是 n
+            // 当 n === m 的时候要结束
+            if (m===n ) {
+                return m
+            } else {
+                // 不满足条件的时候，就是当前数字 + 比自己大 1 的数字
+                return n + add(n + 1,m)
+            }
+        }
+        // add(1)
+        let num1 = +prompt('请输入第一个数');
+        let num2=+prompt('请输入第二个数');
+        console.log(add(num1,num2));
+    </script>
+</body>
+
+</html>

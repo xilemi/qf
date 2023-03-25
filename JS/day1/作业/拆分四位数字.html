@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let origin = 1234;
+        // 从高位做起
+        // let a = parseInt(origin / 1000);
+        // let b = parseInt((origin%1000)/100);
+        // let c = parseInt(((origin%1000)%100)/10);
+        // let d = parseInt(((origin%1000)%100)%10);
+        // 从低位做起
+        let d = parseInt(origin%10);
+        let c =parseInt(origin/10)%10;
+        let b =parseInt(origin/100)%10;
+        let a =parseInt(origin/1000);
+        console.log('a=',a);
+        console.log('b=',b);
+        console.log('c=',c);
+        console.log('d=',d);
+    </script>
+</body>
+</html>

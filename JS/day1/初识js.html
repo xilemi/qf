@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- a标签卸载herf内 -->
+    <!-- <a href="javascript:alert('nihao ');">aaaa</a> -->
+
+
+
+    <!-- 非a标签使用onclick事件 -->
+<!-- 
+    <button onclick="prompt('button点击');console.log('qqqqq');">点击</button>
+    <button onclick="confirm('yes or no')">点击</button> -->
+    <script>
+    //    内嵌式写法
+        // alert('jinitaimei');
+        // console.log('jinitaimei');
+        // let name = parseInt(prompt('button点击'));
+        // console.log(typeof name);
+        // var a='niaho';
+        // var age=20;
+        // var gender='男';
+        // var tel=1231231213
+        // console.log(a,age,gender,tel);
+        // document.write(a,gender,age,tel);
+        // let name=10;
+        // let a=100;
+        // console.log(parseInt(''));
+        /* 
+        parseInt,parseFloat 转换规则
+        1.纯数字 得数字
+        2.数字在前  后面不是数字 ，得前面的数字
+        3.数字在后  得NaN
+        4.undefined null NaN true false '' '    '都得NaN
+        5.parseFloat 可以识别小数 其他和parseInt一致
+        
+        
+        
+        */
+        // 第一个字符不是数字就不能转 NaN
+        // console.log(parseInt('zhangsan123'));
+        // 前面数字 后面字
+        // console.log(parseInt('123张洪'));
+        // NaN
+        //    console.log(parseInt(undefined));
+        // NaN
+        //    console.log(parseInt(null));
+        // NaN
+        //    console.log(parseInt(NaN));
+        // boolean NaN
+        //    console.log(parseInt(true));
+        // +号 转换规则
+        // 数字
+        let a = '123';
+        console.log(+a);
+        // NaN
+        let b = 'zhangssan1234';
+        console.log(+b);
+        // NaN
+        let c = undefined;
+        console.log(+c);
+        // 0
+        let d = null;
+        console.log(+d);
+        // 0 '' '  '
+        let e = ' ';
+        console.log(+e);
+        // 0
+        let f = false;
+        console.log(+f);
+        // 1
+        let g = true;
+        console.log(+g);
+        /* 
+        总结
+        1.纯数字 得数字
+        2.非纯数字和undefined 得NaN
+        3.false '' '   '得0
+        4.true 得1
+        */
+
+        let test1 = 123;
+        let test2=undefined;
+        console.log(test1.toString(),typeof test1.toString());
+        console.log(test2.toString());
+    </script>
+    <!-- <script src="./js/utils.js"></script> -->
+</body>
+</html>

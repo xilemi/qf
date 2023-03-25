@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 1366px;
+            height: 600px;
+            margin: auto;
+            background: url(./images/腾讯会议图片_20230227115615.jpg);
+            overflow: hidden;
+        }
+        .box :first-child,.box :last-child{
+            width: 50%;
+            height: 100%;
+            float: left;
+            background: url(./images/腾讯会议图片_20230227115640.jpg) ;
+            transition: all 2s linear;
+        }
+        .box :last-child{
+            background: url(./images/腾讯会议图片_20230227115640.jpg) right 0;
+        }
+        .box:hover :first-child{
+            transform: translate(-100%);
+        }
+        .box:hover :last-child{
+            transform: translate(100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="left"></div>
+        <div class="right"></div>
+    </div>
+</body>
+</html>

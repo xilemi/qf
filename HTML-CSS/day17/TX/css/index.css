@@ -1,0 +1,30 @@
+@media (max-width: 992) {
+  .item {
+    height: 400px;
+  }
+}
+@media (max-width: 767px) {
+  .item {
+    height: 250px;
+  }
+}
+@media (min-width: 992) {
+  .item {
+    height: 500px;
+  }
+}
+.carousel-inner > .item > img {
+  height: 100%;
+}
+.navbar-default {
+  background-color: transparent;
+  border: 0;
+}
+.title {
+  text-align: center;
+  margin-top: 50px;
+}
+.items {
+  height: 238px;
+  background-color: antiquewhite;
+}

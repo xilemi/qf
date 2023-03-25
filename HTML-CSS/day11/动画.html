@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* @keyframes size{
+            from{
+                width: 100px;
+                height: 100px;
+                background-color: antiquewhite;
+            }
+            to{
+                width: 200px;
+                height: 300px;
+                background-color: aqua;
+            }
+        } */
+        @keyframes size{
+            0%{
+                width: 100px;
+                height: 100px;
+                background-color: antiquewhite;
+            }
+            50%{
+                width: 200px;
+                height: 300px;
+                background-color: aqua;
+            }
+        }
+        div{
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+            animation: size 2s;
+            animation-iteration-count: infinite;
+
+        }
+        p{
+            width: 140px;
+            height: 140px;
+            background: url(./images/腾讯会议图片_20230228153318.png);
+            animation: ren 1s steps(12) infinite forwards;
+            /* position: relative; */
+        }
+        @keyframes ren{
+            from{
+                background-position: 0 0;
+                transform: translateX(0);
+            }
+            to{
+                background-position: -1680px 0;
+                /* left: 1000px; */
+                transform: translateX(1000px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- <div></div> -->
+    <p></p>
+</body>
+</html>

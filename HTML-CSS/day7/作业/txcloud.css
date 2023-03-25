@@ -1,0 +1,142 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+header{
+    /* 沾满窗口 通栏效果 */
+    height: 40px;
+    background-color: #2b303b;
+}
+.header{
+    width: 1205px;
+    height: 40px;
+    margin: auto;
+    background: url(./images/logo.svg) no-repeat 10px 10px #2b303b;
+}
+.header ul{
+    float: right;
+    list-style: none;
+    
+}
+.header ul>li{
+    line-height: 40px;
+    float:left;
+    font-size: 14px;
+    margin-right: 5px;
+}
+.section-main{
+    background-color: #181c28;
+}
+.main{
+    width: 1205px;
+    height: 478px;
+    margin: auto;
+    background-color: #181c28;
+}
+.main-left{
+    width: 252px;
+    height: 478px;
+    background-color: #1b2a3f;
+    float: left;
+    color: #ffffff;
+}
+.main-right{
+    width: 953px;
+    height: 478px;
+    float: left;
+}
+.main-left ul{
+    margin-top: 33px;
+    list-style: none;
+}
+.main-left ul>li{
+    height: 40px;
+    line-height: 40px;
+    padding: 0 24px;
+    box-sizing: border-box;
+}
+.main-left ul>li p{
+    float: right;
+}
+.content{
+    padding-top: 42px;
+    box-sizing: border-box;
+    margin-bottom: 142px;
+}
+.content>p{
+    text-align: center;
+}
+.content>:first-child{
+    font-size: 26px;
+    margin-bottom: 24px;
+}
+.content>:nth-child(2){
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+.content-box{
+    width: 1205px;
+    height: 462px;
+    margin: auto;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    padding: 42px 0 42px 42px;
+    box-sizing: border-box;
+}
+.content-box-left{
+    width: 468px;
+    height: 248px;
+    float: left;
+    font-size: 14px;
+    color: #976697;
+    line-height: 40px;
+}
+h1{
+    color: black;
+}
+hr{
+    width: 105px;
+}
+button{
+    width: 162px;
+    height: 48px;
+    box-sizing: border-box;
+    border: 2px solid #ffa500;
+}
+.content-box img{
+    width: 554px;
+    height: 346px;
+    float: right;
+    margin-right: 54px;
+}
+footer{
+    background-color:#2e3033 ;
+}
+.footer{
+    width: 1205px;
+    height: 398px;
+    padding: 36px 0px;
+    box-sizing: border-box;
+    background-color: #2e3033;
+    color: #cccccc;
+    margin: auto;
+}
+.footer>dl{
+    float: left;
+    margin-right: 96px;
+}
+.footer-box{
+    width: 210px;
+    float: right;
+}
+.footer-box>p{
+    box-sizing: border-box;
+    font-size: 14px;
+}
+.footer-box>button{
+    width: 189px;
+    height: 35px;
+    background-color: #00a4ff;
+    margin-top: 22px;
+    border: 0;
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+         * @Description:  # 数组内插入数组 
+         * @Author: xile
+         * @Date: 2023-03-21 09:48:30
+         */
+        function fn(arr, arr1) {
+            for (let i = 0; i < arr1.length; i++) {
+                if (arr1[i] <= arr[0]) {
+                    arr.unshift(arr1[i])
+                    continue;
+                }
+                if (arr1[i] >= arr[arr.length - 1]) {
+                    arr.push(arr1[i])
+                    continue;
+                }
+                for (let j = 0; j < arr.length - 1; j++) {
+                    if (arr1[i] > arr[j] && arr1[i] <= arr[j + 1]) {
+                        arr.splice(j + 1, 0, arr1[i])
+                        continue;
+                    }
+                }
+            }
+            return arr
+        }
+        let arr = [10, 20, 30, 40, 50]
+        let arr1 = [90, 13,50,80];
+        console.log(fn(arr, arr1));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>hjj</div>
+    <script>
+        var person={};
+        person.name='wangrui';
+        person.gender='男';
+        var person1=new Object()
+        person1.name='lishi'
+        person1.gender='女';
+        // 删除
+        delete person.name
+        // 增加
+        person.height='180';
+        // 修改
+        person.height='1231'
+        // 查询
+        person.gender
+        console.log(person);
+        console.log(person1);
+        var person3={
+            name:'lisi',
+            gender:'nan',
+            height:'125',
+        }
+        person3.name='jjjjj';
+        // 修改
+        person3['name']='jsdgaskjhd'
+        //增加
+        person3['name1']='skdksajdhg'
+        delete person3['name']
+        person3.eat=function(){
+            console.log('dachiyidun');
+        }
+        // ['属性名']
+        console.log(person3['name']);
+        var a='name'
+        // [变量名]
+        // 
+        console.log(person3[a]);
+        delete person3.gender
+        console.log(person3['name']);
+        console.log('----------------------------');
+        var person4={
+            name:'lisi',
+            gender:'nan',
+            height:'125',
+            eat:function(){
+                console.log('大一吃一惊');
+            }
+        }
+        for(var item in person4){
+            // item获取到的是 对象的属性名
+            console.log(item);
+            // 使用[]获取属性值
+            console.log(person4[item]);
+        }
+        //对象方法的使用
+        person4.eat();
+        person4['eat']()
+        console.log(this);
+        // 当属性的属性名是一个变量名，并且想把变量名当做属性名 ，可以用下面的写法。
+        let obj={
+                day,
+                hours,
+                min,
+                sec
+            }
+    </script>
+</body>
+</html>

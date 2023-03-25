@@ -1,0 +1,51 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "34243196",
+      "name": "币种",
+      "font_class": "bizhong",
+      "unicode": "e735",
+      "unicode_decimal": 59189
+    },
+    {
+      "icon_id": "34243198",
+      "name": "裁剪",
+      "font_class": "caijian",
+      "unicode": "e736",
+      "unicode_decimal": 59190
+    },
+    {
+      "icon_id": "34243203",
+      "name": "撤销",
+      "font_class": "chexiao",
+      "unicode": "e737",
+      "unicode_decimal": 59191
+    },
+    {
+      "icon_id": "34243204",
+      "name": "帮助",
+      "font_class": "bangzhu",
+      "unicode": "e738",
+      "unicode_decimal": 59192
+    },
+    {
+      "icon_id": "34243205",
+      "name": "导出",
+      "font_class": "daochu",
+      "unicode": "e739",
+      "unicode_decimal": 59193
+    },
+    {
+      "icon_id": "34243207",
+      "name": "登记",
+      "font_class": "dengji",
+      "unicode": "e73a",
+      "unicode_decimal": 59194
+    }
+  ]
+}

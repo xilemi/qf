@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 没有返回值 用来遍历数组
+        let arr=[1,2,4,5,7,89]
+        let res0=arr.forEach(function(item,index,arr){
+            return console.log(item,index,arr);
+        })
+        let res1=arr.map(function(item,index,arr){
+            return item*2
+        })
+        console.log('map',res1);
+        // 判断每一个是否都满足条件
+        let res2=arr.every(function(item,index){
+            return item>6
+        })
+        console.log('every',res2);
+        // 判断是否有一个满足条件
+        let res3=arr.some(function(item){
+            return item>5
+        })
+        console.log('some',res3);
+        // 过滤出大于5的元素
+        let res4=arr.filter(function(item){
+            return item>5
+        })
+        console.log('filter',res4);
+        let res5=arr.find(function(item){
+            // 找到了返回元素 找不到返回undefined
+            // return item==5
+            return item==121
+        })
+        console.log('find',res5);
+        let res6=arr.findIndex(item =>{
+            // 返回找到的元素下标 找不到返回-1
+            // return item==5
+            return item==0
+        })
+        console.log('findIndex',res6);
+    </script>
+</body>
+</html>

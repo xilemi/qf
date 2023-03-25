@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 200px;
+            height: 200px;
+            background-color: white;    
+        }
+        .a{
+            background-color: black;
+        }
+        .b{
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">hhhhhhh</div>
+    <button>白天</button>
+    <button>黑夜</button>
+    <script>
+        let btns=document.querySelectorAll('button')
+        let box =document.querySelector('div')
+        btns[0].onclick=function(){
+            box.classList.add('b')
+        }
+        btns[1].onclick=function(){
+            box.classList.add('a')
+            box.classList.remove('b')
+        }
+
+    </script>
+</body>
+</html>

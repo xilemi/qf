@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script src="./dayjs.min.js"></script>
+    <script>
+        // 获取当前时间
+        let now = dayjs()
+        let now1=dayjs()
+        // 得到的对象
+        console.log(now);
+        // 格式化时间 format 参数填写 日期格式
+        console.log(now.format('YYYY-MM-DD'));
+        // 时间戳(毫秒) 转日期
+        console.log(dayjs(98987877779999).format('YYYY-MM-DD'));
+        // 获取时间戳(秒)
+        console.log(dayjs.unix().format('YYYY-MM-DD'));
+        // 判断是否在时间前 相等  在后面 isBefore isSame isAfter isBetween
+        console.log(now.isBefore('2011-12-1'));
+        console.log(now.isSame(now1));
+        console.log(now.isAfter('2012-12-1'));
+        // 获取时间 直接在后面点 需要的东西
+        console.log(dayjs().year());
+        console.log(dayjs().month()+1);
+        console.log(dayjs().date());
+        console.log(dayjs().day());
+        console.log(dayjs().hour());
+        console.log(dayjs().minute());
+        console.log(dayjs().second());
+        console.log(dayjs().year(2025).format('YYYY-MM-DD'));
+        console.log(dayjs().month(12).format('YYYY-MM-DD'));
+        console.log(dayjs().unix());
+        // add加   subtract减
+        console.log(dayjs().add(3,'year').format('YYYY-MM-DD'));
+        // 时间的开始和结束 返回某个时间的开始 和结束
+        console.log(dayjs().startOf('month').format('YYYY-MM-DD'));
+    </script>
+</body>
+
+</html>

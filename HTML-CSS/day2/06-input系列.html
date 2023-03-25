@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 
+        input 单标签 类型
+        text 文本框 内容明文
+        password 密码框 内容隐藏
+        radio 单选  加入name属性分组  相同的name值 视为同组 实现单选互斥
+        checkboc 复选框  实现多选
+        file 上传我文件  默认只能单文件   multiple 可以实现多个文件同时上传
+        按钮
+        submit 提交 reset重置 需要配合form使用 
+        自定义按钮  button 自定义按钮 
+        这里input的 value是  按钮显示的名字
+        label 标签的  for属性和id进行绑定 可以实现 点击标题获取焦点
+        checked 默认选中
+
+     -->
+</head>
+<body>
+    <label for="txt">文本框:<input type="text" placeholder="内容明文" id="txt"></label>
+    <br>
+    <label for="psd">密码:<input type="password" placeholder="内容隐藏" id="psd"></label>
+    <br>
+    <!-- 单选框 -->
+    <label for="man"><input type="radio" name="sex" checked id="man">男</label>    
+    <label for="woman"><input type="radio" name="sex" id="woman">女</label>    
+    <label for="renyao"><input type="radio" name="sex" id="renyao">人妖</label>
+    <br>
+    <!-- 复选框 checkboc -->
+    <input type="checkbox" checked>打篮球
+    <input type="checkbox">唱
+    <input type="checkbox">跳
+    <input type="checkbox">rap
+    <br>
+    <!-- 文件上传 -->
+    <input type="file" multiple>
+    <br>
+      <!-提交按钮-  -->
+    <input type="submit">
+    <input type="submit" value="提交2">
+    <!-- 清除按钮 -->
+    <input type="reset">
+    <input type="reset" value="清除">
+    <!-- 普通按钮 -->
+    <input type="button" value="按钮">
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 统计字符串中字符重复出现的次数
+        // 利用对象中的属性重复会覆盖的原理，覆盖后赋予新的属性值
+        // 把字符串中的字符当做对象的属性 没有就赋值为1，有之后对属性值++
+        // 为什么不使用数组存储，当字符串中含有数字，此时使用arr[i] 这里的i会被当成下标 导致前面会有空
+        let str='sdgashdgiuaysifjwqe12218948235';
+        let obj={}
+        for(let i=0;i<str.length;i++){
+            // 如果有 为true  没有 为undefined 转为false
+            if(obj[str[i]]){
+                // 拿到的是
+                obj[str[i]]++
+            }else{
+                obj[str[i]]=1
+            }
+        }
+        console.log(obj);
+    </script>
+
+</body>
+</html>

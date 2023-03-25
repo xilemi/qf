@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./less计算规则.css">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 单位rem 
+        rem相对html根字号大小计算 
+        1rem=16px（默认的字体大小）
+        调整html的默认文字大小(相对于页面跟字号大小，如何随页面视口大小改变呢)    
+        媒体查询 字号为视口宽度的十分之一
+    -->
+  <div class="box">
+    1
+     <div class="box1">2</div>
+     <div class="box2">
+        box2
+        <div class="son">4
+            <div class="sun">
+                sun
+                <div>111</div>
+            </div>
+        </div>
+     </div>
+     <div class="box3">5</div>
+  </div>
+  <script src="./js/flexible.js"></script>
+</body>
+</html>

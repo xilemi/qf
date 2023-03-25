@@ -1,0 +1,14 @@
+//out: ./
+@vw:3.75vw;
+@vh:6.67vh;
+// 参照的对象不同   要么使用vw 要么使用vh  不建议混用（尽量参照vw）
+// div{
+//     width: (68 / @vw);
+//     height: (29/ @vw);
+//     background-color: beige;
+// }
+div{
+    width: (68 / @vw);
+    height: (29 /@vh);
+    background-color: blanchedalmond;
+}

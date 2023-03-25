@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 判断一个数组中的异常元素 如果只有一个为奇数，返回奇数 同样 返回为偶数
+        function findOutlier(integers) {
+            let arr1=[];
+            let arr2=[];
+            integers.forEach(function(item){
+                item%2? arr1.push(item):arr2.push(item)
+            })
+            let res;
+            arr1.length>arr2.length? res=arr2[0]:res=arr1[0]
+            return res
+        }
+
+    </script>
+</body>
+
+</html>

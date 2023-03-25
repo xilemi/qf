@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p{
+            color:burlywood;
+        }
+        p~div{
+            color: blue;
+        }
+        div#content.box~div{
+            background-color: aquamarine;
+        }
+    </style>
+    <!-- 
+        空格 后代选择器（包含子代 比子代的范围更加大）
+        >    子代选择器 （父子关系  不能隔代）
+        ，    并集选择器 （同时选中多个）
+        +     下一个
+        ~     后面的
+        紧挨着 交集选择器
+     -->
+</head>
+<body>
+    <div class="box" id="content">
+        <p>
+            1
+            <span>2</span>
+        </p>
+        <div>
+            6
+            <p>
+                3
+                <strong>4</strong>
+            </p>
+            <span>888</span>
+        </div>
+    </div>
+    <div>
+        hhhhh
+    </div>
+    <div>yyyyy</div>
+</body>
+</html>

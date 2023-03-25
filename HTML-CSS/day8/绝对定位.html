@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .father{
+            /* 
+            1.脱离文档流 不占位置了
+            */
+            width: 300px;
+            height: 300px;
+            position: absolute;
+            background-color: aqua;
+            left: 200px;
+        }
+        .son{
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+            position: absolute;
+            left: 20px;
+        }
+        .father>p{
+            position: absolute;
+            top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="father">
+        <p>JJJJJJJ</p>
+        <div class="son"></div>
+    </div>
+    <p>hhhhhhhh</p>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+        // Date()内可以放时间  年和月是必须的参数
+        function fn() {
+            let date = new Date()
+            let year = date.getFullYear()
+            let month = date.getMonth() + 1;
+            let dat = date.getDate();
+            let hours = date.getHours()
+            let min = date.getMinutes()
+            let sec = date.getSeconds()
+            let week = date.getDay()
+            box.innerHTML=`${year}年${month}月${dat}日${hours}时${min}分${sec}秒`
+            console.log(`${year}年${month}月${dat}日${hours}时${min}分${sec}秒，星期${week}`);
+        }
+        setInterval(function(){
+            // let date = new Date()
+            // let year = date.getFullYear()
+            // let month = date.getMonth() + 1;
+            // let dat = date.getDate();
+            // let hours = date.getHours()
+            // let min = date.getMinutes()
+            // let sec = date.getSeconds()
+            // let week = date.getDay()
+            fn();
+            // box.innerHTML=`${year}年${month}月${dat}日${hours}时${min}分${sec}秒`
+            // console.log(`${year}年${month}月${dat}日${hours}时${min}分${sec}秒，星期${week}`);
+        }, 1000)
+        // set设置年份年份 超过11的数字 会进一年
+        // 时间戳 1970-1-1 毫秒值
+        // let time = date.getTime()
+        // console.log(time);
+        // let time1 = +new Date();
+        // console.log(time1);
+        // let time2 = time.valueOf()
+        // console.log(time2);
+        // 距离某个时间还有多少天  通过时间戳进行计算
+        let qingming = +new Date(2023, 3, 5)
+        let now = +new Date()
+        let res = qingming - now;
+        console.log(Math.ceil(res / (24 * 60 * 60 * 1000)));
+        setInterval(fn(), 1000)
+    </script>
+</body>
+
+</html>

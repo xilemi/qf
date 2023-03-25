@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+    //   简单的应用场景求 1-5的和
+     function add(a,b){
+        if(a===b){
+            return b
+        }else{
+            return a+add(a+1,b)
+        }
+     }
+    //  let num1=+prompt('请输入第一个数')
+    //  let num2=+prompt('请输入第二个数')
+     console.log(add(1,5));
+    </script>
+</body>
+
+</html>

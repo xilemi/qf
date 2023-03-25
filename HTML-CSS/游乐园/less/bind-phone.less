@@ -1,0 +1,136 @@
+@import "./base.less";
+@import "./normalize.less";
+*{
+    padding: 0;
+    margin: 0;
+}
+html,body{
+    width: 100%;
+    height: 100%;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    background-color: #F0F0F0;
+}
+header{
+    height: 12vw;
+    background-color: #262626;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 3.7333vw;
+    color: #FFFFFF;
+    position: relative;
+    flex-shrink: 0;
+    .icon-angle-left{
+        font-size: 3.2vw;
+    }
+    & :nth-child(2){
+        font-size: 4.8vw;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%);
+    }
+    .icon-gengduo-01{
+        font-size: 8vw;
+    }
+}
+section{
+    flex: 1;
+    background: #FFFFFF;
+    .father{
+        padding: 0 4vw;
+        background: #FFFFFF;
+        p{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 13.1467vw;
+            border-bottom: 1px solid #F0F0F0;
+            position: relative;
+            label{
+                input{
+                    border: 0;
+                    outline: none;   
+                }
+                span{
+                    position: absolute;
+                    top: 4vw;
+                    right: 0;
+                }
+            }
+            button{
+                width: 25.6vw;
+                height: 9.6vw;
+                background-color: #45B8FF;
+                border-radius: 9.3333vw;
+                border: 0;
+            }
+            &:last-child>label>span{
+                left: 24vw;
+                
+            }
+        }
+    }
+    .fengge{
+        height: 3.4667vw;
+        background-color: #F0F0F0;
+    }
+    .son{
+       padding: 0 4vw;
+        background-color: #FFFFFF;
+        p{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 13.1467vw;
+            padding-right: 4vw;
+            border-bottom: 1px solid #F0F0F0;
+            position: relative;
+            label{
+                input{
+                    border: 0;
+                    outline: none;   
+                }
+                span{
+                    position: absolute;
+                    top: 4vw;
+                    right: 0;
+                }
+            }
+            button{
+                width: 25.6vw;
+                height: 9.6vw;
+                background-color: #45B8FF;
+                border-radius: 9.3333vw;
+                border: 0;
+            }
+            &:nth-child(2){
+                height: 21.68vw;
+                span{
+                    top: 8.3733vw;
+                    left: 24vw;
+                }
+            }
+            &:nth-child(4){
+                &:last-child{
+                   label{
+                    margin-left: 8vw;
+                   }
+                }
+            }
+        }
+    }
+}
+footer{
+    height: 13.3333vw;
+    font-size: 5.3333vw;
+    button{
+        background: #FECB49;
+        color: #FFFFFF;
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+}

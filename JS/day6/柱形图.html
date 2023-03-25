@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .box {
+            width: 500px;
+            height: 200px;
+            margin: 100px auto;
+            border-left: 1px solid;
+            border-bottom: 1px solid;
+            display: flex;
+            justify-content: space-around;
+            align-items: end;
+            position: relative;
+            background-color: antiquewhite;
+        }
+
+        .item{
+            width: 50px;
+            background-color: aliceblue;
+            position: relative;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: column;
+            
+        }
+
+        .item>span {
+            position: relative;
+            top: -20px;
+        }
+
+        .item>p {
+            font-size: 12px;
+            position: absolute;
+            bottom: -18px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script>
+        let arr = []
+        for (let i = 0; i < 4; i++) {
+            arr.push(+prompt(`请输入第${i + 1}数字`))
+        }
+        document.write(`<div class="box">`)
+        for(let i=0;i<arr.length;i++){
+            document.write(`<div class="item" style="height: ${arr[i]}px;">
+            <span>${arr[i]}</span>
+            <div></div>
+            <p>第${i+1}季度</p>
+        </div>`)
+        }
+        document.write(`</div>`)
+    </script>
+</body>
+
+</html>

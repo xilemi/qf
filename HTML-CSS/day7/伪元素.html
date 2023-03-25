@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p{
+            background-color: aqua;
+        }
+        p::after{
+            content: "武汉";
+            font-size: 20px;
+        }
+        p::before{
+            content: "今天";
+            font-size: 12px;
+        }
+        /* 首字 */
+        p::first-letter{
+            font-size: 40px;
+        }
+        /* 首行 */
+        p::first-line{
+            font-size: 30px;
+            color: blue;
+        }
+        /* 选中 */
+        p::selection{
+            color:black;
+        }
+        span{
+            display: inline-block;
+        }
+        span::first-letter{
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <p>千峰
+        文字是人类用符号记录表达信息以传之久远的方式和工具。 现代文字大多是记录语言的工具。 人类往往先有口头的语言后产生书面文字，很多小语种，有语言但没有文字。 文字的不同体现了国家和民族的书面表达的方式和思维不同。
+    </p>
+    <span>hfhfhfh</span>
+</body>
+</html>

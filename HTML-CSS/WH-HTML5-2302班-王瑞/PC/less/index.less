@@ -1,0 +1,357 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+ul,li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+img {
+    display: block;
+    max-width: 100%;
+}
+.containers{
+    width: 1263px;
+    margin: auto;
+}
+.daohang{
+   .container-fluid{
+    height: 102px;
+    background-color: #ffffff;
+    padding-right:0 ;
+    img{
+        float: left;
+    }
+    ul{
+        float: right;
+        display: flex;
+        justify-content: center;
+        height: 102px;
+        li{
+            height: 102px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            padding: 0 30px;
+            border-right: 1px solid #d6e4ed;
+            &::before{
+                font-size: 30px;
+            }
+        }
+    }
+   }
+}
+.contents{
+    margin-top: 30px;
+    .containers{
+        padding: 0 50px;
+        &>p{
+            text-align: center;
+        }
+        .content{
+            display: flex;
+            height: 145px;
+            margin-top: 20px;
+            .content-item{
+                width: 25%;
+                height: 145px;
+                margin-right: 10px;
+                position: relative;
+                overflow: hidden;
+                
+                img{
+                    width: 100%;
+                    height: 145px;
+                    z-index: 100;
+                    transition: all 0.5s linear;
+                }
+                .box{
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    padding: 5px;
+                    p{
+                        text-align: center;
+                        color: #ffffff;
+                    }
+                }
+                &:hover>img{
+                    transform: scale(1.2);
+                }
+            }
+            &>div:nth-of-type(4){
+                margin-right: 0;
+            }
+        }
+    }
+}
+.title{
+    margin-top: 36px;
+    margin-bottom: 26px;
+    text-align: center;
+    p{
+        font-size: 20px;
+        color: #676566;
+    }
+}
+.news{
+    .containers{
+        display: flex;
+        justify-content: space-between;
+        height: 180px;
+        .news-item{
+            width: 25%;
+            margin-right: 10px;
+            position: relative;
+            
+            img{
+                width: 100%;
+            }
+            .box{
+                width: 100%;
+                height: 100%;
+                padding: 5px;
+                position: absolute;
+                left: 0;
+                top: 0;
+                display: none;
+                p{
+                    text-align: center;
+                    color: #ffffff;
+                }
+            }
+            .shade{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0);
+                transition: all 0.5s linear;
+            }
+            &:hover .box{
+                display: block;
+            }
+            &:hover .shade{
+                background: rgba(0, 0, 0, 0.3);
+            }
+        }
+        &>div:nth-of-type(4){
+            margin-right: 0;
+        }
+    }
+}
+.jiantou{
+    margin: 30px 0;
+    .containers{
+        display: flex;
+        justify-content: center;
+        div{
+            width: 35px;
+            height: 35px;
+        }
+        &>div:nth-of-type(1){
+            background:transparent url(../images/jian.png) no-repeat 2px -32px;
+            margin-right: 40px;
+        }
+        &>div:nth-of-type(2){
+            background: url(../images/jian.png) no-repeat -32px -32px;
+        }
+    }
+}
+.daohang1{
+    .containers{
+        padding: 0 150px;
+        text-align: center;
+        ul{
+            display: flex;
+            justify-content: center;
+            li{
+                width: 94px;
+                height: 40px;
+                border: 1px solid;
+                margin-right: 170px;
+                line-height: 40px;
+            }
+            &>li:nth-of-type(4){
+                margin-right: 0;
+            }
+        }
+    }
+
+}
+.daohang2{
+    .containers{
+        padding: 0 70px;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+        ul{
+            width: 25%;
+            margin-right: 25px;
+            li{
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+        &>ul:nth-of-type(4){
+            margin-right: 0;
+        }
+    }
+}
+.solution{
+    margin-top: 100px;
+    .containers{
+        height: 553px;
+        background: url(../images/solu_bg.jpg) no-repeat center/100% 100%;
+        .items{
+            padding: 0 60px;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 60px;
+            transform: translateY(-60px);
+            .item{
+                margin-right: 30px;
+                background-color: #ffffff;
+                .imgbox{
+                    width: 100%;
+                    height: 112px;
+                    background-color: #c7c7c7;
+                    padding-top: 20px;
+                    img{
+                        margin: auto;
+                        transition: all 0.5s  linear;
+                    }
+                }
+                .item-content{
+                    height: 186px;
+                    padding: 20px;
+                    text-align: center;
+                    button{
+                        width: 320px;
+                        height: 45px;
+                        background-color: #ffffff;
+                        transition: all 0.5s  linear;
+                    }
+                    p{
+                        width: 320px;
+                    }
+                    
+                }
+                &:hover img{
+                    transform:rotateZ(300deg);
+                }
+                &:hover button{
+                    background-color: blue;
+                }
+            }
+            &>div:nth-of-type(3){
+                margin-right: 0;
+            }
+        }
+        .jiantou{
+            .containers{
+                background: none;
+                height: 40px;
+            }
+        }
+        .items1{
+            padding: 0 60px;
+            box-sizing: border-box;
+            ul{
+                display: flex;
+                justify-content: space-between;
+                color: #ffffff;
+                font-size: 20px;
+                li{
+                    flex-grow: 1;
+                    margin-right: 30px;
+                    border-bottom: 4px solid white;
+                }
+            }
+        }
+    }
+}
+.success{
+    .containers{
+        height: 832px;
+        background: url(../images/case_bg.gif);
+        .title{
+           padding: 30px 0;
+           box-sizing: border-box;
+        }
+       .items{
+        
+        padding: 0 50px;
+        box-sizing: border-box;
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        grid-template-rows: repeat(2,236px);
+        grid-gap: 30px;
+        place-content: center;
+        div{
+            width: 236px;
+            height: 236px;
+            overflow: hidden;
+            border: 3px solid #bad4e1;
+            border-radius: 50%;
+            img{
+                width: 100%;
+            }
+        }
+       }
+    }
+}
+.team{
+    .containers{
+        height: 518px;
+        background: url(../images/con_bg.jpg) no-repeat;
+        .title{
+          padding-top: 30px;
+          box-sizing: border-box;
+        }
+        .items{
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            margin-top: 50px;
+            .item{
+                width: 190px;
+                color: #ffffff;
+                img{
+                    margin-bottom: 10px;
+                    transition: all 0.5s linear;
+                }
+                &:hover img{
+                    transform: rotateZ(300deg);
+                }
+            }
+        }
+    }
+}
+footer{
+    .containers{
+        text-align: center;
+        height: 175px;
+        background-color: black;
+        img{
+            width: 176px;
+            height: 72px;
+            margin: auto;
+        }
+        ul{
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            li{
+                padding: 0 6px;
+            }
+        }
+    }
+}

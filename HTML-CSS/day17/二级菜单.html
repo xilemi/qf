@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        div{
+            width: 100%;
+            background-color: black;
+            height: 50px;
+        }
+        .yiji{
+            width: 500px;
+            height: 50px;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            list-style: none;
+        }
+        .yiji>li{
+            padding: 0 50px;
+            position: relative;
+        }
+        .yiji>li:nth-of-type(1)>ul{
+            position: absolute;
+            width: 300px;
+            height: 0;
+            background-color: aqua;
+            overflow: hidden;
+            top: 36px;
+            transition: all 1s linear   ;
+        }
+        .yiji>li:nth-of-type(1):hover>ul{
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <!--溢出的不占位 -->
+    <div>
+        <ul class="yiji">
+            <li>首页
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                </ul>
+            </li>
+            <li>首页</li>
+            <li>首页</li>
+        </ul>
+    </div>
+</body>
+</html>

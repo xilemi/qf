@@ -1,0 +1,314 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+ul,li{
+    list-style: none;
+}
+::-webkit-scrollbar {
+    /*滚动条整体样式*/
+    width: 5px; /*高宽分别对应横竖滚动条的尺寸*/
+    height: 2px;
+}
+::-webkit-scrollbar-thumb {
+    /*滚动条里面小方块*/
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.25);
+}
+header{
+    width: 100%;
+    height: 30px;
+    font-size: 12px;
+    line-height: 30px;
+    background-color: black;
+    color: #cccccc;
+}
+.content{
+    width: 889px;
+    margin: auto;
+}
+.container{
+    width: 702px;
+    margin: auto;
+}
+header ul{
+    display: flex;
+    float: right;
+}
+header ul>li{
+    line-height: 30px;
+    padding: 0 20px;
+}
+header ul>li:last-child{
+    padding: 0;
+}
+nav{
+    border-bottom: 2px solid #e0e0e0;
+}
+nav>.content{
+    height: 36px;
+    background-color: #ffffff;
+    line-height: 36px;
+    font-size: 12px;
+}
+nav img{
+    width: 66.5px;
+    height: 15px;
+    float: left;
+    margin-top: 9.5px;
+}
+nav ul{
+    margin-left: 194px;
+}
+nav ul>li{
+    float: left;
+    padding: 0 15px;
+}
+nav p{
+    float: right;
+}
+.icon-icon_search{
+    margin-left: 20px;
+}
+.icon-jiantou_liebiaozhankai_o{
+    display: none;
+}
+nav p:hover .icon-jiantou_liebiaozhankai_o{
+    display:inline;
+}
+nav p:hover .icon-jiantou_liebiaoshouqi_o{
+    display: none;
+}
+.main>.content{
+    width: 889px;
+    height: 323px;
+    background: url(./images/vmall-mate50-series-3.avif) no-repeat center/contain;
+    margin-bottom: 36px;
+}
+/* 标题 */
+.title{
+    font-size: 18px;
+    text-align: center;
+    position: relative;
+    margin-bottom: 34px;
+}
+.title::after{
+    content: "";
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 25px;
+    height: 1px;
+    background-color: black;
+    margin-top: 10px;
+}
+.items>.container{
+    height: 100%;
+}
+.first,.two{
+    height: 223px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+.two{
+    flex-direction: row-reverse;
+}
+.left{
+    width: 464px;
+    background-color: antiquewhite;
+    overflow: hidden;
+    position: relative;
+}
+.right{
+    width: 226px;
+    background-color: black;
+    overflow: hidden;
+    position: relative;
+}
+.left img{
+    width: 464px; 
+    height: 223px;
+    transition: all 1s linear;
+}
+.right img{
+    width: 226px;
+    height: 223px;
+    transition: all 1s linear;
+}
+.three{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 46px;
+}
+.three>div{
+    position: relative;
+    overflow: hidden;
+}
+.three>div,.three img{
+    width: 226px;
+    height: 159px;
+    transition: all 1s linear;
+}
+/* 缩放 */
+.play:hover img{
+    transform: scale(1.1);
+}
+.play:hover .shade{
+    background-color: rgba(0,0,0,0.3);
+}
+.shade{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.box{
+    width: 100%;
+    height: 100px;
+    position: absolute;
+    bottom:0;
+    left: 0;
+    color: #ffffff;
+    transform: translateY(50%);
+    margin-left: 10px;
+    transition: all 1s linear;
+}
+.play:hover .box{
+    transform: translateY(0);
+}
+.middle>.content{
+    width: 889px;
+    height: 323px;
+    background: url(./images/hainan-gibbon.jpg) no-repeat center/contain;
+    position: relative;
+    margin-bottom: 30px;
+}
+.middle button{
+    width: 85px;
+    height: 25px;
+    position: absolute;
+    left: 48%;
+    top: 60%;
+    background: transparent;
+    border-color: #ffffff;
+    color: #ffffff;
+}
+.middle button:hover{
+    background-color: red;
+    color: #ffffff;
+}
+.bottom>.container{
+    display: flex;
+    height: 258px;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+.bottom-item,.bottom-item-new{
+    width: 223px;
+    background-color: #f6f6f6;
+    font-size: 8px;
+    line-height: 20px; 
+    overflow: hidden;
+    position: relative;
+}
+.play:hover.bottom-item{
+    background-color: #f2f2f2;
+}
+.bottom-item>span,.bottom-item-new span{
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    color: #ffffff;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.25);
+}
+.bottom-item-new span{
+    padding: 5px 10px;
+}
+
+.bottom-item-new{
+    overflow: auto;
+}
+.bottom img{
+    width: 100%;
+    height: 142px;
+    transition: all 1s linear;
+}
+.bottom p{
+    padding: 0 6px;
+}
+.sticky{
+    position: sticky;
+    top: 0px;
+    height: 30px;
+    color: #ffffff;
+    
+    background-color:#f6f6f6 ;
+}
+.more>.container{
+       width: 223px;    
+       display: flex;
+       justify-content: space-around;
+       margin-bottom: 36px;
+    }
+.more button{
+    width: 84px;
+    height: 20px;
+    display: inline-block;
+    background-color: #ffffff;
+}
+.more button:hover{
+    background-color: red;
+}
+footer{
+    background-color: #efefef;
+    font-size: 12px;
+}
+.first-line{
+    display: flex;
+    justify-content: space-between;
+    height: 42px;
+    line-height: 42px;
+    border-bottom: 1px solid #dbdbdb;
+}
+.first-line input{
+    width: 245px;
+    height: 25px;
+    border:none;
+    box-sizing: border-box;
+    vertical-align: middle;
+}
+.second-line{
+    display: flex;
+    height: 210px;
+    margin-top: 24px;
+    justify-content: space-between;
+    border-bottom: 1px solid #dbdbdb;
+    line-height: 20px;
+}
+.third-line{
+    background: url(./images/share.png) no-repeat center right;
+}
+.third-line ul{
+    display: flex;
+    justify-content: flex-start;
+    height: 50px;
+    line-height: 50px;
+}
+.third-line ul>li{
+    padding: 0 10px;
+}
+.footer-bar{
+    height: 50px;
+    line-height: 50px;
+    font-size: 10px;
+}
+.footer-bar ul{
+    display: flex;
+    justify-content: space-between;
+}

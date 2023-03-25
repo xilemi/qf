@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let str='abcabcdabcdddddd1123232342342355'
+        let str1=new String('jdgjdgh')
+        console.log(str);
+        console.log(Object.getPrototypeOf(str));
+        // 拿每个去和后面的比较  如前面已经比较则不比(先去重？)
+        let arr=str.split('');
+        // let res=new Set(arr);
+        // console.log(res);
+        // let res1=[...res]
+        // console.log([...res]);
+        // for(let i=0;i<res1.length;i++){
+        //     let count=0
+        //     for(let j=0;j<str.length;j++){
+        //         if(res1[i]==str[j]){
+        //             count++;
+        //         }
+        //     }
+        //     console.log(res1[i],count);
+        // }
+        let obj=[]
+        
+        for(let i=0;i<arr.length;i++){
+            if(obj[arr[i]]){
+                obj[arr[i]]++
+            }else{
+                // 会有当成下标处理的情况 arr[i]结果为数组是
+                obj[arr[i]]=1
+            }    
+           
+        }
+        console.log(obj);
+    </script>
+</body>
+</html>

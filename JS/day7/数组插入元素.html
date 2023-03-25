@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 数组插入元素，传入两个参数 插入的下标 插入的内容 从下标开始 把元素依次往后挪一位
+        function fn(index,arr,newArr){
+          for(let i=arr.length-1;i>=index;i--){
+            arr[i+newArr.length]=arr[i]
+          }
+          for(let i=0;i<newArr.length;i++){
+            arr[index++]=newArr[i]
+          }
+          return arr
+        }
+        let arr=[1,2,3,4,5]
+        let newArr=[8,9,8,9,8,9]
+        console.log(fn(1,arr,newArr));
+    </script>
+</body>
+</html>

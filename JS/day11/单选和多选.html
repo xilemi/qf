@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input {
+            width: 20px;
+            height: 20px;
+        }
+
+        label {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <label>
+        <input type="checkbox">全选
+    </label>
+    <br>
+    <label><input type="checkbox">1</label>
+    <label><input type="checkbox">2</label>
+    <label><input type="checkbox">3</label>
+    <label><input type="checkbox">4</label>
+    <label><input type="checkbox">5</label>
+
+    <script>
+        // 实现单选  每次点击统计选中的个数 选中的项数 则全选等于true
+        let all = document.querySelector('label>input')
+        console.log(all);
+        let ds = document.querySelectorAll('label:nth-of-type(n+2)>input')
+        console.log(ds);
+        // 实现全选
+        all.onclick = function () {
+            for (let i = 0; i < ds.length; i++) {
+                ds[i].checked = this.checked
+            }
+        }
+        for (let i = 0; i < ds.length; i++) {
+            ds[i].onclick = function () {
+                let sum = 0;
+                for(let j=0;j<ds.length;j++){
+                    if (ds[j].checked) {
+                    sum++   
+                }
+                }
+                if (sum == ds.length) {
+                    all.checked = true
+                }
+                else{
+                    all.checked=false
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

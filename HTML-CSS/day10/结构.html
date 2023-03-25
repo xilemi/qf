@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 
+            translate 位移
+            rotate    旋转
+            scale     缩放
+            同时存在时要考虑 重叠 把位移放在最前
+        
+        */
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .box {
+            width: 250px;
+            height: 260px;
+            border: 2px solid;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .main{
+            width: 100%;
+            height: 150px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        .main :first-child{
+            width: 100%;
+            height: 150px;
+        }
+        .main :last-child{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%) scale(5);
+            opacity: 0;
+            transition: all 1s linear;
+        }
+        p {
+            padding: 0 10px;
+        }
+        .main :last-child:hover{
+            transform: translate(-50%,-50%) scale(1);
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div>
+            <div class="main">
+                <img src="./images/腾讯会议图片_20230227153352.jpg" alt="">
+                <img src="./images/播放.png " alt="">
+            </div>
+            <p>王者荣耀王者荣耀王者荣耀王者荣耀王者荣耀</p>
+        </div>
+    </div>
+</body>
+
+</html>

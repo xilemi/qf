@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .a {
+            width: 400px;
+            height: 300px;
+            background-color: antiquewhite;
+        }
+
+        .b {
+            font-size: 40px;
+        }
+
+        .c {
+            color: bisque;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="a">7875</div>
+    <input type="text" value="8989">
+    <script>
+        // 获取元素 id  tagname classname querySelector querySelectorAll
+        let box = document.querySelector('div')
+        let inp = document.querySelector('input')
+        // 获取元素的内容 innerHTML innerText(不能识别标签) value(作用于表单)
+        console.log(box.innerHTML);
+        console.log(box.innerText);
+        console.log(inp.value);
+        // 操作元素的样式 window的方法 只能读取  不能设置
+        console.log(window.getComputedStyle(box)['width'])
+        // 元素.style 方式 只能作用于行内样式
+        console.log(box.style.backgroundColor);
+        // 操作元素类名  className classList
+        box.classList.add('b')
+        // box.classList.remove('a')
+        // box.classList.toggle('b')//有则删除 无则添加
+        // 获取类名
+        console.log(box.className);
+        // 修改类名
+        box.className='c'
+        // 添加类名
+        box.className+=' c'
+        // 操作元素的属性 
+        // 原生属性 自定义属性  h5自定义属性
+        // 原生属性直接用  元素.属性名 
+        console.log(box.id='jikk');
+        // 自定义属性
+        // 设置自定义属性
+        box.setAttribute('key','value')
+        // 获取自定义属性
+        box.getAttribute('key')
+        // 删除自定义属性
+        box.removeAttribute('key')
+        // h5自定义属性 驼峰命名法 会被转成-连接
+        // 添加
+        box.dataset.wangrui='123'
+        // 读取
+        console.log(box.dataset.wangrui);
+        // 删除自定义属性
+        // delete box.dataset.wangrui
+    </script>
+</body>
+
+</html>

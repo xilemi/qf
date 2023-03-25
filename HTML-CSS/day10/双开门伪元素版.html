@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 1366px;
+            height: 600px;
+            margin: auto;
+            background: url(./images/腾讯会议图片_20230227115615.jpg);
+            overflow: hidden;
+        }
+        .box::before,.box::after{
+            content: "";
+            display: block;
+            float: left;
+            width: 50%;
+            height: 600px;
+            background: url(./images/腾讯会议图片_20230227115640.jpg) ;
+            transition: all 2s linear;
+        }
+        .box::after{
+            background:url(./images/腾讯会议图片_20230227115640.jpg) right 0;
+        }
+        .box:hover::before{
+            transform: translate(-100%);
+        }
+        .box:hover::after{
+            transform: translate(100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 创建一个新的数组，将原数组中的元素与新数组内的元素进行比较 没有的则添加
+        function fn(arr){
+            let newArr=[]
+           for(let i=0;i<arr.length;i++){
+            if(newArr.indexOf(arr[i])==-1){
+                newArr.push(arr[i])
+            }
+           }
+            return newArr
+        }
+        let arr=[4357,4,4,6,26,1,1,21,1,1,1,1,1,1,1,266,234,64,762,2,45,26,46,324,62362]
+        console.log(fn(arr));
+    </script>
+</body>
+</html>

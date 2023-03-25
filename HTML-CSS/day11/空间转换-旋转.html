@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        ul,li{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+        }
+        ul{
+            width: 120px;
+            text-align: center;
+            line-height: 30px;
+            margin: 100px auto;
+            transition: all 1s linear;
+            float: left;
+        }
+        a{
+            width: 120px;
+            height: 30px;
+            display: block;
+        }
+        li{
+            transform-style: preserve-3d;
+            transition: all 1s linear;
+            position: relative;
+        }
+        ul>li>a:nth-child(1){
+           
+            transform: translateY(-50%) rotateX(90deg);
+            background-color: burlywood;
+        }
+        ul>li>a:nth-child(2){
+            position:absolute;
+            top: 0;
+            left: 0;
+            background-color: aquamarine;
+            transform: translateZ(50%);
+        }
+       ul:hover li{
+        transform: rotateX(-90deg);
+       }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>
+            <a href="#">首页</a>
+            <a href="#">index</a>
+        </li>
+    </ul>
+    <ul>
+        <li>
+            <a href="#">首页</a>
+            <a href="#">index</a>
+        </li>
+    </ul>
+    <ul>
+        <li>
+            <a href="#">首页</a>
+            <a href="#">index</a>
+        </li>
+</body>
+</html>

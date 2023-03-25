@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        header {
+            height: 40px;
+            background-color: #2b303b;
+        }
+
+        header>div {
+            width: 1205px;
+            height: 40px;
+            /* background-color: antiquewhite; */
+            margin: auto;
+        }
+
+        header>div img {
+            padding-top: 10px;
+        }
+
+        header>div>ul {
+            float: right;
+            height: 40px;
+            list-style: none;
+        }
+
+        header>div>ul li {
+            float: left;
+            line-height: 40px;
+            padding: 0 10px;
+            background: url(../作业/images/竖线.png) no-repeat right center;
+        }
+
+        header>div>ul :last-child {
+            background: url();
+        }
+
+        .main {
+            height: 480px;
+            background-color: #181c28;
+        }
+
+        .box {
+            width: 1205px;
+            height: 480px;
+            margin: 0 auto;
+            background-color: blue;
+        }
+
+        .main-box-left {
+            width: 246px;
+            height: 480px;
+            background-color: azure;
+            float: left;
+        }
+
+        .main-box-right {
+            width: 959px;
+            height: 480px;
+            background-color: black;
+            float: left;
+        }
+
+        .main-box-left>ul {
+            list-style: none;
+            padding: 20px;
+        }
+
+        .main-box-left>ul>li {
+            height: 40px;
+            line-height: 40px;
+
+        }
+
+        .main-box-left>ul>li span {
+            float: right;
+        }
+
+        .content-box {
+            width: 1205px;
+            height: 696px;;
+            margin: auto;
+            /* background-color: aquamarine; */
+        }
+        .title{
+            height: 100px;
+            /* background-color: bisque; */
+            text-align: center;
+            padding-top: 40px;
+            box-sizing: border-box;
+        }
+        .item>div{
+            width: 582px;
+            height: 464px;
+            box-sizing: border-box;
+            /* background-color: pink; */
+        }
+        .item{
+            display: flex;
+            border: 1px solid;
+            border-radius: 10px;
+        }
+        .item-left{
+            padding: 40px 20px 20px 30px;
+            line-height: 30px;
+        }
+        .item-left button{
+            width: 164px;
+            height: 46px;
+            border: 2px solid #ffa500;
+            box-sizing: border-box;
+            margin-top: 28px;
+        }
+        .item-left h1{
+            width: 114px;
+            height: 40px;
+            border-bottom: 2px solid;
+        }
+        .item-right img{
+            width:584px;
+            height: 346px;
+            margin: 40px 40px 0 0;
+        }
+        footer{
+            background-color: #181c28;
+            height: 392xp;
+            padding-top: 30px;
+            box-sizing: border-box;
+        }
+        .footer-box{
+            width: 1205px;
+            height: 100%;
+            margin: auto;
+            background-color: #ffa500;
+            display: flex;
+            justify-content: space-between;
+        }
+        .footer-box>div{
+            width: 200px;
+            font-size: 14px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div>
+            <img src="../作业/images/logo.svg" alt="">
+            <ul>
+                <li><a href=""></a>最新活动</li>
+                <li><a href=""></a>产品</li>
+                <li><a href=""></a>客户</li>
+                <li><a href=""></a>最新活动</li>
+                <li><a href=""></a>最新活动</li>
+                <li><a href=""></a>长安牌</li>
+                <li><a href=""></a>迪迦</li>
+                <li><a href=""></a>塞了</li>
+                <li><a href=""></a>第三方付</li>
+                <li><a href=""></a>调动单</li>
+            </ul>
+        </div>
+    </header>
+    <section class="main">
+        <div class="box">
+            <div class="main-box-left">
+                <ul>
+                    <li><a href="">腾讯云<span>></span></a></li>
+                    <li><a href="">腾讯云<span>></span></a></li>
+                    <li><a href="">腾讯云<span>></span></a></li>
+                    <li><a href="">腾讯云<span>></span></a></li>
+                    <li><a href="">腾讯云<span>></span></a></li>
+                    <li><a href="">腾讯云<span>></span></a></li>
+                    <li><a href="">腾讯云<span>></span></a></li>
+                    <li><a href="">腾讯云<span>></span></a></li>
+                    <li><a href="">腾讯云<span>></span></a></li>
+                    <li><a href="">腾讯云<span>></span></a></li>
+                </ul>
+            </div>
+            <div class="main-box-right"></div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="content-box">
+            <div class="title">
+                <p>云从业者培训及认证</p>
+                <p>好好学习，天天向上</p>
+            </div>
+            <div class="item">
+                <div class="item-left">
+                    <h1>在线学习</h1>
+                    <p>本课程专为云计算初学者、学生、个人开发者打造。购买云+校园任意套餐可免费观
+                        看课程视频本课程专为云计算初学者、学生、个人开发者打造。购买云+校园任意套
+                        餐可免费观看课程视频本课程专为云计算初学者、学生.个人开发者打造，购买云
+                        +校园任意套餐可免费观看课程视频本课程专为云计算初学者、学生、个人开发者打
+                        造。购买云+校园任意套餐可免费观看课程视频本课程专为云计算初学者.学生、个
+                        人开发者打造，购买云+校园任意套餐可免费观看课程视频</p>
+                        <button>开始学习</button>
+                </div>
+                <div class="item-right">
+                    <img src="../作业/images/item.png" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-box">
+            <dl>
+                <dt>
+                    <dd>1</dd>
+                    <dd>2</dd>
+                    <dd>3</dd>
+                    <dd>4</dd>
+                </dt>
+            </dl>
+            <dl>
+                <dt>
+                    <dd>1</dd>
+                    <dd>2</dd>
+                    <dd>3</dd>
+                    <dd>4</dd>
+                </dt>
+            </dl>
+            <dl>
+                <dt>
+                    <dd>1</dd>
+                    <dd>2</dd>
+                    <dd>3</dd>
+                    <dd>4</dd>
+                </dt>
+            </dl>
+            <dl>
+                <dt>
+                    <dd>1</dd>
+                    <dd>2</dd>
+                    <dd>3</dd>
+                    <dd>4</dd>
+                </dt>
+            </dl>
+            <dl>
+                <dt>
+                    <dd>1</dd>
+                    <dd>2</dd>
+                    <dd>3</dd>
+                    <dd>4</dd>
+                </dt>
+            </dl>
+            <div>
+                <p>Copyright&copy;2013 - 2020Tencent Cloud.All Rights Reserved</p>
+                <p>腾讯云 版权所有</p>
+                <button>
+                    购买咨询
+                </button>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

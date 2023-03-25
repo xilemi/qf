@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 字符串中第一个出现的 没有重复的字母 大小写被认为是相同的字母 
+        // 思路先将字符串斗转小写，再来统计字母出现的次数
+        let s = ''
+        function firstNonRepeatingLetter(s) {
+            if(s.length==0){
+                return null
+            }
+            console.log(s);
+            let s1=s.toLowerCase()
+            console.log(s1);
+            let obj={}
+            for(let i=0;i<s1.length;i++){
+                if(obj[s1[i]]){
+                    obj[s1[i]]++
+                }else{
+                    obj[s1[i]]=1
+                }
+            }
+            let count=0;
+            for(let item in obj){
+                if(obj[item]==1){
+                    count++
+                    if(s.includes(item)){
+                        return item
+                    }else{
+                        return item.toUpperCase()
+                    }
+                }
+                if(count==0){
+                    return ''
+                }
+            }
+        }
+        console.log(firstNonRepeatingLetter(s));
+    </script>
+</body>
+
+</html>

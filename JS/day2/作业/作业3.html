@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let year = +prompt('请输入年');
+        let mouth = +prompt('请输入月');
+        let mouth1 = [1, 3, 5, 7, 8, 10, 12]
+        let mouth2 = [4, 6, 9, 11]
+        // 先片段是否是闰年
+        if (isNaN(year) == isNaN(mouth) && mouth <= 12 && mouth > 0 && isNaN(year) == false) {
+            if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
+                if (mouth == 2) {
+                    let day = 29;
+                    console.log('day:', day);
+                }
+                else{
+                    for (let i = 0; i < mouth1.length; i++) {
+                        if (mouth == mouth1[i]) {
+                            let day = 31;
+                            console.log('day:', day);
+                        }
+                    }
+                    for (let i = 0; i < mouth2.length; i++) {
+                        if (mouth == mouth2[i]) {
+                            let day = 30
+                            console.log('day:', day);
+                        }
+                    }
+            }
+        }
+            else {
+                if (mouth == 2) {
+                    let day = 28
+                    console.log('day:', day);
+                }
+                else {
+                    for (let i = 0; i < mouth1.length; i++) {
+                        if (mouth == mouth1[i]) {
+                            let day = 31;
+                            console.log('day:', day);
+                        }
+                    }
+                    for (let i = 0; i < mouth2.length; i++) {
+                        if (mouth == mouth2[i]) {
+                            let day = 30
+                            console.log('day:', day);
+                        }
+
+                    }
+                }
+            }
+        }
+        else{
+            alert('请输入正确的年月')
+        }
+
+    </script>
+</body>
+
+</html>

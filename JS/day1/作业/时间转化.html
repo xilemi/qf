@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 只需要把上一个单位的时间取余掉即可
+
+        let origin = 1234567;
+        let day = parseInt(origin/3600/24);
+        let hours = parseInt((origin%(3600*24))/3600);
+        let minutes = parseInt((origin%3600)/60);
+        let second = parseInt(origin%60);
+        console.log('day:',day,'hours:',hours,'minutes:',minutes,'second:',second);
+    </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul {
+            width: 150px;
+            display: flex;
+            list-style: none;
+            margin-top: 200px;
+        }
+
+        li {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: aqua;
+            margin-right: 10px;
+        }
+
+        li.active {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li class="active"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <script>
+        // 厕所思想
+        let flag = true;
+        // 定时器
+        let timer;
+        //  控制全局的下标
+        let i = 0
+        let lis = document.querySelectorAll('ul>li')
+        lis.forEach(function (item, index) {
+            item.onmouseenter = function () {
+                i=index
+                common()
+                flag = true;
+                clearInterval(timer)
+            }
+            item.onmouseleave=function(){
+                if(!flag){
+                    return
+                }
+                flag=false
+                i=index
+                timer=setInterval(function(){
+                    common()
+                },1000)
+            }
+        })
+        function common() {
+            document.querySelector('li.active').classList.remove('active')
+            lis[i].classList.add('active')
+            i++
+            if (i >= 5) {
+                i = 0;
+            }
+        }
+        // 打开页面轮播
+        timer = setInterval(function () {
+            common();
+        }, 1000)
+    </script>
+</body>
+
+</html>

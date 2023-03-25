@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 利用对象的相同key会覆盖的原理 ，对向数组进行去重
+        // 创建空对象，将数组遍历，元素作为对象的key，插入对象
+        // 创建新的空数组,利用for in循环将对象的key插入数组,注意key是string型的进行转换
+        function fn(arr) {
+            let obj={};
+            let newArr=[]
+            arr.forEach(function(item){
+                obj[item]=''
+            })
+            for(let item in obj){
+                newArr.push(+item)
+            }
+            return newArr
+        }
+        let arr = [4357, 4, 4, 6, 26, 1, 1, 21, 1, 1, 1, 1, 1, 1, 1, 266, 234, 64, 762, 2, 45, 26, 46, 324, 62362]
+        console.log(fn(arr));
+    </script>
+</body>
+
+</html>

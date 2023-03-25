@@ -1,0 +1,57 @@
+@font-face {
+  font-family: "iconfont"; /* Project id  */
+  src: url('iconfont.ttf?t=1677506155945') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 12px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-shouhuodizhi:before {
+  content: "\e64e";
+}
+
+.icon-icon_search:before {
+  content: "\e614";
+}
+
+.icon-rili:before {
+  content: "\e8cf";
+}
+
+.icon-jiantou_liebiaoshouqi_o:before {
+  content: "\eb8a";
+}
+
+.icon-jiantou_liebiaozhankai_o:before {
+  content: "\eb8b";
+}
+
+.icon-kefu:before {
+  content: "\ec2e";
+}
+
+.icon-diqiu:before {
+  content: "\e67d";
+}
+
+.icon-fanhuidingbu-:before {
+  content: "\e646";
+}
+
+.icon-caidan:before {
+  content: "\e613";
+}
+
+.icon-jurassic_user:before {
+  content: "\e6a4";
+}
+
+.icon-HandbagSimple:before {
+  content: "\e634";
+}
+

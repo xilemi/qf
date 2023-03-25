@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        // 编写一个函数persistence，它接受一个正参数num并返回其乘法持久性，这是您必须将数字相乘num直到达到一位数的次数。
+
+
+
+        // 先拆分数字 将每个数字进行相乘 判断相乘的结果 大于10 继续
+
+
+        
+       
+        function persistence(num) {
+            let count = 0;
+            while (num >= 10) {
+                let arr = [];
+                let res = 1;
+                while (num > 0) {
+                    arr.push(num % 10);
+                    num = parseInt(num / 10);
+                }
+                console.log(arr);
+                for (let i = 0; i < arr.length; i++) {
+                    res = res * arr[i]
+                }
+                num = res;
+                count++;
+                
+            }  
+            return count
+        }
+        console.log(persistence(25));
+    </script>
+</body>
+
+</html>

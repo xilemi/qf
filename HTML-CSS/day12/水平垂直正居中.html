@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .father{
+            width: 300px;
+            height: 300px;
+            background-color: aqua;
+            /* 1 父盒子内边距 */
+            /* padding: 100px;
+            box-sizing: border-box; */
+            /* border-top: 1px solid; */
+            /* 3 定位 父相子绝 配合位移 或者margin */
+            /* position: relative; */
+            /* 4 flex布局 主轴 侧轴 center */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .son{
+            width: 100px;
+            height: 100px;
+            background-color: beige;
+            /*2 子盒子外边距 上外边距塌陷(消除外边距塌陷))*/
+            /* margin: 100px; */
+            /* position: absolute;
+            left: 50%;
+            top: 50%; */
+            /* transform: translate(-50%,-50%); */
+            /* margin: -50px 0 0 -50px; */
+        }
+    </style>
+</head>
+<body>
+    <div class="father">
+        <div class="son"></div>
+    </div>
+</body>
+</html>

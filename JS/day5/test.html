@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function descendingOrder(n) {
+            let num = [];
+            let sum = 0;
+            let num2 = num.length - 1
+            while (n > 0) {
+                num.push(n % 10);
+                n = parseInt(n / 10);
+            }
+            num.sort(function (a, b) {
+                return a - b;
+            })
+            console.log(num);
+            for (let i = 0; i < num.length; i++) {
+                sum += num[i] * Math.pow(10, i)
+            }
+            return sum
+        }
+        console.log(descendingOrder(234));
+        function getSum(a, b) {
+            if (a > b) {
+                let temp = a;
+                a = b;
+                b = temp;
+            }
+            if (a == b) {
+                return b;
+            } else {
+                return a + getSum(a + 1, b)
+            }
+        }
+        console.log(getSum(1, 5));
+    </script>
+</body>
+
+</html>

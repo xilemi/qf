@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="inp1"><br>
+    <button id="sum">+</button>
+    <button id="sub">-</button>
+    <button id="take">*</button>
+    <button id="remove">/</button><br>
+    <input type="text" id="inp2"><br>
+    <button id="equal">=</button><br>
+    <input type="text" id="result">
+    <script>
+        // 获取到输入的input1 input2 以及点击的的运算符号 再通过switch 判断点击的符号 取到运算公式
+        let ysf;
+        sum.onclick = function () {
+             ysf = '+'
+        }
+        sub.onclick = function () {
+             ysf = '-'
+        }
+        take.onclick = function () {
+             ysf = '*'
+        }
+        remove.onclick = function () {
+             ysf = '/'
+        }
+        equal.onclick = function () {
+            let num1 = +inp1.value;
+            let num2 = +inp2.value;
+            switch (ysf) {
+                case '+':
+                    result.value = num1 + num2
+                    break;
+                case '-':
+                    result.value = num1 - num2
+                    break;
+                case '*':
+                    result.value = num1 * num2
+                    break;
+                case '/':
+                    result.value = num1 / num2
+                    break;
+                default:
+                    alert('请点击符号');
+                    break;
+            }
+            inp1.value=''
+            inp2.value=''
+            
+        }
+    </script>
+</body>
+
+</html>

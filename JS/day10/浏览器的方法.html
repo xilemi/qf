@@ -1,0 +1,93 @@
+<!-- <!DOCTYPE html> -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            width: 8000px;
+            height: 3000px;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="o">打开</button>
+    <button id="c">关掉</button>
+    <button id="shuaxin">刷新</button>
+    <button id="openurl">打开新的地址</button>
+    <button id="run">滚动到</button>
+    <script>
+        // 展示的宽高 视口
+        console.log(window.innerHeight);
+        console.log(window.innerWidth);
+        console.log(Object.getPrototypeOf(history));
+        console.log(location);
+        // onresize 当页面尺寸发生变化时 
+        // onscroll
+        window.onload = function () {
+            console.log('内容加载完执行');
+        }
+        window.onresize = function () {
+            console.log(innerHeight);
+            console.log(innerWidth);
+        }
+        window.onscroll = function () {
+            console.log(innerHeight);
+            console.log(innerWidth);
+            // 带有DOCTYPE
+            // console.log('顶部', document.documentElement.scrollTop);
+            // console.log('左边', document.documentElement.scrollLeft);
+            // 没有DOCTYPE时候
+            // console.log('顶部',document.body.scrollTop);
+            // console.log('左边',document.body.scrollLeft);
+            // 中和两种情况
+            let scrolltop = document.documentElement.scrollTop || document.body.scrollTop
+            let scrollleft = document.documentElement.scrollLeft || document.body.scrollLeft
+            console.log('顶部', scrolltop);
+            console.log('左边', scrollleft);
+        }
+        // 打开标签页
+        // window.open('http://www.1000phone.com')
+        // 关闭当前页
+        // window.close()
+        o.onclick = function () {
+            URL = 'http://www.baidu.com'
+            window.open(URL)
+        }
+        c.onclick = function () {
+            window.close()
+        }
+        // 浏览器的location 属性
+        openurl.onclick = function () {
+            location.href = 'http://www.1000phone.com'
+        }
+        shuaxin.onclick = function () {
+            location.reload()
+        }
+        // 浏览器的卷出高度，由于屏幕的大小有限，页面不能全部展示，可以获取页面滚出的距离
+        // 带有DOCTYPE
+        // console.log('顶部', document.documentElement.scrollTop);
+        // console.log('左边', document.documentElement.scrollLeft);
+        // 没有DOCTYPE时候
+        // console.log('顶部',document.body.scrollTop);
+        // console.log('左边',document.body.scrollLeft);
+        // 中和两种情况
+        // let scrolltop = document.documentElement.scrollTop || document.body.scrollTop
+        // let scrollleft = document.documentElement.scrollLeft || document.body.scrollLeft
+        // console.log('顶部', scrolltop);
+        // console.log('左边', scrollleft);
+        // 浏览器滚动到
+        run.onclick=function(){
+            window.scrollTo({
+                left:200,
+                top:200
+            })
+        }
+    </script>
+</body>
+
+</html>

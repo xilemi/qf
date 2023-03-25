@@ -1,0 +1,71 @@
+@import "./common.less";
+@size:(1/37.5rem);
+.card{
+    .title{
+        height: 44*@size;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        padding-left:15.4*@size;
+        font-size: 15*@size;
+        background-color: #FFFFFFFF;
+        .icon-chevron-thin-left{
+            font-size: 17.5*@size;
+            margin-right: 129.6*@size;
+        }
+    }
+    .item{
+        margin: 10*@size 20*@size 0;
+        height: 120*@size;
+        border-radius:8*@size ;
+        background:#78B3F4 url(../images/Fill\ 1@2x.png) no-repeat  190*@size bottom;
+        padding:15*@size;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        position: relative;
+        .name{
+            width: 166*@size;
+            font-size: 16*@size;
+            margin-left: 0.5*@size;
+        }
+        .time{
+            font-size: 10*@size;
+            margin: 6*@size 0 39*@size;
+        }
+        .count{
+            font-size: 13*@size;
+            color: #4492E4;
+            margin-left: @size;
+        }
+        button{
+            width: 80*@size;
+            height: 30*@size;
+            position: absolute;
+            right: 15*@size;
+            border: 0;
+        }
+        .yueka{
+            width: 50*@size;
+            height: 20*@size;
+            font-size: 12*@size;
+            top: 13*@size;
+            color: #FFFFFF;
+            background-color: transparent;
+            border: @size solid #FFFFFF;
+            border-radius: 4*@size;
+        }
+        .xiaofei{
+            bottom: 15*@size;
+            right: 100*@size;
+            border-radius: 40*@size;
+            background-color: transparent;
+            border: @size solid #ffffff;
+        } 
+        .xufei{
+            bottom: 15*@size;
+            border-radius: 50*@size;
+            background-color: #FFFFFF;
+        }
+            
+    }
+}

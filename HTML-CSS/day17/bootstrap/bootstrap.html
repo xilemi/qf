@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./bootstrap-3.4.1-dist/css/bootstrap.min.css">
+        <style>
+            .container{
+                height: 50px;
+                background-color: antiquewhite;
+            }
+            ul{
+                background-color: antiquewhite;
+                height: 50px;
+            }
+            .container-fluid{
+                margin-top: 50px;
+                height: 50px;
+                line-height: 50px;
+                background-color: black;
+                /* padding: 0; */
+            }
+        </style>
+</head>
+<body>
+    <div class="container">
+       <div class="col-lg-3 col-md-6 col-xs-12">1</div>
+       <div class="col-lg-3 col-md-6 col-xs-12">2</div>
+       <div class="col-lg-3 col-md-6 col-xs-12">3</div>
+       <div class="col-lg-3 col-md-6 col-xs-12">4</div>
+    </div>
+    <div class="container">
+        <!-- 左右内边距15px  添加 row类消除 -->
+       <div class="row">123</div>
+    </div>
+    <!-- 通栏效果 -->
+    <div class="container-fluid">
+        <div class="row">
+            12345
+        </div>
+    </div>
+    <ul class="cotainer nav nav-tabs">
+        <li role="presentation">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+    <button class="btn btn-success">年后</button>
+</body>
+</html>

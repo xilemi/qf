@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 
+        文本溢出显示...
+     -->
+    <style>
+        /* 单行文本 */
+        /* div{
+            width: 750px;
+            height: 100px;
+            background-color: aquamarine;
+            /* 是否换行 */
+        white-space: nowrap;
+        overflow: hidden;
+        /* 显示3个小点 */
+        text-overflow: ellipsis;
+        }
+
+        */
+
+        /* 多行文本  设置高度会将隐藏的文字显示:想要高度可以通过设置行高实现*/
+        div {
+            width: 200px;
+            line-height: 30px;
+            background-color: antiquewhite;
+            /* 盒子可以伸缩弹性盒 */
+            display: -webkit-box;
+            /* 文字排列方式 */
+            -webkit-box-orient: vertical;
+            /* 显示行数 */
+            -webkit-line-clamp: 1;
+            overflow: hidden;
+        }
+
+        div {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 99.996px;
+            height: 99.996px;
+            overflow: hidden;
+            background-color: antiquewhite;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+</body>
+
+</html>

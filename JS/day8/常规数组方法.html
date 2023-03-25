@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let arr = [12, 4, 53, 4]
+        let arr1 = [1, 2,,3, 4, 5, 6]
+        //拼接数组
+        let res = arr.concat(arr1)
+        console.log(res);
+        // 查找元素 找到返回下标 找不到返回 -1 只返回第一次找到的
+        let res1=arr.indexOf(4)
+        let res2=arr.indexOf(1)
+        console.log(res1,res2);
+        // 从尾部开始找
+        let res3=arr.lastIndexOf(4)
+        console.log(res3);
+        // 截取数组  slice 包头不包尾
+        let res4=arr.slice(1,3)
+        console.log(res4);
+        // 将数组转换为字符串 默认‘，’分隔
+        let res5=arr.join()
+        console.log(res5);
+        // 参数可选  自己选择分隔符号
+        let res6=arr.join('-')
+        console.log(res6);
+        // 将字符串转为数组 参数为分隔符
+        let res7=res6.split('-')
+        console.log(res7);
+
+        let arr3=[
+            {name:1},
+            {name:2},
+            {name:3},
+            {name:4},
+        ]
+        // 不能作用于 数组对象
+        let res8=arr3.indexOf({name:1})
+        console.log(res8);
+        let res9=arr3.findIndex(function(item){
+            return item.name==1
+        })
+        console.log(res9);
+
+    </script>
+</body>
+
+</html>

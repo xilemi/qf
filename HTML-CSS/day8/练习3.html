@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .box{
+            width: 80px;
+            height: 50px;
+            background-color: aqua;
+            text-align: center;
+            line-height: 50px;
+            position: relative;
+        }
+        .sanjiao{
+            width: 0;
+            height: 0;
+            border: 8px solid transparent;
+            border-top-color: red;
+            position: absolute;
+            left: 75%;
+            top: 50%;
+        }
+        .box:hover>.sanjiao{
+            border: 8px solid transparent;
+            border-bottom-color: red;
+            position: absolute;
+            left: 75%;
+            top: 50%;
+            transform: translateY(-100%);
+        }
+        div{
+            width: 100px;
+            height: 30px;
+            background-color: aquamarine;
+            text-align: center;
+            line-height: 30px;
+        }
+        span{
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+            display: inline-block;
+            border-top-color: red;
+            position: relative;
+            top: 15px;
+        }
+        div:hover span{
+            border: 10px solid transparent;
+            border-bottom-color: red;
+            top: -5px;
+        }
+    </style>
+</head>
+<body>
+        <!-- <div class="box">导航<div class="sanjiao"></div>
+        </div> -->
+        <div>
+            导航
+            <span></span>
+        </div>
+</body>
+</html>

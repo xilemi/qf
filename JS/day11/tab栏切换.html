@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <style>
+        .box{
+            width: 300px;
+            height: 300px;
+        }
+        ul{
+            height: 100px;
+        }
+    </style> -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 600px;
+            height: 400px;
+            border: 3px solid red;
+            margin: 100px auto 0;
+        }
+
+        ul,
+        li,
+        ol {
+            list-style: none;
+        }
+
+        ul {
+            height: 100px;
+            background-color: pink;
+            display: flex;
+        }
+
+        ul>li {
+            width: 200px;
+            height: 100px;
+            background-color: springgreen;
+            font-size: 30px;
+            text-align: center;
+            line-height: 100px;
+            color: #fff;
+        }
+
+        ul>li.active {
+            background-color: rgb(206, 22, 157);
+        }
+
+        ol {
+            height: 300px;
+        }
+
+        ol>li {
+            height: 300px;
+            width: 600px;
+            background-color: skyblue;
+            text-align: center;
+            font-size: 34px;
+            color: #fff;
+            line-height: 300px;
+            display: none;
+        }
+
+        ol>li.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div class="box">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <ol>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ol>
+    </div> -->
+    <div class="box">
+        <ul>
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <ol>
+            <li class="active">A</li>
+            <li>B</li>
+            <li>C</li>
+        </ol>
+    </div>
+    <script>
+        let ulis=document.querySelectorAll('ul>li')
+        let olis=document.querySelectorAll('ol>li')
+        for(let i=0;i<ulis.length;i++){
+            ulis[i].dataset.index=i
+            ulis[i].onclick=function(){
+                document.querySelector('ul>li.active').classList.remove('active')
+                document.querySelector('ol>li.active').classList.remove('active')
+                this.classList.add('active')
+                let index=this.dataset.index
+                olis[index].classList.add('active')
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+@size:20rem;
+.clearfix{
+    &:after,&::before{
+        content: "";
+        display: block;
+    }
+    &:after{
+        clear: both;
+    }
+}
+.box{
+    width:(200px/4);
+    height: 300px;
+    background-color: aquamarine;
+    // display: none;
+    .box1{
+        width: 30%;
+        height: 20px;
+        background-color: black;
+    }
+    .box2{
+        // @定义变量 可以进行运算 除法带括号运算
+        // width: 5*@size;
+        width: (@size/5);
+        height: 50px;
+        .son{
+            font-size: 20px;
+            height: 30px;
+            width: 20px;
+            background-color: blanchedalmond;
+        }
+        .sun{
+            width: 20px;
+            height: 20px;
+            background-color: aqua;
+            display: none;
+        }
+        &:hover .sun{
+            display: block;
+        }
+    }
+    & :nth-child(3){
+        width: 50px;
+        height: 50px;
+        background-color: pink;
+        font-size: 2rem;
+    }
+   /*  &:hover .box1{
+        width: 150px;
+        height: 50px;
+    } */
+}

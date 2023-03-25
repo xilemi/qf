@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        ul{
+            width: 500px;
+            height: 400px;
+            background-color: aqua;
+            border: 1px solid;
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            grid-template-rows: repeat(4,1fr);
+            grid-gap: 10px;
+            list-style: none;
+            grid-template-areas: 
+                   'a1 a2 a2' 
+                   'b1 a2 a2' 
+                   'c1 c1 c3' 
+                   'd1 d2 d2' 
+            
+            ;
+        }
+        li{
+            background-color: pink;
+        }
+        /* ul>li:nth-of-type(2){
+            grid-area: 1/2/3/4;
+        }
+        ul>li:nth-of-type(4){
+            grid-area: 3/1/4/3;
+        }
+        ul>li:nth-of-type(7){
+            grid-area:4/2/5/4 ;
+        } */
+        ul>li:nth-of-type(1){grid-area: a1;}
+        ul>li:nth-of-type(2){grid-area: a2;}
+        ul>li:nth-of-type(3){grid-area: b1;}
+        ul>li:nth-of-type(4){grid-area: c1;}
+        ul>li:nth-of-type(5){grid-area: c3;}
+        ul>li:nth-of-type(6){grid-area: d1;}
+        ul>li:nth-of-type(7){grid-area: d2;}
+    </style>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <!-- <li>3</li> -->
+        <li>4</li>
+        <!-- <li>5</li>
+        <li>6</li> -->
+        <li>7</li>
+        <!-- <li>8</li> -->
+        <li>9</li>
+        <li>10</li>
+        <li>11</li>
+        <!-- <li>12</li> -->
+    </ul>
+</body>
+</html>

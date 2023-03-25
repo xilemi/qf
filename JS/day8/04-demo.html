@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 为字符串编写简单的 .camelCase 方法（camel_casePHP、CamelCaseC# 或camelCaseJava 中的函数）。所有单词的第一个字母必须大写且没有空格。
+        // 首先将字符串转换成数组 取到数组的每个元素 转换为数组 每个数组的第一个元素touppercase
+        String.prototype.camelCase = function () {
+            return this.split('-').map(function(item){
+               return  item[0].toUpperCase() + item.slice(1)
+            }).join('')
+        }
+        console.log("hello-case".camelCase());
+        let str="hello-case"
+        console.log(Object.getPrototypeOf(str));
+
+    </script>
+</body>
+
+</html>

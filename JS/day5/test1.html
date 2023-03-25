@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function spinWords(string) {
+            let newStr = string.split(' ');
+            for (let i=0;i<newStr.length;i++) {
+                if (newStr[i].length>= 5) {
+                    newStr.splice(i,1,newStr[i].split('').reverse().join(''))
+                }
+            }
+            console.log(newStr);
+            return newStr.join(' ')
+        }
+        console.log(spinWords('Hey fellow warriors'));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var a = 10;
+        function fn1() {
+            function fn2() {
+                function fn3() {
+                    console.log(a);
+                }
+                fn3();
+            }
+            fn2();
+            var a = 100;
+        }
+        fn1();
+        var num = [12, 3, 323]
+        console.log(num.sort());
+        var aa = {
+            name:12
+        }
+        var bb = aa;
+        var aa={
+            name:13
+        }
+        console.log(aa === bb);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 
+        行内元素可以一行显示  但是不能设置宽高
+        转换为行内块元素 既可以设置宽高 又能显示在一行
+        清楚 间隔 使用字体大小 设置为0实现
+     -->
+    <style>
+        body {
+            font-size: 0;
+        }
+        div{   
+            text-align: center;
+            /* 不生效父子元素都必须为块元素 */
+            /* margin: 0 auto; */
+        }
+        span {
+            width: 80px;
+            height: 50px;
+            background-color: #ff0000;
+            font-size: 16px;
+            display: inline-block;
+            text-align: center;
+            line-height: 50px;
+        }
+
+        span:hover {
+            background-color: #ffa500;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <span>导航1</span>
+        <span>导航2</span>
+        <span>导航3</span>
+        <span>导航4</span>
+        <span>导航5</span>
+    </div>
+</body>
+
+</html>

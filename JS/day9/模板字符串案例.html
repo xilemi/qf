@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <table border="1" style="width: 300px;border-collapse: collapse;" >
+        <thead>
+            <th>编号</th>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>性别</th>
+        </thead>
+        <tbody id="tbody">
+           
+        </tbody>
+    </table>
+    <script>
+        let list = [
+            { id: '1', name: 'wangrui1', age: '12', gender: '男' },
+            { id: '2', name: 'wangrui2', age: '12', gender: '男' },
+            { id: '3', name: 'wangrui3', age: '12', gender: '男' },
+            { id: '4', name: 'wangrui4', age: '12', gender: '男' },
+            { id: '5', name: 'wangrui5', age: '12', gender: '男' },
+        ]
+        list.forEach(function (item) {
+            let str = `
+            <tr>
+                <td>${item.id}</td>
+                <td>${item.name}</td>
+                <td>${item.age}</td>
+                <td>${item.gender}</td>
+            </tr>
+            `;
+            tbody.innerHTML+=str;
+        })
+
+
+
+
+    </script>
+</body>
+
+</html>

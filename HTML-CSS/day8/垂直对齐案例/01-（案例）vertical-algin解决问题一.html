@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* 浏览器遇到行内和行内块标签当做文字处理, 默认文字是按基线对象 */
+    input {
+      height: 50px;
+      box-sizing: border-box;
+      vertical-align: middle;
+      float: left;
+      /* 获取光标是取消选中是的样式 */
+      outline: none;
+    }
+  .left{
+    border-right: 0;
+  }
+  .right{
+    border-left: 0;
+  }
+  </style>
+</head>
+<body>
+  <input class="left" type="text">
+  <!-- button会有内边距和边框 -->
+  <input class="right" type="button" value="搜索">
+</body>
+</html>

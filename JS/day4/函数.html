@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./js/utils.js"></script>
+    <!-- 可以将函数写在外部 然后进行调用 -->
+    <script>
+
+        function test() {
+            login();
+            console.log('woshiyonglebiedhanshu');
+        }
+        getSum(4, 9);
+        function test1(){
+            return 'fanhuizhi'
+        }
+        console.log(test1());
+        function test2(a,b){
+            return a,b
+        }
+        console.log(test2(4,8));
+        function test3(a,b,c){
+            console.log(a,b,c);
+            return a+b+c
+        }
+        console.log(test3('a','b','x'));
+        function test4(a,b,c,d){
+            //伪数组接收实参
+            console.log(a,b,c,d);
+            var a=arguments
+            console.log(a[0]);
+            console.log(a[1]);
+            console.log(a[2]);
+            console.log(a[2]);
+        }
+        test4(1,2,3);
+        var fn=function(){
+            console.log('我是赋值式函数');
+            // return 'aaa'
+        }
+        // 此时输出的为fn()的返回值  因为没有返回值 所以输出undefined
+        console.log(function(){});
+        // 数组
+        // var arr=[1,2,34,5]
+        // 函数自调用
+        (function(a,b){
+           return console.log(a+b);
+        })(3,6)
+        
+    </script>
+</body>
+
+</html>

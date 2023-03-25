@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let arr = [12, 53, 7, 1222, 6]
+        // 外层循环表示第几轮 控制内层循环比较到位置 
+        /* 
+        第一轮到到下标 4 对应的j到3 j+1到4 这就是内层循环  -i的原因
+        外层减1  是从0开始  所以到3即可 4轮
+        01 12 23 34 
+        01 12 23
+        01 12
+        01
+        
+        
+        
+        */
+        for (let i = 0; i < arr.length - 1; i++) {
+            let count=0;
+            for (let j = 0; j < arr.length - 1 - i; j++) {
+                if (arr[j] < arr[j + 1]) {
+                    let temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                    count=1;
+                }
+                
+            }
+            // 一旦这一趟比较没有交换  说明已经排序好  结束循环即可
+            if(count==0){
+                break;
+            }
+            console.log('1');
+        }
+        console.log(arr);
+    </script>
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // (a ^ p + b ^ (p+1) + c ^(p+2) + d ^ (p+3) + ...) = n * k
+        // 给定数字和p
+        function digPow(n, p) {
+            let arr=[]
+            let num=n;
+            while(n>0){
+                arr.push(n%10);
+                n=parseInt(n/10)
+            }
+            arr.reverse()
+            console.log(arr);
+            let sum=0;
+            arr.forEach(function(item){
+                sum+=Math.pow(item,p)
+                p++
+            })
+            if(sum%num){
+                return -1
+            }
+            else{
+                return sum/num
+            }
+            // 
+        }
+
+        console.log(digPow(46288, 3));
+    </script>
+</body>
+
+</html>

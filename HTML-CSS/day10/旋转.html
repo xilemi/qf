@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 300px;
+            height: 50px;
+            border: 2px solid;
+            margin: 300px auto 0;
+        }
+        img{
+            width: 50px;
+            height: 50px; 
+            transition: all 3s linear;
+        }
+        .box:hover img{
+            transform-origin: center;
+            /* 相同属性 连写 会覆盖掉  位移在前  旋转在后  如果先旋转 会改变轴向 导致移动的位置不对*/
+            transform:translate(250px) rotate(360deg);
+            /* transform:rotate(360deg) translate(250px) ; */
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <img src="./images/luntai.png" alt="">
+    </div>
+</body>
+</html>

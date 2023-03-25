@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- ul li都是块级元素 独占一行 
+        type 属性 定义前面的点的样式 ：
+        none 无
+        square 方块 
+        disc  实心圆（默认）
+        circle 空心圆   
+    -->
+    <ul type="disc">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>
+            <ul>
+                <li>6</li>
+                <li>5</li>
+                <li>7</li>
+            </ul>
+        </li>
+    </ul>
+    <!-- 快速生成数字的无序标签 
+    ul>li{$}*个数
+    ul>li{$}*5
+    -->
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+</body>
+</html>

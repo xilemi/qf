@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function randomNum(n,m){
+            return Math.floor((Math.max(n,m)-Math.min(n,m)+1)*Math.random())+Math.min(n,m)
+        }
+        console.log(randomNum(0,255));
+    </script>
+</body>
+</html>

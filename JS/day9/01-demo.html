@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 当数组长度为0 返回 "no one likes this"
+        // 当数组长度为1时返回 "Peter likes this"
+        // 当数组长度为2-3时返回"Jacob and Alex like this"
+        // 当数组长度大于等于4 返回"Alex, Jacob and 2 others like this"
+        let names = ["Alex"];
+        function fn(names) {
+            let res;
+            switch (names.length) {
+                case 0:
+                    res = `no one likes this`
+                    break;
+                case 1:
+                    res = `${names[0]} likes this`
+                    break;
+                case 2:
+                    res = `${names[0]} and ${names[1]} likes this`
+                    break;
+                case 3:
+                    res = `${names[0]},${names[1]} and ${name[2]} likes this`
+                    break;
+                default:
+                    res = `${names[0]},${names[1]} and ${names.length - 2} others likes this`
+                    break;
+            }
+            return res
+        }
+        console.log(fn(names));
+    </script>
+</body>
+
+</html>

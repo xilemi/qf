@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 200px;
+            height: 200px;
+            /* background-color: aliceblue; */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+        // 先生成rgb颜色  再将rgb颜色转换为16进制
+
+        // console.log(r,g,b);
+        // console.log(str);
+        // 有问题  16进制较小时 为单个数字  如何补位
+        // box.onclick = function () {
+        //     let r = Math.floor(Math.random() * 256)
+        //     let g = Math.floor(Math.random() * 256)
+        //     let b = Math.floor(Math.random() * 256)
+        //     let str = '#' + r.toString(16) + g.toString(16) + b.toString(16)
+        //     box.style.backgroundColor = str;
+        // }
+        // 生成带范围的随机整数 Math.floor((m-n+1)*Math.random()) 直接用max min 函数
+        // function random(n, m) {
+        //     return Math.floor((Math.max(n,m) - Math.min(n,m) + 1) * Math.random())+Math.min(n,m)
+        // }
+        // console.log(random(10, 25));
+        // 10-30的随机数
+        // function random1(n, m) {
+        //     return Math.random() * (m - n) + n
+        // }
+        // console.log(random1(10, 20));
+        // 随机生成16位颜色 0-15中取数字 然后转16进制 拼接转的数字
+        function random(n,m){
+            return Math.floor((Math.max(m,n)-Math.min(m,n)+1)*Math.random())+Math.min(m,n)
+        }
+        let color='#'
+        for(let i=0;i<6;i++){
+            let str=random(0,15)
+            console.log(str);
+            color+=str.toString(16)
+        }
+        console.log(color);
+    </script>
+</body>
+
+</html>
