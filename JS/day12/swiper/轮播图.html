@@ -8,10 +8,11 @@
     <title>Document</title>
     <link rel="stylesheet" href="./fonts/iconfont.css">
     <style>
-        *{
+        * {
             padding: 0;
             margin: 0;
         }
+
         .box {
             width: 1226px;
             height: 460px;
@@ -29,7 +30,6 @@
         img {
             width: 100%;
         }
-
         ul {
             width: 120px;
             height: 20px;
@@ -40,18 +40,15 @@
             left: 50%;
             transform: translateX(-50%);
         }
-
         li {
             width: 20px;
-            background-color: black;
+            background-color: pink;
             border-radius: 50%;
             margin-right: 10px;
         }
-
         li.active {
             background-color: red;
         }
-
         button {
             position: absolute;
             height: 50px;
@@ -60,15 +57,12 @@
             background-color: transparent;
             border: none;
         }
-
         .iconfont {
             font-size: 30px;
         }
-
         .box>button:nth-of-type(1) {
             left: 0;
         }
-
         .box>button:nth-of-type(2) {
             right: 0;
         }
@@ -120,7 +114,7 @@
             document.querySelector('li.active').classList.remove('active')
             lis[i].classList.add('active')
         }
-        // 轮播
+        // 轮播7
         timer = setInterval(function () {
             common()
         }, 1000)
@@ -154,4 +148,5 @@
         // 下一张
     </script>
 </body>
+
 </html>

@@ -21,6 +21,9 @@ a {
   text-decoration: none;
   color: black;
 }
+::-webkit-scrollbar {
+  display: none;
+}
 header {
   height: 22.4vw;
   display: flex;
@@ -58,6 +61,7 @@ header .download a {
 nav {
   height: 10.6667vw;
   box-sizing: border-box;
+  border-bottom: 1px solid #e1e2e3;
 }
 nav ul {
   display: flex;
