@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .adver {
+            width: 300px;
+            /* height: 400px; */
+            background-color: grey;
+            position: fixed;
+            right: 5px;
+            bottom: 5px;
+        }
+
+        .adver-top {
+            font-size: 14px;
+            line-height: 30px;
+        }
+
+        .adver-top .adver-title {
+            text-indent: 10px;
+        }
+
+        .adver-top .adver-close {
+            padding: 0 5px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div class="adver">
+        <div class="adver-top">
+            <div class="adver-title">距离广告关闭还有10秒</div>
+            <div class="adver-close">X</div>
+        </div>
+        <div class="adver-detail">
+            <img src="./images/111.gif" alt="">
+        </div>
+    </div> -->
+    <script>
+        // 动态操作小广告(默认隐藏)
+
+        // 1. 延迟5s显示小广告
+        // 2. 倒计时10秒后关闭小广告
+        // 3. 重复 1 - 2 两步
+        // 4. 点击 x  关闭小广告
+        // 5. 重复 1 - 2 两步
+        let timer = null;
+        let timer1 = null;
+        const adver = document.createElement('div')
+        const adverTop = document.createElement('div')
+        const adverDetail = document.createElement('div')
+        const adverTitle = document.createElement('div')
+        const adverClose = document.createElement('div')
+        const img = document.createElement('img')
+        loop()
+        function loop() {
+            timer = setTimeout(function () {
+                createEle()
+                let count = 10;
+                timer1 = setInterval(function () {
+                    console.log(count);
+                    count--
+                    adverTitle.innerHTML = `距离广告关闭还有${count}秒`
+                    if (count <= 0) {
+                        clearInterval(timer1)
+                        adver.remove()
+                        loop()
+                        adverTitle.innerHTML = '距离广告关闭还有10秒'
+                    }
+                }, 1000)
+            }, 5000)
+        }
+       
+        adverClose.onclick = function () {
+            adver.remove()
+            clearTimeout(timer)
+            clearInterval(timer1)
+            loop()
+        }
+        // 自动生成元素
+        function createEle() {
+            adver.className='adver'
+            adverTop.className='adver-top'
+            adverDetail.className='adver-detail'
+            adverTitle.className='adver-title'
+            adverClose.className='adver-close'
+            adverClose.innerHTML='X'
+            adverTitle.innerHTML='距离广告关闭还有10秒'
+            img.src = './images/111.gif'
+            document.body.append(adver)
+            adver.append(adverTop)
+            adver.append(adverDetail)
+            adverTop.append(adverTitle)
+            adverTop.append(adverClose)
+            adverDetail.append(img)
+        }
+    </script>
+</body>
+
+
+</html>

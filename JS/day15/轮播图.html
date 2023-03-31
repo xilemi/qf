@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./fonts/iconfont.css">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .box {
+            width: 400px;
+            height: 400px;
+            margin: 100px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .imgLis {
+            display: flex;
+            position: absolute;
+            left: 0;
+        }
+
+        .pointLis {
+            display: flex;
+            position: absolute;
+            left: 50%;
+            bottom: 10px;
+            transform: translateX(-50%);
+
+        }
+
+        .pointLis li {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: blanchedalmond;
+            margin-right: 20px;
+            cursor: pointer;
+        }
+
+        .pointLis li.active {
+            background-color: rgb(233,212,255);
+        }
+
+        span {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        .icon-xiangzuojiantou {
+            font-size: 30px;
+            left: 0;
+        }
+
+        .icon-xiangyoujiantou {
+            font-size: 30px;
+            right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <ul class="imgLis">
+            <li><img src="./images/girlsmall1.jpg" alt=""></li>
+            <li><img src="./images/girlsmall2.jpg" alt=""></li>
+            <li><img src="./images/girlsmall3.jpg" alt=""></li>
+            <li><img src="./images/girlsmall4.jpg" alt=""></li>
+        </ul>
+        <ul class="pointLis">
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <span class="iconfont icon-xiangzuojiantou"></span>
+        <span class="iconfont icon-xiangyoujiantou"></span>
+    </div>
+    <script>
+
+        // 获取点
+        let i = 0;
+        let timer;
+        const box = document.querySelector('.box')
+        const pointLis = document.querySelectorAll('.pointLis>li')
+        const imgLis = document.querySelector('.imgLis')
+        const xiangzuo = document.querySelector('.icon-xiangzuojiantou')
+        const xiangyou = document.querySelector('.icon-xiangyoujiantou')
+        // i值的判断 可以利用照片数组长度减1来判断   每次切换的距离 用照片总长度 /张数 
+        // 尽量不要写定值
+        // 公共 下一张
+        function common() {
+            document.querySelector('.pointLis li.active').classList.remove('active')
+            pointLis[i].classList.add('active')
+            imgLis.style.left = -i * 400 + 'px'
+            i++
+            if (i > pointLis.length-1) {
+                i = 0
+            }
+        }
+        // 上一张
+        function last() {
+            document.querySelector('.pointLis li.active').classList.remove('active')
+            pointLis[i].classList.add('active')
+            imgLis.style.left = -i * 400 + 'px'
+        }
+        // 轮播
+        timer = setInterval(function () {
+            common()
+        }, 1000)
+        // 鼠标进入box 停止轮播
+        box.addEventListener('mouseenter', function () {
+            clearInterval(timer)
+            // 清除后 鼠标移出 要能开始 轮播
+        })
+        // 鼠标移出box 开始轮播
+        box.addEventListener('mouseleave', function () {
+            timer = setInterval(function () {
+                common()
+            }, 1000)
+        })
+        // 下一张
+        xiangyou.addEventListener('click', function () {
+            common()
+        })
+        // 上一张
+        xiangzuo.addEventListener('click', function () {
+            i--
+            if (i < 0) {
+                i = pointLis.length-1
+            }
+            last()
+        })
+        // 点击圆点
+        pointLis.forEach(function(item,index){
+            item.addEventListener('click',function(){
+                i=index
+                common()
+            })
+        })
+    </script>
+</body>
+
+</html>

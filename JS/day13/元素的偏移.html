@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: aliceblue;
+            overflow: hidden;
+            margin: 50px;
+            position: relative;
+        }
+
+        .one {
+            width: 100px;
+            height: 100px;
+            background-color: aquamarine;
+            margin: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="one">
+            <!-- fghdfjhg -->
+        </div>
+        11
+        <span>sdkgsk</span>
+    </div>
+    <script>
+        let box = document.querySelector('.box')
+        let one = document.querySelector('.one')
+        // offsetLeft offsetTop 会参照于设置了定位的父元素 但没有设置都没有设置定位的时候 参照于body
+        // 定位是操作整个盒模型
+        console.log(one.style);
+        console.log(one.offsetLeft);
+        console.log(one.offsetTop);
+        console.log(box.childNodes);
+        console.log(box.children);
+
+    </script>
+</body>
+
+</html>

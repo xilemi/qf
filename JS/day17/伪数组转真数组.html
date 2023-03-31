@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</body>
+<script>
+    const uls = document.querySelectorAll('ul>li')
+    console.log(uls);
+    // 下标赋值 不可以
+    let ulss=Array.from(uls)
+    console.log(ulss); 
+    let ulsss=[];
+    for(let i=0;i<uls.length;i++){
+        ulsss.push(uls[i])
+    }
+    console.log(ulsss);
+    console.log(Array.isArray(ulsss));
+    // 伪数组转成真数组的方法
+    // 1.将伪数组遍历，push进新的真数组
+    // 2.构造函数Array方法  Array.from()
+    let arr = [1, 2, 3]
+    console.log(Array.isArray(arr));
+    // 数组for遍历
+    // for in 也可以遍历数组   拿到到的是数组的下标  字符串的
+    // 数组也是一种特殊的对象  下标是字符串数字，也可以使用for in
+    // 但更适合使用  for of 直接拿到数组的值
+    for(let i of arr){
+        console.log(i);
+    }
+</script>
+
+</html>

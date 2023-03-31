@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: aquamarine;
+        }
+
+        ul>li {
+            width: 100px;
+            height: 50px;
+            background-color: aqua;
+            margin-bottom: 10px;
+        }
+
+        li.active {
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <p>1231213</p>
+    </div>
+    <ul>
+        <li class="a1 active">01</li>
+        <li class="a2">02</li>
+        <li class="a3">03</li>
+        <li class="a4">04</li>
+        <li class="a5">05</li>
+        <li class="a6">06</li>
+        <li class="a7">07</li>
+        <li class="a8">08</li>
+        <li class="a9">09</li>
+        <li class="a10">10</li>
+    </ul>
+    <script>
+        // 事件冒泡  点击子元素  父元素也会被点击
+        const p = document.querySelector('p')
+        const div = document.querySelector('div')
+        p.onclick = function (e) {
+            console.log('123');
+            e.stopPropagation();
+        }
+        div.onclick = function (e) {
+            console.log(e);
+            console.log('你爹被点了');
+        }
+        //  停止冒泡stopPropagation
+
+        // 事件委托 添加给父元素的事件  会作用给子元素   点击子元素  拿到点击的子元素 给拿到的子元素 设置不同的样式
+        const ul = document.querySelector('ul')
+        const uLis = document.querySelectorAll('ul>li')
+        ul.addEventListener('click', function (e) {
+
+            if (e.target.nodeName == 'LI') {
+                console.log(e.target);
+                document.querySelector('li.active').classList.remove('active')
+                e.target.classList.add('active')
+            }
+        })
+    </script>
+</body>
+
+</html>

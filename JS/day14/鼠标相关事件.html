@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        div {
+            width: 300px;
+            height: 300px;
+            background-color: aliceblue;
+            position: fixed;
+        }
+
+        p {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <p>123</p>
+    </div>
+    <script>
+        const div = document.querySelector('div')
+        const p = document.querySelector('div>p')
+        div.addEventListener('click', function () {
+            p.style.fontSize = 50 + 'px'
+        })
+        div.addEventListener('mousemove', function (e) {
+            // div.style.backgroundColor=randomColor()
+            // console.log(e.screenX,e.screenY);
+            console.log(e.clientX, e.clientY);
+        })
+        // ommouseover 和onmouseout 回导致事件冒泡
+        // div.onmouseover=function(){
+        //     div.style.backgroundColor=randomColor()
+        // }
+        // div.onmouseout=function(){
+        //     div.style.backgroundColor=randomColor()
+        // }
+        //不会导致事件冒泡
+        div.onmouseenter = function (e) {
+            div.style.backgroundColor = randomColor()
+            console.log(e);
+        }
+        div.onmouseleave = function (e) {
+            div.style.backgroundColor = randomColor()
+        }
+        div.onmouseup = function (e) {
+            console.log(e.button);
+        }
+        function randomColor() {
+            let r = Math.floor(Math.random() * 256)
+            let g = Math.floor(Math.random() * 256)
+            let b = Math.floor(Math.random() * 256)
+            return `rgb(${r},${g},${b})`
+        }
+        window.addEventListener('mousemove', function (e) {
+            div.onfocus = function () {
+                console.log(e.clientX, e.clientY);
+                div.style.left = e.clientX+ 'px'
+                div.style.top = e.clientY + 'px'
+            }
+
+        })
+    </script>
+</body>
+
+</html>

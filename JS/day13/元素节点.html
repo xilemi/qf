@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 256px;
+            height: 288px;
+            background-color: aliceblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="one" id="qq" title="ff" data-index="666"></div>
+    <div class="one" id="qq1" title="ff" data-index="666"></div>
+    <form action="">
+        <input type="text" required="true">
+        <input type="submit">
+    </form>
+    <script>
+        console.log(document.getElementById("qq"));
+        let box=document.getElementById("qq")
+        box.se
+        // 直接点  
+        console.log(qq.id);
+        console.log(qq.className);
+        console.log(qq.title);
+        console.log(qq.dataset);
+        // setAttribute 返回值为undefined
+        // getAttribute
+        console.log(qq.getAttribute('class'));
+        console.log(qq.getAttribute('title'));
+        console.log(qq.getAttribute('id'));
+        console.log(qq.getAttribute('data-index'));
+        getComputedStyle(box)['属性名']
+        // 封装成函数 
+        function getStyle(ele,cssKey){
+            return getComputedStyle(ele)[cssKey]
+        }
+        console.log(getStyle(box,'width'));                                     
+    </script>
+</body>
+
+</html>

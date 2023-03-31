@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .box{
+            width: 200px;
+            height: 200px;
+            background-color: aliceblue;
+            opacity: 0.5;
+            position: fixed;
+            cursor: all-scroll;
+        }
+        .son{
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+            position: fixed;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        <!-- <div class="son"></div> -->
+    </div>
+    <script>
+        // 鼠标位置获取 
+        // 使用clientX clientY 是相对于 可视窗口
+        // 使用pageX pageY 是相对于页面
+        // 使用offsetX offsetY是相对于 事件源的位置
+        // 获取鼠标在元素内的位置  特别是元素内还存在子元素的时候 
+        // 可以使用 pageX-ele.offsetLeft pageY-ele.offsetTop
+        const box=document.querySelector('.box')
+        const son=document.querySelector('.son')
+        // box.onclick=function(e){
+        //     let posX=e.pageX-box.offsetLeft
+        //     let posY=e.pageY-box.offsetTop
+        //     console.log(posX,posY);
+        //     son.style.left=posX+'px'
+        //     son.style.top=posY+'px'
+        // }
+        // 跟随鼠标移动
+        document.onmousemove=function(e){
+            e=e||window.event
+            let posX=e.pageX-box.clientWidth/2;
+            let posY=e.pageY-box.clientHeight/2;
+            // 限制盒子运动范围
+            let maxLeft=document.documentElement.clientWidth-box.clientWidth
+            let maxTop=document.documentElement.clientHeight-box.clientHeight
+            if(posX<0) posX=0
+            if(posX>maxLeft) posX=maxLeft
+            if(posY<0) posY=0
+            if(posY>maxTop) posY=maxTop
+            box.style.left=posX+'px'
+            box.style.top=posY+'px'
+        }
+
+    </script>
+</body>
+</html>

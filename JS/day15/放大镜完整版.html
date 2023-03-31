@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./fonts/iconfont.css">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            margin-left: 100px;
+            margin-top: 50px;
+        }
+
+        .left {
+            width: 400px;
+            height: 500px;
+            position: relative;
+        }
+
+        .left .imgbox {
+            width: 400px;
+            height: 400px;
+            background-color: aqua;
+            margin-bottom: 20px;
+        }
+
+        .shadow {
+            width: 200px;
+            height: 200px;
+            background-color: rgba(0, 0, 0, .5);
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: all-scroll;
+        }
+
+        .swiper {
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            line-height: 80px;
+        }
+        .swiper>img{
+            height: 80px;
+        }
+        .swiper>span{
+            font-size: 30px;
+        }
+        .right {
+            width: 400px;
+            height: 400px;
+            position: absolute;
+            left: 420px;
+            top: 0;
+            overflow: hidden;
+            display: none;
+        }
+
+        .right img {
+            width: 800px;
+            box-sizing: border-box;
+            position: absolute;
+        }
+        .swiper>img.active{
+            border: 2px solid;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="left">
+            <div class="imgbox">
+                <img src="./images/girlsmall1.jpg" alt="">
+                <div class="shadow"></div>
+            </div>
+            <div class="swiper">
+                <span class="iconfont icon-xiangzuojiantou"></span>
+                <img src="./images/girlsmall1.jpg" alt="" class="active">
+                <img src="./images/girlsmall2.jpg" alt="">
+                <img src="./images/girlsmall3.jpg" alt="">
+                <img src="./images/girlsmall4.jpg" alt="">
+                <span class="iconfont icon-xiangyoujiantou"></span>
+            </div>
+            <div class="right">
+                <img src="./images/girlbig1.jpg" alt="">
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    const shadow = document.querySelector('.shadow')
+    const left = document.querySelector('.left')
+    const imgbox = document.querySelector('.imgbox')
+    const smallImg=document.querySelector('.imgbox>img')
+    console.log(smallImg);
+    const right=document.querySelector('.right')
+    const bigImg = document.querySelector('.right>img')
+    const imglis=document.querySelectorAll('.swiper>img')
+    // 放大比例关系
+    let scale=getStyle(bigImg,'width')/getStyle(left,'width')
+    imgbox.onmousemove = function (e) {
+        //控制shadow的位置  用鼠标相对于页面的位置-左边大盒子的偏移量-自身的一半
+        let posX = e.pageX - left.offsetLeft - shadow.clientWidth / 2
+        let posY = e.pageY - left.offsetTop - shadow.clientHeight / 2
+        // 移动距离 用大盒子宽度-shadow的宽度
+        let maxLeft = imgbox.clientWidth - shadow.clientWidth
+        let maxTop = imgbox.clientHeight - shadow.clientHeight
+        // 边界判断条件
+        if (posX < 0) posX = 0
+        if (posX > maxLeft) posX = maxLeft
+        if (posY < 0) posY = 0
+        if (posY > maxTop) posY = maxTop
+        // 控制shadow的定位
+        shadow.style.left = posX + 'px'
+        shadow.style.top = posY + 'px'
+        // 控制大图片的定位  大图片的定位是相对于 right的
+        bigImg.style.left = -posX * scale + 'px'
+        bigImg.style.top = -posY * scale + 'px'
+        console.log('posX', -posX*2);
+        console.log('posY', -posY*2);
+    }
+    // 鼠标进入 出现 shadow 和 right
+    imgbox.addEventListener('mouseenter', function () {
+        right.style.display='block'
+        imgbox.append(shadow)
+    })
+    // 出来消失
+    imgbox.onmouseleave = function () {
+        right.style.display='none'
+        shadow.remove()
+    }
+    // 获取放大比例 获取图片的width
+    function getStyle(ele,cssKey){
+        return parseFloat(getComputedStyle(ele)[cssKey])
+    }
+    // 
+    imglis.forEach(function(item,index){
+        item.onmouseenter=function(){
+            smallImg.src=item.src
+            bigImg.src="./images/girlbig"+(index+1)+'.jpg'
+            document.querySelector('.swiper>img.active').classList.remove('active')
+            item.classList.add('active') 
+        }
+    })
+</script>
+
+</html>

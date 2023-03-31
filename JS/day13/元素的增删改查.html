@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul>
+            <li></li>
+            <li class="two"></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</body>
+<script>
+    let box=document.querySelector('.box')
+    let ul=document.querySelector('.box>ul')
+    let lis=document.querySelectorAll('ul>li')
+    console.log(lis);
+    let li=document.createElement('li')
+    li.innerHTML='123123'
+    ul.insertBefore(li,lis[2])
+    ul.appendChild(li)
+</script>
+</html>

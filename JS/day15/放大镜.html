@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .imgbox {
+            width: 1226px;
+            height: 460px;
+            position: relative;
+            margin: 100px auto;
+            cursor: all-scroll;
+        }
+        img{
+            width: 100%;
+        }
+
+        .big {
+            width: 200px;
+            height: 200px;
+            background-color: aquamarine;
+            opacity: 0.5;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="imgbox">
+        <img src="./images/333.webp" alt="">
+    </div>
+    <script>
+        // 鼠标移入图片框 出现方框 
+        // 并且方框能够跟随鼠标移动
+        // 可以使用刚刚的鼠标的拖拽事件 
+        // 同时创建元素 大图
+        // 大图的内的图片跟随鼠标移动
+        const imgbox = document.querySelector('.imgbox')
+        const img = document.querySelector('img')
+        const ele = document.createElement('div')
+        ele.className = 'big'
+        imgbox.onmouseenter = function () {
+            window.onmousemove = function (e) {
+                imgbox.append(ele)
+                let x = e.clientX - imgbox.offsetLeft - ele.clientWidth / 2
+                let y = e.clientY - imgbox.offsetTop - ele.clientHeight / 2
+                let maxLeft = imgbox.clientWidth - ele.clientWidth
+                let maxTop = imgbox.clientHeight - ele.clientHeight
+                console.log('x', e.clientX - imgbox.offsetLeft);
+                console.log('y', e.clientY - imgbox.offsetTop);
+                if (x < 0) x = 0
+                if (x > maxLeft) x = maxLeft
+                if (y < 0) y = 0
+                if (y > maxTop) y = maxTop
+                ele.style.left = x + 'px'
+                ele.style.top = y + 'px'
+                // 让元素的定位 往左和上走自身的一半
+            }
+
+        }
+        imgbox.addEventListener('mouseleave', function () {
+            window.onmousemove = null
+            ele.remove()
+            console.log('chu');
+        })
+    </script>
+</body>
+
+</html>

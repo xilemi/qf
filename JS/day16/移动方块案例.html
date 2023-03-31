@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .big {
+            width: 300px;
+            height: 500px;
+            background-color: antiquewhite;
+            margin: 100px auto;
+            position: relative;
+        }
+
+        .box {
+            width: 50px;
+            height: 50px;
+            background-color: aqua;
+            position: absolute;
+            left: 50%;
+            top: 450px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="big">
+        <div class="box"></div>
+    </div>
+    <script>
+        const box = document.querySelector('.box')
+        let left = false
+        let right = false
+        let up = false
+        let down = false
+        let speed = 1
+        let posX = 165;
+        let posY = 450;
+        document.onkeydown = function (e) {
+            console.log(e.key, e.keyCode);
+            if (e.keyCode == 37) {
+                left = true
+            }
+            if (e.keyCode == 38) {
+                up = true
+            }
+            if (e.keyCode == 39) {
+                right = true
+            }
+            if (e.keyCode == 40) {
+                down = true
+            }
+        }
+        document.onkeyup = function (e) {
+            if (e.keyCode == 37) {
+                left = false
+            }
+            if (e.keyCode == 38) {
+                up = false
+            }
+            if (e.keyCode == 39) {
+                right = false
+            }
+            if (e.keyCode == 40) {
+                down = false
+            }
+        }
+        setInterval(function () {
+            if (left) posX -= speed
+            if (right) posX += speed
+            if (up) posY -= speed
+            if (down) posY += speed
+            if(posX<0) posX=0
+            if(posX>250) posX=250
+            if(posY<0) posY=0
+            if(posY>450) posY=450
+            box.style.left = posX + 'px'
+            box.style.top = posY + 'px'
+        }, 1)
+    </script>
+</body>
+
+</html>

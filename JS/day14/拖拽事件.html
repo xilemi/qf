@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: beige;
+            position: fixed;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+    </div>
+    <script>
+        // 封装拖拽事件 控制盒子的边界  控制 盒子的left 和top的位置
+        function move() {
+            const box = document.querySelector('div')
+            // 监听鼠标移入
+            box.onmousedown = function (e) {
+                // 鼠标按下的位置和偏移量的间隔   
+                // 鼠标与盒子的位置关系  之前让鼠标居中   让盒子往左和上走 自身一半 
+                // 现在是走  鼠标按下位置 与 盒子偏移量的间隔 
+                let posX=e.pageX-box.offsetLeft
+                let posY=e.pageY-box.offsetTop
+                box.style.left = e.pageX  -posX  + 'px'
+                box.style.top = e.pageY -posY + 'px'
+                document.onmousemove = function (e) {
+                    box.style.left = e.pageX  -posX + 'px'
+                    box.style.top = e.pageY - posY + 'px'
+                }
+            }
+            // 移出
+            box.onmouseup = function () {
+                document.onmousemove = null
+            }
+        }
+        move()
+    </script>
+</body>
+
+</html>

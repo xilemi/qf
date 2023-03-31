@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <textarea name="" id="" cols="30" rows="10"></textarea>
+</body>
+<script>
+    // keypress 只能对写入相关按键触发   写入字符
+    const textarea=document.querySelector('textarea')
+    textarea.onkeydown=function(e){
+        console.log(e);
+        console.log(e.key);
+
+        console.log(e.code);
+        // 键盘码
+        console.log(e.keyCode);
+        // isComposing 是否中文输入法 只对 keydown 和keyup有效
+    }
+    // keypress 内置了  ctrl +enter  keycode 为10
+    // 丝滑 由于事件的触发和 
+
+
+
+    /* 
+    给盒子加入监听鼠标移入移出事件   得到一个判断标识  
+    给文档加入监听鼠标移动事件  控制 方块的移动
+    设置最大最小移动距离 
+    当移入时 跟随方块移动等于最大距离时 解锁成功
+    
+    在最大最小的范围内 都回到原来
+    
+    
+    
+    */
+</script>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>添加</button>
+    <button>删除</button>
+    <ul>
+        <li>01</li>
+        <li>02</li>
+        <li>03</li>
+        <li>04</li>
+        <li>05</li>
+    </ul>
+    <a href="http://www.baidu.com">111</a>
+</body>
+<script>
+    const ul=document.getElementsByTagName('ul')[0]
+    let lis=ul.getElementsByTagName('li')
+    const lis1=document.querySelectorAll('ul>li')
+    const btns=document.querySelectorAll('button')
+    btns[0].onclick=function(){
+        const ele=document.createElement('li')
+        ele.className='name'
+        ele.innerHTML='123123'
+        ul.appendChild(ele)
+        console.log(lis);
+        console.log(lis1);
+    }
+    
+    btns[1].onclick=function(){
+       lis[0].remove()
+    }
+    window.onfocus=function(){
+        console.log('聚焦');
+    }
+    window.onblur=function(){
+        console.log('失焦');
+    }
+    window.onbeforeunload=function(){
+        return
+    }
+     
+</script>
+</html>

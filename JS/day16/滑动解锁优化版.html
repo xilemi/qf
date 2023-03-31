@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .imgBox {
+            /* 如果由图片撑开  不设置宽高 会有问题 */
+            width: 400px;
+            height: 400px;
+            background-color: antiquewhite;
+            margin: 100px auto 0;
+            position: relative;
+        }
+
+        .box,
+        .shadow {
+            width: 60px;
+            height: 60px;
+            background-color: aqua;
+            position: absolute;
+            top: 50px;
+        }
+
+        .shadow {
+            left: 0;
+            /* 背景图片的偏移量等于 box的left top; */
+            background-image: url(./images/girlsmall1.jpg);
+            background-repeat: no-repeat;
+            background-position: -300px -50px;
+        }
+
+        .box {
+            left: 300px;
+        }
+
+        .slide {
+            width: 400px;
+            height: 60px;
+            background-color: bisque;
+            margin: 20px auto;
+            position: relative;
+        }
+
+        .slide-box {
+            width: 60px;
+            height: 60px;
+            background-color: blue;
+            position: absolute;
+            left: 0;
+            cursor: all-scroll;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="imgBox">
+        <img src="./images/girlsmall1.jpg" alt="">
+        <div class="box"></div>
+        <div class="shadow"></div>
+    </div>
+    <div class="slide">
+        <div class="slide-box"></div>
+    </div>
+</body>
+<script>
+    let flag = false
+    const slide = document.querySelector('.slide')
+    const slideBox = document.querySelector('.slide-box')
+    const box = document.querySelector('.box')
+    const shadow = document.querySelector('.shadow')
+    // 滑动盒子的位置
+    let posX;
+    let mousex;
+    let maxLeft = slide.clientWidth - slideBox.clientWidth
+    // let randomLeft=random(100,280)+'px'
+    // let randomTop=random(50,250)+'px'  
+    let randomLeft = random(100, 280) + 'px'
+    let randomTop = random(50, 250) + 'px'
+    box.style.left = randomLeft
+    box.style.top = randomTop
+    shadow.style.top = box.style.top
+    let checkX = box.offsetLeft
+    let checkY = box.offsetTop
+    shadow.style.backgroundPosition = `${-checkX}px ${-checkY}px`
+    slideBox.addEventListener('mousedown', function (e) {
+        mousex = e.offsetX
+        console.log(this);
+        flag = true
+        this.addEventListener('mouseleave', function () {
+            flag = false
+            check(5)
+        })
+        this.addEventListener('mousemove', function (e) {
+            if (flag) {
+                posX = e.pageX - slide.offsetLeft - mousex
+                if (posX < 0) posX = 0
+                if (posX > maxLeft) posX = 0
+                slideBox.style.left = posX + 'px'
+                // shadow联动
+                shadow.style.left = slideBox.style.left
+            }
+            // 松开时滑动
+            else {
+                check(5)
+            }
+        })
+    })
+    slideBox.addEventListener('mouseup', function () {
+        flag = false
+        // 还要判断是否是到滑块时松开
+        // 松开时验证
+        check(5)
+        this.addEventListener('mousemove', function (e) {
+            check(5)
+        })
+    })
+    // 校验是否位置合适
+    function check(val) {
+        if (posX > checkX - val && posX < checkX + val) {
+            slideBox.style.left = posX + 'px'
+            // shadow联动
+            shadow.style.left = slideBox.style.left
+            setTimeout(function () {
+                location.href = 'http://www.baidu.com'
+            }, 2000)
+        }
+        else {
+            slideBox.style.left = 0
+            shadow.style.left = slideBox.style.left
+        }
+    }
+    // 随机数 
+    function random(m, n) {
+        return Math.floor(Math.random() * (Math.max(m, n) - Math.min(m, n) + 1)) + Math.min(m, n)
+    }
+</script>
+
+</html>

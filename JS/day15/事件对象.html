@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: aliceblue;
+        }
+
+        .son {
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="son"></div>
+    </div>
+    <script>
+        // 事件对象的通用属性
+        //  timeStamp  type target ctrlkey altkey shiftkey metakey
+        const box = document.querySelector('.box')
+        box.onclick = function (e) {
+            // IE低版本为window.event
+            e = e || window.event
+            console.log(e.timeStamp);
+            console.log('事件类型',e.type);
+            // 可能不是绑定事件的元素
+            console.log(('被谁触发',e.target));
+            console.log('是否有',e.ctrlKey);
+            console.log('是否有',e.altKey);
+            console.log('是否有',e.metaKey);
+            console.log('是否有',e.shiftKey);
+        }
+    </script>
+</body>
+
+</html>

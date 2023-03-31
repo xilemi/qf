@@ -1,0 +1,30 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.adver {
+    width: 300px;
+    /* height: 400px; */
+    background-color: grey;
+    position: fixed;
+    right: 5px;
+    bottom: 5px;
+}
+
+.adver-top {
+    font-size: 14px;
+    line-height: 30px;
+}
+
+.adver-top .adver-title {
+    text-indent: 10px;
+}
+
+.adver-top .adver-close {
+    padding: 0 5px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./utils.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .imgbox {
+            width: 160px;
+            height: 160px;
+            position: relative;
+            margin: 200px auto;
+        }
+
+        img {
+            width: 160px;
+            height: 160px;
+        }
+
+        .big {
+            width: 50px;
+            height: 50px;
+            background-color: aquamarine;
+            opacity: 0.5;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="imgbox">
+        <img src="./images/1.jpg" alt="">
+    </div>
+    <script>
+        // 鼠标移入图片框 出现方框 
+        // 并且方框能够跟随鼠标移动
+        // 可以使用刚刚的鼠标的拖拽事件 
+        // 同时创建元素 大图
+        // 大图的内的图片跟随鼠标移动
+        const imgbox = document.querySelector('.imgbox')
+        const img = document.querySelector('img')
+        const ele = document.createElement('div')
+        ele.className = 'big'
+        
+        imgbox.onmouseenter = function () {
+            window.onmousemove = function (e) {
+                imgbox.append(ele)
+                let x = e.clientX - imgbox.offsetLeft
+                let y = e.clientY - imgbox.offsetTop
+                console.log('x', e.clientX - imgbox.offsetLeft);
+                console.log('y', e.clientY - imgbox.offsetTop);
+                if ((x <= imgbox.clientWidth && x >=0) && y >= 0 && (y <= imgbox.clientHeight)) {
+                    ele.style.left = x - 25 + 'px'
+                    ele.style.top = y - 25 + 'px'
+                }
+                // if (x > imgbox.clientWidth - 25) {
+                //     ele.style.left = imgbox.clientWidth - ele.clientWidth + 'px'
+                //     ele.style.top = y - 25 + 'px'
+                // }
+                // else if (x < 25) {
+                //     ele.style.left = 0
+                //     ele.style.top = y - 25 + 'px'
+                // }
+                // else if (y < 25) {
+                //     ele.style.left = x - 25 + 'px'
+                //     ele.style.top = 0
+                // }
+                // else if (y > imgbox.clientHeight - 25) {
+                //     ele.style.left = x - 25 + 'px'
+                //     ele.style.top = imgbox.clientWidth - ele.clientWidth + 'px'
+                // } else {
+                //     ele.style.left = x - 25 + 'px'
+                //     ele.style.top = y - 25 + 'px'
+                // }
+                // 让元素的定位 往左和上走自身的一半
+            }
+
+        }
+        imgbox.addEventListener('mouseleave', function () {
+            window.onmousemove = null
+            ele.remove()
+            console.log('chu');
+        })
+    </script>
+</body>
+
+</html>

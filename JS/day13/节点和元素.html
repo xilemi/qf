@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: aliceblue;
+            overflow: hidden;
+            margin: 50px;
+            position: relative;
+        }
+
+        .one {
+            width: 100px;
+            height: 100px;
+            background-color: aquamarine;
+            margin: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        1213
+        <div class="zero"></div>
+        <div class="one" id="one" name="123">
+            <!-- fghdfjhg -->
+        </div>
+        11
+        <span>sdkgsk</span>
+    </div>
+    <script>
+        let box = document.querySelector('.box')
+        let one = document.querySelector('.one')
+        // 子节点 包含很多东西  元素 文本 注释
+        console.log(box.childNodes);
+        console.log(box.firstChild);
+        console.log(box.lastChild);
+        // 子元素 只有元素
+        console.log(box.children);
+        console.log(box.firstElementChild);
+        console.log(box.lastElementChild);
+        // 父元素和父节点 可以视为一个东西
+        console.log(one.parentElement);
+        // 节点的层级关系  
+        // 上一个节点
+        console.log(one.previousSibling);
+        // 上一个元素
+        console.log(one.previousElementSibling);
+        // 下一个节点
+        console.log(one.nextSibling);
+        // 下一个元素
+        console.log(one.nextElementSibling);
+        // 属性节点
+        console.log(one.attributes);
+    </script>
+</body>
+
+</html>

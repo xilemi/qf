@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li {
+            width: 500px;
+            height: 50px;
+            margin-bottom: 20px;
+            background-color: antiquewhite;
+        }
+    </style>
+</head>
+
+<body>
+    <button>新增</button>
+    <ul>
+        <li>01</li>
+        <li id="two">02</li>
+        <li>03</li>
+        <li class="four">04</li>
+        <li>05</li>
+        <li class="six">06</li>
+        <li>07</li>
+        <li>08</li>
+        <li>09</li>
+        <li>10</li>
+    </ul>
+    <script>
+        // 利用事件冒泡 子元素的事件会冒泡到父元素  ，可以直接给父元素绑定事件
+        // 通过e.target.tagName 按照标签名分类
+        // 通过 e.target.属性 按照属性分类
+        const ul = document.querySelector('ul')
+        const uls = document.querySelectorAll('ul>li')
+        const btn = document.querySelector('button')
+        // ul.onclick=function(e){
+        //     // 识别点击的事件源
+        //     console.log(e.target);
+        //     // 判断点击的谁  
+        //     if(e.target.tagName=='LI'){
+        //         console.log('我是li');
+        //     }
+        //     if(e.target.tagName=='UL'){
+        //         console.log('我是ul');
+        //     }
+        //     if(e.target.id){
+        //         console.log('我是有id的');
+        //     }
+        //     if(e.target.className){
+        //         console.log('我是有classNmae的');
+        //     }
+        //     if(e.target.className=='newLi'){
+        //         console.log('我是新增得');
+        //     }
+        // }
+        // 传统for循环的事件绑定 使用 querySelectorAll 不能动态获取 uls
+        for (var i = 0; i < uls.length; i++) {
+            uls[i].onclick = function (e) {
+                // 打印下标会出现问题  直接循环完成  10
+                // 使用let  每个uls[i]都是单独的作用域  因此拿到的值 是点击的元素的
+                console.log(e);
+                // 获取下标得方式
+
+            }
+        }
+        // 可以给未来生成的元素添加事件
+        btn.onclick = function () {
+            const li = document.createElement('li')
+            li.innerHTML = 'xinde'
+            li.className = 'newLi'
+            ul.append(li)
+        }
+
+    </script>
+</body>
+
+</html>

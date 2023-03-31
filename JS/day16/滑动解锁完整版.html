@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            * {
+                padding: 0;
+                margin: 0;
+            }
+
+            .imgBox {
+                width: 400px;
+                height: 400px;
+                background-color: antiquewhite;
+                margin: 100px auto 0;
+                position: relative;
+            }
+
+            .box,
+            .shadow {
+                width: 60px;
+                height: 60px;
+                background-color: aqua;
+                position: absolute;
+                top: 50px;
+            }
+
+            .shadow {
+                left: 0;
+                /* 背景图片的偏移量等于 box的left top; */
+                background-image: url(./images/girlsmall1.jpg);
+                background-repeat: no-repeat;
+                background-position: -300px -50px;
+            }
+
+            .box {
+                left: 300px;
+            }
+
+            .slide {
+                width: 400px;
+                height: 60px;
+                background-color: bisque;
+                margin: 20px auto;
+                position: relative;
+            }
+
+            .slide-box {
+                width: 60px;
+                height: 60px;
+                background-color: blue;
+                position: absolute;
+                left: 0;
+                cursor: all-scroll;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="imgBox">
+            <img src="./images/girlsmall1.jpg" alt="">
+            <div class="box"></div>
+            <div class="shadow"></div>
+        </div>
+        <div class="slide">
+            <div class="slide-box"></div>
+        </div>
+    </body>
+    <script>
+        const slideBox = document.querySelector('.slide-box')
+        const slide = document.querySelector('.slide')
+        const box = document.querySelector('.box')
+        const shadow = document.querySelector('.shadow')
+        let posX;
+        let flag = false;
+        let maxLeft = slide.clientWidth - slideBox.clientWidth
+        // 位移的量
+        let x;
+        // 随机box的left 和top  shadow 和box 的top 和一致
+
+        // 随机高度
+        let randomTop = random(50, 250)
+        box.style.top = randomTop + 'px'
+        shadow.style.top = box.style.top
+        // 随机box的left
+        let randomLeft = random(100, 200)
+        box.style.left = randomLeft + 'px'
+        let boxX = parseFloat(getComputedStyle(box)['left'])
+        let boxY = parseFloat(getComputedStyle(box)['top'])
+        shadow.style.backgroundPosition = `${-boxX}px ${-boxY}px`
+        slideBox.addEventListener('mousedown', function (e) {
+            flag = true
+            posX = e.offsetX
+            slideBox.addEventListener('mouseleave', function () {
+                flag = false
+                slideBox.style.left = 0
+                shadow.style.left = slideBox.style.left
+                if (x > boxX - 2 && x < boxX + 2) {
+                    slideBox.style.left = x+'px'
+                    shadow.style.left = slideBox.style.left
+                    location.href = 'http://www.baidu.com'
+            }
+               
+            })
+        })
+        slideBox.addEventListener('mouseup', function () {
+            if (x > boxX - 2 && x < boxX + 2) {
+                location.href = 'http://www.baidu.com'
+                shadow.style.left=x+'px'
+            }
+            flag = false
+        })
+        // 底部滑动
+        slideBox.addEventListener('mousemove', function (e) {
+            if (flag) {
+                x = e.pageX - slide.offsetLeft - posX
+                console.log(x);
+                if (x < 0) x = 0
+                if (x > maxLeft) x = maxLeft + 'px'
+                slideBox.style.left = x + 'px'
+                // shadow联动
+                shadow.style.left = slideBox.style.left
+            } else if (x > 0 && x < maxLeft) {
+                if (x > boxX - 2 && x < boxX + 2) {
+                    slideBox.style.left = x + 'px'
+                }
+                else {
+                    slideBox.style.left = 0
+                }
+
+            }
+        })
+        // 随机数
+        function random(m, n) {
+            return Math.floor(Math.random() * ((Math.max(m, n) - Math.min(m, n) + 1))) + Math.min(m, n)
+        }
+        /*  0.底部点击后 鼠标移动能滑动 当点击后 移出 失效
+            1.鼠标抬起后 失效 
+            2.滑动底部 同时 上部滑动  底部滑动位置限制
+            3.上部滑动到覆盖的位置 允许误差范围   滑块不动 执行后面的操作
+            4.未到覆盖的位置时 鼠标进行上述的操作都失效
+        
+        
+        
+        
+        
+        */
+    </script>
+
+    </html>
+</body>
+
+</html>

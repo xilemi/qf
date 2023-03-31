@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" name="" id="">
+    <span></span>
+    <select name="" id="">
+        <option value="2001">2001</option>
+        <option value="2002">2002</option>
+        <option value="2003">2003</option>
+        <option value="2004">2004</option>
+        <option value="2005">2005</option>
+        <option value="2006">2006</option>
+        <option value="2007">2007</option>
+        <option value="2008">2008</option>
+        <option value="2009">2009</option>
+        <option value="2010">2010</option>
+        <option value="2011">2011</option>
+        <option value="2012">2012</option>
+        <option value="2013">2013</option>
+        <option value="2014">2014</option>
+        <option value="2015">2015</option>
+        <option value="2016">2016</option>
+        <option value="2017">2017</option>
+        <option value="2018">2018</option>
+        <option value="2019">2019</option>
+        <option value="2020">2020</option>
+    </select>
+    <script>
+        /* 
+            onfocus onblur 
+            onchange 触发条件  input textarea内容改变和失焦/回车 
+                                下拉选框中 取选中的值
+            oninput 即时输入
+
+            onsubmit 提交  阻止提交默认事件  return false
+            onreset  重置   阻止提交默认事件  return false
+        
+        */
+        const inp=document.querySelector('input')
+        const sp=document.querySelector('span')
+        const sc=document.querySelector('select')
+        // inp.onfocus=function(){
+        //     sp.innerHTML='1111'
+        // }
+        // inp.onblur=function(){
+        //     sp.innerHTML='123'
+        // }
+        //  onchange触发条件   内容更改和失焦或者回车
+        // inp.onchange=function(){
+        //     if(inp.value.length>6&&inp.value.length<12){
+        //         sp.innerHTML='√'
+        //     }
+        //     else{
+        //         sp.innerHTML='x'
+        //     }
+        // }
+        // onchange 获取下拉选框的值
+        sc.onchange=function(){
+            console.log(sc.value);
+        }
+        inp.oninput=function(){
+            if(this.value.length>6&&this.value.length<12){
+                sp.innerHTML='√'
+            }
+            else{
+                sp.innerHTML='x'
+            }
+        }
+
+    </script>
+</body>
+</html>

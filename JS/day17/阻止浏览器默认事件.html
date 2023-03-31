@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="http://www.baidu.com">百度</a>
+    <form action="">
+        <input type="text">
+        <input type="submit">
+    </form>
+    <script>
+        // 对于a标签  高版本浏览器  e.preventDefault(); 低版本e.returnValue=false
+
+        // if(e.preventDefault){
+        //     e.preventDefault()
+        // }else{
+        //     e.returnValue=false
+        // }
+        
+        // 阻止的 F5 oncopy onpaste contextmenu
+        const a=document.querySelector('a')
+        a.addEventListener('click',function(e){
+            if(e.preventDefault){
+                e.preventDefault()
+            }
+            else{
+                e.returnValue=false
+            }
+        })
+        document.oncopy=function(e){
+            if(e.preventDefault){
+                e.preventDefault()
+            }
+            else{
+                e.returnValue=false
+            }
+            
+        }
+        document.onpaste=function(e){
+            if(e.preventDefault){
+                e.preventDefault()
+            }
+            else{
+                e.returnValue=true
+            }
+        }
+        document.oncontextmenu=function(e){
+            if(e.preventDefault){
+                e.preventDefault()
+            }
+            else{
+                e.returnValue=false
+            }
+        }
+        document.onkeydown=function(e){
+            if(e.keyCode==116){
+                if(e.preventDefault){
+                    e.preventDefault()
+                }
+                else{
+                    e.returnValue=false
+                }
+            }
+        }
+    </script>
+</body>
+</html>

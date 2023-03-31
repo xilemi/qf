@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>01</li>
+        <li>02</li>
+        <li>03</li>
+        <li>04</li>
+        <li>05</li>
+    </ul>
+    <button>自删</button>
+    <button>父删</button>
+    <script>
+        // 删除节点  
+        // 1.自删 ele.remove
+        // 2.父删 elePraent.removeChild
+        const ul=document.querySelector('ul')
+        const lis=document.querySelectorAll('ul>li')
+        const btns=document.querySelectorAll('button')
+        btns[0].onclick=function(){
+            lis[1].remove()
+            console.log(lis);
+        }
+        btns[1].onclick=function(){
+            ul.removeChild(lis[2])
+        }
+        
+    </script>
+    
+    
+</body>
+</html>
