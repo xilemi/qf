@@ -84,6 +84,7 @@ nav ul li:hover a {
 section {
   background-color: #fbfcfd;
   flex: 1;
+  overflow: auto;
 }
 section .search {
   display: flex;
@@ -127,4 +128,40 @@ section .hot-search ul li {
   border-radius: 4vw;
   margin-right: 2vw;
   margin-bottom: 1.3333vw;
+}
+section .music {
+  padding-left: 2.6667vw;
+}
+section .music .music-item {
+  height: 14.8vw;
+  display: flex;
+}
+section .music .music-item .num {
+  width: 10.6667vw;
+  font-size: 4.5333vw;
+  line-height: 14.8vw;
+}
+section .music .music-item .item {
+  display: flex;
+  justify-content: space-between;
+  height: 14.8vw;
+  flex: 1;
+  border-bottom: 1px solid #cccccc;
+}
+section .music .music-item .item .music-name {
+  padding: 1.6vw 0;
+}
+section .music .music-item .item .music-name > p:nth-of-type(1) {
+  font-size: 4.5333vw;
+  margin-bottom: 2.6667vw;
+}
+section .music .music-item .item .music-name > p:nth-of-type(2) {
+  font-size: 3.2vw;
+}
+section .music .music-item .item span {
+  display: flex;
+  align-items: center;
+  padding: 0 2.6667vw;
+  color: #aaaaaa;
+  font-size: 5.8667vw;
 }

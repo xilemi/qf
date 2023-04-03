@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 对于引用数据类型 
+        // 浅复制:直接复制  两者是共用内存地址  ，因此在修改时会同步修改
+        // 例如
+        // let arr=[1,2,3,4,5]
+        // let newArr=arr
+        // newArr.push('jkhgh')
+        // // 同步修改
+        // console.log(arr,newArr);
+        // 深复制： 将旧数组遍历  插入到新数组 使用slice截取  使用concat拼接 
+        // let arr=[12,3,4,5,6]
+        // let newArr=[]
+        // for(let i=0;i<arr.length;i++){
+        //     newArr.push(arr[i])
+        // }
+        // 两个数组的内存地址是不同的了 
+        // console.log(newArr===arr);
+        // for(let item of arr){
+        //     newArr.push(item)
+        // }
+        // console.log(newArr===arr);
+        // 使用拼接 
+        // let res=newArr.concat(arr)
+        // console.log(res);
+        // console.log(res===arr);
+        // 使用slice 截取
+        // let newArr=arr.slice()
+        // console.log(newArr,newArr===arr);
+
+
+        // 那么对于 二维数组  或者是更深的数组 如何进行深复制呢 
+        // let arr=[1,2,4,,5,[1,2,4]]
+        // let newArr=[]
+        // for(let item of arr){
+        //     newArr.push(item)
+        // }
+        // 此时是true 那么就是浅拷贝
+        // console.log(newArr[4]===arr[4]);
+        // 如何进行深拷贝呢
+        // 对数组里的元素再进行判断 如果是数组  就再进行一次遍历
+        function deepCopy(arr) {
+            let newArr = []
+            for (let item of arr) {
+                if (Array.isArray(item)) {
+                    // 将第二次遍历拷贝的结果 也插入新数组
+                    newArr.push(deepCopy(item))
+                }
+                else {
+                    newArr.push(item)
+                }
+            }
+            return newArr
+        }
+        let arr = [1, 5, 7, 8, 89, [2, 3, 5, 6], [2345, 4556]]
+        deepCopy(arr)
+        console.log(deepCopy(arr));
+        console.log(arr[5] === deepCopy(arr)[5]);
+
+    </script>
+</body>
+
+</html>

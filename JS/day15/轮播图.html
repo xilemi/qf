@@ -29,6 +29,7 @@
             display: flex;
             position: absolute;
             left: 0;
+
         }
 
         .pointLis {
@@ -50,7 +51,7 @@
         }
 
         .pointLis li.active {
-            background-color: rgb(233,212,255);
+            background-color: rgb(233, 212, 255);
         }
 
         span {
@@ -79,12 +80,14 @@
             <li><img src="./images/girlsmall2.jpg" alt=""></li>
             <li><img src="./images/girlsmall3.jpg" alt=""></li>
             <li><img src="./images/girlsmall4.jpg" alt=""></li>
+            <li><img src="./images/girlsmall1.jpg" alt=""></li>
         </ul>
         <ul class="pointLis">
             <li class="active"></li>
             <li></li>
             <li></li>
             <li></li>
+            <!-- <li></li> -->
         </ul>
         <span class="iconfont icon-xiangzuojiantou"></span>
         <span class="iconfont icon-xiangyoujiantou"></span>
@@ -97,25 +100,45 @@
         const box = document.querySelector('.box')
         const pointLis = document.querySelectorAll('.pointLis>li')
         const imgLis = document.querySelector('.imgLis')
+        const imgs = document.querySelectorAll('.imgLis>li')
         const xiangzuo = document.querySelector('.icon-xiangzuojiantou')
         const xiangyou = document.querySelector('.icon-xiangyoujiantou')
         // i值的判断 可以利用照片数组长度减1来判断   每次切换的距离 用照片总长度 /张数 
         // 尽量不要写定值
         // 公共 下一张
+        let flag = true
         function common() {
-            document.querySelector('.pointLis li.active').classList.remove('active')
-            pointLis[i].classList.add('active')
-            imgLis.style.left = -i * 400 + 'px'
+            // imgLis.style.left = -i * 400 + 'px'
+            // imgLis.style.transition='all 0.5s linear'
             i++
-            if (i > pointLis.length-1) {
+            imgLis.style.left = -i * 400 + 'px'
+            imgLis.style.transition = '0.5s ease'
+            if (i == imgs.length - 1) {
                 i = 0
+                setTimeout(function () {
+                    imgLis.style.transition = 'none'
+                    imgLis.style.left = 0
+                }, 500)
             }
+            pointMove()
         }
         // 上一张
         function last() {
-            document.querySelector('.pointLis li.active').classList.remove('active')
-            pointLis[i].classList.add('active')
-            imgLis.style.left = -i * 400 + 'px'
+            i--
+            if (i == -1) {
+                imgLis.style.transition = 'none'
+                imgLis.style.left = -(imgs.length - 1) * 400 + 'px'
+                setTimeout(function () {
+                    i = imgs.length - 2
+                    pointMove()
+                    imgLis.style.transition = '0.5s ease'
+                    imgLis.style.left = -i * 400 + 'px'
+                }, 0)
+            }
+            else {
+                pointMove()
+                imgLis.style.left = -i * 400 + 'px'
+            }
         }
         // 轮播
         timer = setInterval(function () {
@@ -138,19 +161,33 @@
         })
         // 上一张
         xiangzuo.addEventListener('click', function () {
-            i--
-            if (i < 0) {
-                i = pointLis.length-1
-            }
             last()
         })
         // 点击圆点
-        pointLis.forEach(function(item,index){
-            item.addEventListener('click',function(){
-                i=index
-                common()
+        pointLis.forEach(function (item, index) {
+            item.addEventListener('click', function () {
+                i = index
+                // common()
+                document.querySelector('.pointLis li.active').classList.remove('active')
+                pointLis[index].classList.add('active')
+                imgLis.style.transition = '0.5s ease'
+                imgLis.style.left = -i * 400 + 'px'
             })
         })
+
+        function pointMove() {
+            let index = i
+            console.log(i);
+            if (i === imgs.length - 1) {
+                index=0
+                document.querySelector('.pointLis li.active').classList.remove('active')
+                pointLis[index].classList.add('active')
+            } else {
+                document.querySelector('.pointLis li.active').classList.remove('active')
+                pointLis[index].classList.add('active')
+            }
+
+        }
     </script>
 </body>
 

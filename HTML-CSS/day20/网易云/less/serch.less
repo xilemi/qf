@@ -67,6 +67,7 @@ nav{
 section{
     background-color: #fbfcfd;
     flex: 1;
+    overflow: auto;
     .search{
         display: flex;
         align-items: center;
@@ -107,6 +108,42 @@ section{
                 border-radius: 4vw;
                 margin-right: 2vw;
                 margin-bottom: 1.3333vw;
+            }
+        }
+    }
+    .music{
+        padding-left: 2.6667vw;
+        .music-item{
+            height: 14.8vw;
+            display: flex;
+            .num{
+                width: 10.6667vw;
+                font-size: 4.5333vw;
+                line-height: 14.8vw;
+            }
+            .item{
+                display: flex;
+                justify-content: space-between;
+                height: 14.8vw;
+                flex: 1;
+                border-bottom: 1px solid #cccccc;
+                .music-name{
+                    padding: 1.6vw 0;
+                    &>p:nth-of-type(1){
+                        font-size: 4.5333vw;
+                        margin-bottom: 2.6667vw;
+                    }
+                    &>p:nth-of-type(2){
+                        font-size: 3.2vw;
+                    }
+                }
+                span{
+                    display: flex;
+                    align-items: center;
+                    padding: 0 2.6667vw;
+                    color: #aaaaaa;
+                    font-size: 5.8667vw;
+                }
             }
         }
     }

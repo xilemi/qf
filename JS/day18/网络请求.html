@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="box"></div>
+    <script>
+        const box=document.querySelector('.box')
+        async function getMusic(key) {
+            fetch(`http://iwenwiki.com:3000/search?keywords=${key}`)
+            .then(res=>{
+                if(res.ok){
+                    // 如何抛出 .json 返回的promise的对象
+                    return res.json()
+                }else{
+                    throw new Error('请求出错')
+                }
+            }
+            ).then(data=>{
+                // 进行渲染 
+                let songs=data.result.songs
+                for(let item of songs){
+                    console.log(item);
+                    console.log(`歌名:${item.name} 歌手:${item.artists[0].name}`);
+                    // 得到的对象
+                    const p=document.createElement('p')
+                    const img=document.createElement('img')
+                    img.src=item.album.artist.img1v1Url
+                    p.innerHTML=`歌名:${item.name} 歌手:${item.artists[0].name}`
+                    box.append(img)
+                    box.append(p)
+                }
+            })
+            .catch(err=>{
+                console.log('请求出错',err);
+            })
+        }
+        // 出错了处理不了  可以抛出一个 error 让catch统一处理
+        getMusic('追光者')
+    </script>
+</body>
+
+</html>

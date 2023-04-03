@@ -30,7 +30,7 @@
                         <input class="count-input" type="text" value="1" />
                         <span class="add">+</span>
                     </td>
-                    <td class="subtotal">1</td>
+                    <td class="subtotal">1.00</td>
                     <td class="operation"><span class="delete">删除</span></td>
                 </tr>
                 <tr>
@@ -41,7 +41,7 @@
                         <input class="count-input" type="text" value="1" />
                         <span class="add">+</span>
                     </td>
-                    <td class="subtotal">1</td>
+                    <td class="subtotal">1.00</td>
                     <td class="operation"><span class="delete">删除</span></td>
                 </tr>
                 <tr>
@@ -52,7 +52,7 @@
                         <input class="count-input" type="text" value="1" />
                         <span class="add">+</span>
                     </td>
-                    <td class="subtotal">1</td>
+                    <td class="subtotal">1.00</td>
                     <td class="operation"><span class="delete">删除</span></td>
                 </tr>
                 <tr>
@@ -63,7 +63,7 @@
                         <input class="count-input" type="text" value="1" />
                         <span class="add">+</span>
                     </td>
-                    <td class="subtotal">1</td>
+                    <td class="subtotal">1.00</td>
                     <td class="operation"><span class="delete">删除</span></td>
                 </tr>
             </tbody>
@@ -96,6 +96,7 @@
     let priceTotal = document.querySelector('#priceTotal')
     let tbody = document.querySelector('tbody')
     let tbodyTr = document.getElementsByTagName('tr')
+    let catBox=document.querySelector('.catbox')
     let checkItem;
     // 总价 勾选时计算
     function total() {
@@ -105,13 +106,14 @@
                 totalPrice += parseFloat(subtotal[i].innerHTML)
             }
         }
-        return totalPrice.toFixed(2)
+        priceTotal.innerHTML = totalPrice.toFixed(2)
     }
     // 计算checkbox勾选的个数
     function checkCount() {
         let count = 0
         if (checkOne.length == 0) {
             checkAll.checked = false
+            checkAll.disabled = true
         }
         for (let i = 0; i < checkOne.length; i++) {
             if (checkOne[i].checked) {
@@ -128,18 +130,18 @@
                 total += parseInt(countInput[i].value)
             }
         }
-        return total
+        selectedTotal.innerHTML = total
     }
-    function getTotal(){
-        if(total()>0){
-            location.href='./pay.html'
+    function getTotal() {
+        if (selectedTotal.innerHTML> 0) {
+            location.href = './pay.html'
         }
-        else{
+        else {
             alert('请勾选商品')
         }
     }
     // 单删
-    tbody.onclick = function (e) {
+    tbody. onclick = function (e) {
         if (e.target.className == 'delete') {
             e.target.parentElement.parentElement.remove()
         }
@@ -150,8 +152,10 @@
             checkAll.checked = false
         }
         checkCount()
-        priceTotal.innerHTML = total()
-        selectedTotal.innerHTML = totalShop()
+        // priceTotal.innerHTML = total()
+        // selectedTotal.innerHTML = totalShop()
+        total()
+        totalShop()
     }
     // 批量商品删除 
     deleteAll.onclick = function () {
@@ -160,9 +164,12 @@
                 checkOne[i].parentElement.parentElement.remove()
             }
         }
+        // 用假设法  或者使用every数组方法
         checkCount()
-        priceTotal.innerHTML = total()
-        selectedTotal.innerHTML = totalShop()
+        // priceTotal.innerHTML = total()
+        // selectedTotal.innerHTML = totalShop()
+        total()
+        totalShop()
     }
     // 全选
     checkAll.addEventListener('click', function () {
@@ -170,8 +177,10 @@
             checkOne[i].checked = checkAll.checked
         }
         if (checkAll.checked) {
-            priceTotal.innerHTML = total()
-            selectedTotal.innerHTML = totalShop()
+            // priceTotal.innerHTML = total()
+            // selectedTotal.innerHTML = totalShop()
+            total()
+            totalShop()
         }
         else {
             priceTotal.innerHTML = 0
@@ -181,8 +190,10 @@
     // 单选
     for (let i = 0; i < checkOne.length; i++) {
         checkOne[i].addEventListener('click', function () {
-            priceTotal.innerHTML = total()
-            selectedTotal.innerHTML = totalShop()
+            // priceTotal.innerHTML = total()
+            // selectedTotal.innerHTML = totalShop()
+            total()
+            totalShop()
             if (checkCount() == checkOne.length) {
                 checkAll.checked = true
             }
@@ -206,15 +217,19 @@
                 nextEle.value = 1
             }
             nextEle.parentElement.nextElementSibling.innerHTML = (nextEle.value * nextEle.parentElement.previousElementSibling.innerHTML).toFixed(2)
-            priceTotal.innerHTML = total()
-            selectedTotal.innerHTML = totalShop()
+            // priceTotal.innerHTML = total()
+            // selectedTotal.innerHTML = totalShop()
+            total()
+            totalShop()
         }
         countInput[i].nextElementSibling.onclick = function () {
             let preEle = this.previousElementSibling
             preEle.value++
             preEle.parentElement.nextElementSibling.innerHTML = (preEle.value * preEle.parentElement.previousElementSibling.innerHTML).toFixed(2)
-            priceTotal.innerHTML = total()
-            selectedTotal.innerHTML = totalShop()
+            // priceTotal.innerHTML = total()
+            // selectedTotal.innerHTML = totalShop()
+            total()
+            totalShop()
             if (preEle.value > 1) {
                 preEle.previousElementSibling.innerHTML = '-'
             }

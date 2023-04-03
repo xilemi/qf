@@ -17,9 +17,9 @@
     </header>
     <nav>
         <ul>
-            <li><a href="#" class="active">推荐音乐</a></li>
-            <li><a href="#">热搜榜</a></li>
-            <li><a href="#">搜索</a></li>
+            <li><a href="index.html" class="active">推荐音乐</a></li>
+            <li><a href="hot-music.html">热搜榜</a></li>
+            <li><a href="search.html">搜索</a></li>
         </ul>
     </nav>
     <section>
@@ -44,13 +44,58 @@
                 <li>起风了</li>
             </ul>
         </div>
-
-
+        <div class="music"></div>
     </section>
 
 
 
 
 </body>
+<script>
+    const inp = document.querySelector('input')
+    const hotSearch = document.querySelector('.hot-search')
+    const section = document.querySelector('section')
+    async function search(key) {
+        fetch(`http://iwenwiki.com:3000/search?keywords=${key}`)
+            .then(res => {
+                // 这里可以加入校验请求是否成功
+                if (res.status == 200) {
+                    hotSearch.remove()
+                    return res.json()
+                } else {
+                    throw new Error('请求出错')
+                }
+            }).then(data => {
+                //处理返回的结果 歌曲名 艺术家 专辑
+                let songs = data.result.songs
+                const music = document.createElement('div')
+                music.className = "music"
+                document.querySelector('.music').remove()
+                section.append(music)
+                console.log(songs);
+                for (let song of songs) {
+                    const musicItem = document.createElement('div')
+                    musicItem.className = 'music-item'
+                    musicItem.innerHTML = `
+                    <a href="#" class="item">
+                        <div class="music-name">
+                            <p>${song.name}</p>
+                            <p class="iconfont icon-erji">${song.artists[0].name} - ${song.album.name}</p>
+                        </div>
+                        <span class="iconfont icon-bofang"></span>
+                    </a>
+                    `
+                    music.append(musicItem)
+                }
+            }).catch(err => {
+                console.log('请求出错', err);
+            })
+    }
+    inp.onchange = function () {
+        search(inp.value) 
+    }
+
+
+</script>
 
 </html>
