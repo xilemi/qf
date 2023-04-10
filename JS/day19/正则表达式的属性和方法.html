@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    </style>
+</head>
+<body>
+    <script>
+        // 属性
+        // source 匹配规则
+        // flags  修饰符
+        // ignorecase 是否忽略大小写
+        // global 是否全局检索 
+        // lastindex 检索开始位置 默认为0 会记录上次检索的位置  并传递给下一次
+        // 方法
+        // test() 有返回true  无返回 false 一次只能返回一个
+        // exec() 匹配到的结果返回到数组  一次只能匹配一个  
+        /* while(res.exec()){
+            arr.push
+        } */
+
+
+        let reg=new RegExp('mi','igu')
+        let str='sdb gas hdd amimimixiaomi&nbsp;'
+        console.dir(reg);
+        // 检验是否存在
+        // console.log(reg.test(str));  
+        // 如果想检测出现的次数
+        let count=0
+        while(reg.test(str)){
+            count++
+            console.log(reg.lastIndex);
+        }
+        console.log(count);
+        // 如果想要把mi取出来 使用exec
+        // console.log(reg.exec(str));
+        let arr=[]
+        let item=null;
+        while(item=reg.exec(str)){
+            arr.push(item)
+        }
+        console.log(arr);
+        let reg1=/^\d$/
+        let str1='1111'
+        console.log(reg1.test(str1));
+    </script>
+</body>
+</html>

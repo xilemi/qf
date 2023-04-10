@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Map是对象的升级版  
+        // 传统对象的健值 只能是字符串  设置其他类型的健值 都会先经过tostring() 转换为字符串 原始的类型不能被保存
+        // 使用Map可以实现
+        // 创建  属性 size 数据的条数
+        let map = new Map()
+        // Map的方法
+        // set(key,value) 添加健值对   可以链式操作 返回值都是map数据结构本身  
+        // get(key) 获取 如果没有返回undefined
+        // has(key) 判断是否存在  true or false
+        // detele(key)  删除 删除 删除成功返回true  失败返回false
+        // clear(key) 清除 全删
+        // forEach(value,key) 遍历
+        // Map和二维数组的转换
+        // new Map() 参数可以接受二维数组 二维数组转map
+        // Array.from ...
+        let key = 123
+        let val = 12333
+        map.set(key, val).set(null, undefined).set('name', 'zhangsan')
+        console.log(map.size);
+        console.log(map.get(null));
+        console.log(map.get(undefined));//找不到返回undefined
+        console.log(map.has('name'));
+        // map.delete('name')
+        // map.clear()
+        map.forEach((val, key) => {
+            console.log(key, val);
+        })
+        console.log(map);
+        // Set() 元素不允许重复 size Set的长度  类似数组的结构  健名健值都是同一个值或者没有健名 
+        // add() 增加
+        // delete() 删除 删除成功返回true 删除失败返回 false
+        // clear() 全删 
+        // has() 
+        // forEach()
+        // 应用
+        // 去重
+        let values = ["Hare", "Krishna", "Hare", "Krishna",
+            "Krishna", "Krishna", "Hare", "Hare", ":-O"
+        ];
+        let set=new Set(values)
+        console.log(set.add('zhangsn'));
+        console.log(Array.from(new Set(values)));
+    </script>
+</body>
+
+</html>

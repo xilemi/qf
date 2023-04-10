@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let str='xiao mif99  ansir    MIedmimi'
+        // search 不能忽略大小写   配合正则使用可以忽略大小写  只返回第一次出现的下标
+        // str.search()
+        // 将匹配的结果 提出取来  放到数组 本质也是正则的exec的方法实现 加g有效
+        // str.match()
+        // 存在就替换 返回新的字符串  加g有效
+        // str.replace()
+        // str.split()
+        // 去空格
+        // console.log(str.replace(/\s/g,''));
+        // 返回下标
+        console.log(str.search(/\d/g));
+        console.log(str.match(/mi/gi));
+        // 全部替换掉 返回新的字符串
+        console.log(str.replace(/mi/gi,'xiaomi'));
+        // split() 拆分字符串成数组 当空格的数量不确定时 如何拆分呢 
+        console.log(str.split(/\s+/));
+
+    </script>
+</body>
+</html>

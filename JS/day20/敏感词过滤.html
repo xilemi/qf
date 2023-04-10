@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <input type="text" name="" id="">
+    <script>
+        const inp = document.querySelector('input')
+        let keyWord = ['菜b', '菜', '垃圾', 'sb', 'cnm', 'cnmb', '菜狗', 'tmd']
+        inp.onblur = function () {
+            for (let i = 0; i < keyWord.length; i++) {
+                let key = keyWord[i]
+                let reg = new RegExp(key, 'ig')
+                inp.value = inp.value.replace(reg, '*'.repeat(key.length))
+            }
+        }
+        // 敏感词过滤
+    </script>
+</body>
+
+</html>

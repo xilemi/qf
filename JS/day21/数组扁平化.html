@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let arr = [1, 2, 3, 4, [2, 3, 4, 5]]
+        function flat(arr) {
+            let newArr = []
+            for (let item of arr) {
+                if (Array.isArray(item)) {
+                    newArr= newArr.concat(flat(item))
+                }
+                else {
+                    newArr.push(item)
+                }
+            }
+            return newArr
+        }
+        console.log(flat(arr));
+        // 使用flat方法 参数为数组的层数 要识别数组层数 默认只识别拉平一层   可以使用infinity拉平无限层
+        console.log(arr.flat(2));
+        let arr1=[1,2,[1,2],3,[12,3,[12,[12,[12]]]]]
+        let count=1
+        function getArrDeep(arr){
+            for(let item of arr){
+                if(Array.isArray(item)){
+                    count++
+                    getArrDeep(item)
+                    return count
+                }
+            }
+            return count
+        }
+        console.log(getArrDeep(arr1));
+    </script>
+</body>
+
+</html>

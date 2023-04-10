@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 正则表达式中的字符
+        // 字面量字符
+        // 元字符
+        /*  1.限定符
+            2.定位
+            3.字符匹配
+            4.选择匹配
+            5.转义字符 
+        */
+
+        // 1、限定符：限定子表达式出现的次数   限制前面的表达式出现的次数
+        //    {次数} 准确次数  {m,n} m到n次   {m}至少m次
+        //  * 0次或者多次{0，}  +1 至少一次    ？0次数或者1次 {0,1}  
+        let str = 'xiaomishoujimi redmxiaomiiiiii';
+        let reg = /mi+/gi
+        console.log(reg.test(str)); 
+        let reg1= /(^0?\d+)|(^1\d\d)|(^2[0-4]\d)|^25[0-5]%/
+        console.log(reg1.test(5));
+        (0,255)
+        //2、定位符 ^以什么开头  $ 以什么结束 ^$用于精确匹配
+        //3、字符匹配符  [xyz] [0-9] [a-z]  [0-9a-zA-Z_]数字字母下划线 [^0-9] 取反 非数字
+        /*
+        \d 数字 
+        \D 非数字
+        \w 字符 数字 字母 下划线
+        \W 非字符
+        \s  空
+        \S 非空
+        . 任意 除换行
+        [\u4e00-\u9fa5]
+        */
+    //    电话号码
+     let reg2=/^1[3-9]\d{9}/
+     console.log(reg2.test(13145465669));
+    //  let reg3=/[\u4e00-\u9fa5]/
+     let reg3=/[\u4e00-\u9fa5]/
+     console.log(reg3.test('电话费撒谎的高级'));
+    //  需求  6-18个 数组字母下划线 不能以数字开头  或者7个中文
+    let reg4=/(^[a-zA-Z_][\d\w]{5,17}$)|([\u4e00-\u9fa5]{7})/
+    console.log(reg4.test('hkjfgjkh'));
+    // 选择字符 (|)
+    // 转义字符
+    //  \   对于特殊字符  正则表达式内的关键字符  使用\ 进行转义
+    </script>
+</body>
+
+</html>

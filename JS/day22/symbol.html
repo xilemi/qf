@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // symbol()函数  新增数据类型 symbol
+        // 特点？  独一无二 
+        let s=Symbol()
+        let s1=Symbol()
+        console.log(s===s1);
+        // 通过description获取 symbol数据类型的描述
+        // 应用
+        // 作为对象的属性 
+       let random=Symbol('random')
+        Math[random]=(min=0,max=0)=>{
+            return min+Math.floor(Math.random()*(max-min+1))
+        }
+        console.log(Math);
+        console.log(Math[random](2,99));
+        let age =Symbol('age')
+        let person={
+            name:'zhangsan',
+            [age]:1111
+        }
+        // 不能被遍历
+        for(let item in person){
+            console.log(item);
+        }
+        console.log(person);
+        // 消除魔术字符串
+    </script>
+</body>
+</html>

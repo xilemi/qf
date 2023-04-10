@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text">
+    <script>
+        const inp = document.querySelector('input')
+        let reg = /[\u4e00-\u9fa5]/g
+       /*  inp.onblur = function () {
+            inp.value = inp.value.replace(/\s/g,'')
+            let count = 0
+            console.log(inp.value);
+            for (let i = 0; i < inp.value.length; i++) {
+                if (reg.test(inp.value[i])) {
+                    console.log(11);
+                    count += 2
+                }
+                else {
+                    count++
+                }
+            }
+            console.log(inp.value.length);
+            console.log(count);
+        } */
+        // 字节统计
+        // 直接判断 是中文 +2 不是+1
+
+
+
+
+
+
+        // 用match匹配  统计中文的个数   加上 对应的个数即可
+        inp.onblur=function(){
+            let count=0
+            inp.value=inp.value.replace(/\s/g,'')
+            count=inp.value.length+inp.value.match(reg).length
+            console.log(count);
+        }
+    </script>
+</body>
+
+</html>

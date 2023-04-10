@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: antiquewhite;
+            position: fixed;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="btn1">运动</button>
+    <button class="btn2">返回</button>
+    <div class="box"></div>
+    <script>
+        const box = document.querySelector('.box')
+        const btn1 = document.querySelector('.btn1')
+        const btn2 = document.querySelector('.btn2')
+        // obj 表示元素的类名 attr 表示属性的对象  属性名 以及结束的位置 每次运动10 
+        function move(obj, attr, time) {
+            obj.timer = setInterval(() => {
+                for (let key in attr) {
+                    console.log(attr[key]);
+                    if (Math.abs(getStyle(box, key) - attr[key])<10) {
+                        clearInterval(obj.timer)
+                        break;
+                    }
+                    obj.style[key] = getStyle(box, key) + 10 + 'px'
+                }
+            }, time / 100)
+        }
+        function getStyle(obj, attr) {
+            return parseFloat(getComputedStyle(obj)[attr])
+        }
+        btn1.onclick = () => {
+            move(box, { left: 300, top: 500 }, 5000)
+        }
+        btn2.onclick = () => {
+            move(box, { left: 0, top: 0 }, 5000)
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 普通定义  => 此时对象的属性可以正常的进行 取值 赋值  循环遍历  删除
+    // var zhang = {
+    //     name:"张三",
+    //     age:18,
+    //     height:"177cm",
+    //     weight:"70kg",
+    // }
+
+
+    // 自定义对象的属性描述  => 可以实现对象的某个属性 只能取值不能赋值(只读)  对象遍历时无法枚举该属性  对象的属性不允许被删除 
+    // 构造函数 Object的方法
+    // Object.defineProperty(target, key,desc)    单个属性定义
+    // target 目标对象
+    // key    需要设置的属性名(键名)
+    // desc   对象的属性描述(对象)
+    //      value:     属性值
+    //      writable:  是否是否可以改写(true(默认)/false)
+    //      enumerable:  是否是否可以枚举(true(默认)/false)   => 遍历对象时,属性是否可以被列举出来
+    //      configable   属性是否可以被重新配置/删除  (true(默认)/false
+        
+    // 拦截器  => 注意: 拦截器和 value/writable不能同时存在
+    //      get:function(){},     取值拦截 (对属性取值时触发此函数 => 根据函数的返回值决定取值内容)
+    //      set:function(val){},     赋值拦截 (对属性赋值时触发此函数 => 函数有一个形参,用于接收实际值 -> )
+
+    // Object.defineProperties(target,options)    多个属性定义
+    // target 目标对象
+    // options 对象 => 定义对象的键名和描述 => {key:desc,key:desc} 
+
+    var zhang = {};
+
+    var _defaultName = "张三";
+    Object.defineProperty(zhang,"name",{
+        enumerable:true,
+        configurable:false,
+        get:function(){
+            console.log("取值拦截");
+            // return zhang.name;  // 会形成死递归 => 一直调用zhang.name的取值拦截
+
+            if(Math.random() > 0.5){
+                return _defaultName;
+            }else{
+                return "张一百";
+            }
+
+        },
+        set:function(val){
+            console.log("赋值拦截",val);
+            _defaultName = val;
+        },
+    })
+    
+    // console.log(zhang.name);
+    zhang.name = "李四";
+    // console.log(zhang);
+
+
+    // Object.defineProperty(zhang,"age",{
+    //     value:18,
+    //     writable:true,
+    //     enumerable:true,
+    //     configurable:true,
+    // })
+
+    // Object.defineProperty(zhang,"height",{
+    //     value:"177cm",
+    //     writable:true,
+    //     enumerable:true,
+    //     configurable:true,
+    // })
+
+    // Object.defineProperty(zhang,"weight",{
+    //     value:"70kg",
+    //     writable:true,
+    //     enumerable:true,
+    //     configurable:true,
+    // })
+ 
+
+
+
+
+    
+    
+
+
+</script>
+</html>

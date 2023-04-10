@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 递归  先传递再回归
+        function fn(i, sum) {
+            sum+=i
+            if (i <= 1) {
+                return sum
+            } else {
+               
+                return fn(i-1, sum)
+            }
+        }
+        // debugger
+        console.log( fn(9, 0));
+        // 深拷贝
+        let arr=[1,2,3,4,5,6,[1,2,3],7,8]
+        function deepCopy(arr){
+            let newArr=[]
+            for(let item of arr){
+                if(Array.isArray(item)){
+                    newArr.push(deepCopy(item))
+                }else{
+                    newArr.push(item)
+                }
+            }
+            return newArr
+        }
+        // debugger
+        console.log(deepCopy(arr));
+        // 数组扁平化
+        function flat(arr){
+            let newArr=[]
+            for(let item of arr){
+                if(Array.isArray(item)){
+                    // 不会改变现有数组 是所以要重新赋值  这里和push不同
+                    newArr= newArr.concat(flat(item))
+                }
+                else{
+                    newArr.push(item)
+                }
+            }
+            return newArr
+        }
+        // debugger
+        console.log(flat(arr));
+        let a=5000
+        function count(year){
+            a*=1.05
+            year--
+            if(year>0){
+               return count(year)
+            }
+            return a
+        }
+        console.log(count(3));
+    </script>
+</body>
+
+</html>

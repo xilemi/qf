@@ -96,7 +96,7 @@
     let priceTotal = document.querySelector('#priceTotal')
     let tbody = document.querySelector('tbody')
     let tbodyTr = document.getElementsByTagName('tr')
-    let catBox=document.querySelector('.catbox')
+    let catBox = document.querySelector('.catbox')
     let checkItem;
     // 总价 勾选时计算
     function total() {
@@ -133,7 +133,7 @@
         selectedTotal.innerHTML = total
     }
     function getTotal() {
-        if (selectedTotal.innerHTML> 0) {
+        if (selectedTotal.innerHTML > 0) {
             location.href = './pay.html'
         }
         else {
@@ -141,7 +141,7 @@
         }
     }
     // 单删
-    tbody. onclick = function (e) {
+    tbody.onclick = function (e) {
         if (e.target.className == 'delete') {
             e.target.parentElement.parentElement.remove()
         }

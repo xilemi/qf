@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <script>
+        // es6新特性
+        // babel转码   es6转es5
+        // let  const 和var 
+        /* 
+            var 有变量提升  let const 不会被提升 会报错  不能初始化之前使用
+            不能重复声明变量
+            const 声明的是常量 不能被修改
+            es6新增块级作用域 let和const在块级作用域中也是局部变量 (暂时性死区) 对var声明的变量没有影响
+            块级作用域:成对的花括号的代码执行区域,对象除外
+        */
+        // let a = 999 Identifier 'a' has already been declared
+        // let b = 999
+        // var a=999;
+        // let 变量不能被重复声明
+        // Cannot access 'b' before initialization 没有变量提升  不能再变量声明前使用
+        // a是有变量提升   只提升变量的声明  变量赋值不会被提升  所以结果为undefined
+        // console.log(a,b);
+        // var a=999
+        // let b=9999
+        // const a=9999;
+        // let b=99999;
+        // Assignment to constant variable. 报错  const 声明的变量不能被赋值  
+        // console.log(a=b);
+        // 块级作用域  带有成对{}的代码执行块  let和const 有块级作用域
+        // {
+        //     let a=9999;
+        //     var b=999999;
+        // }
+        // 此时  a具有块级作用域 不能在全局使用 var声明的变量没有块级作用域
+        // console.log(a);
+        // console.log(b);
+
+        /* 
+        应用：多元素绑定事件
+        使用 let 
+        外层再套一层循环
+        使用Array.form转真数组 使用forEach
+        */
+        const lis = document.querySelectorAll('ul>li')
+        for (var i = 0; i < lis.length; i++) {
+            lis[i].onclick = function () {
+                console.log(this, '拿下标会出问题');
+            }
+        }
+        for (let i = 0; i < lis.length; i++) {
+            lis[i].onclick = function () {
+                console.log(this, '拿下标会出问题', i);
+            }
+        }
+        /* 
+        对象的新写法 当健名和健值同名的时候 
+        可以只写健名
+        方法也可以只写fn()
+        不用写fn:function()
+        */
+        // let obj={}
+        // let name='zhangsan'
+        // let age='99'
+        // let height='189'
+        // obj={
+        //     name,age,height,
+        //     fn(){
+        //         console.log('我是函数新写法');
+        //     }
+        // }
+        // obj.fn()
+        // console.log(obj.fn());
+        /* 
+            字符串的新增方法：
+            在头部或者尾部 追加 padStart() padEnd() 返回值新的字符串
+            如果需要补全的长度 不能被补全字符串的长度整除   先向上取整  再截取
+            padEnd(length,'padStr')
+        */
+        // 日期补全 两位
+        let date = new Date('2022-10-2 14:54:09')
+        let second = date.getSeconds().toString()
+        console.log(second);
+        second = second < 10 ? '0' + second : second
+        console.log(second);
+
+        /* 
+        数组新增  构造函数Array自己新增的方法
+        Array.from()  1.伪数组  2.可遍历对象（es6 新增数组结构set map）
+        Array.of() 将一组数据放入数组
+        find() 查找满足条件的第一个元素 找到返回元素  找不到返回undefined
+        findIndex()  下标  找到返回下标  找不到返回-1
+        findLast() 从尾部开始找 
+        findLastIndex 从尾部开始找 
+        
+        fill('替换元素','index','lastIndex') 用一个值 覆盖数组中的每一个元素 开始下标 和结束下标 包头不包尾
+        includes 可以判断是否存在NaN
+        flat() 数组扁平化 多维数组变一维数组 默认只拉平一层   参数 写拉平的层数  如何识别 数组深度(递归) 
+        at() 可传负值
+        */
+        /* 
+        ... 将数组展开
+        展开数组  得到,分隔的参数  例如  实参的时候
+        将数组展开放到新的数组中
+        伪数组转真数组
+        ...给对象
+        展开对象
+        对象合并
+        */
+        // 合并对象...
+        let a = { name: '1' }
+        let b = { age: '1' }
+        let c = { height: '1' }
+        let d = {
+            ...a,
+            ...b,
+            ...c,
+        }
+        console.log(d);
+        let arr2 = [12, 3, 4, 34, 6, 24727, 623, 456326, 1, 23, 2, 132, 431, 234124]
+        console.log(Math.max(...arr2));
+        // console.log(...[1, 2, 4, ...[1, 2, 4]]);
+    </script>
+</body>
+
+</html>

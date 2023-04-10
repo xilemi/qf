@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="./login.html" method="get">
+        <input type="text" name="user" id="">
+        <input type="text" name="pwd" id="">
+        <input type="text" name="phone" id="">
+        <input type="text" name="email" id="">
+        <input type="submit" class="btn">
+    </form>
+    <script>
+        // 数据解析
+        // const btn = document.querySelector('.btn')
+        
+        let str =location.search.slice(1)
+        console.log(str);
+        let reg = /(\w+)=([^&]+)/g
+        let res = null;
+        let obj = {}
+        while(res=reg.exec(str)){
+            obj[res[1]]=res[2]
+        }
+        console.log(obj);
+    </script>
+</body>
+
+</html>

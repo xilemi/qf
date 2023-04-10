@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 取值拦截  赋值拦截  不能和value writenable 共用
+        // _defineValue
+        // get:function()
+        // set:Function()
+        // 定义空的对象  使用 defineProperty 方法向对象中添加属性
+        let obj = {
+            width:9999
+        }
+        // 添加单个属性 Object.defineProperty(target,key,{})
+        Object.defineProperty(obj, 'name', {
+            value: 'wangrui',
+            writable: false,
+            enumerable: false,
+            configurable: false
+        })
+        let _defineValue=198
+        Object.defineProperties(obj, {
+            age: {
+                // value: 19,
+                // Writable: false,
+                enumerable: false,
+                configurable: true,
+                // get:function(){
+                //     console.log("取值拦截");
+                //     return 999
+                // },
+                set:function(val){
+                    console.log('赋值了');
+                    _defineValue=val
+                }
+            },
+            height: {
+                value: 187,
+                writable: false,
+                enumerable: true,
+                configurable: true
+            }
+        })
+        obj.age=20
+        console.log(obj);
+        // console.log(Object.getOwnPropertyDescriptors(obj));
+        let girlFriend={
+            name:'谭苏琴',
+            age:'19',
+            height:170
+        }
+        console.log(Object.getOwnPropertyDescriptors(girlFriend));
+    </script>
+</body>
+
+</html>
