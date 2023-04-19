@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 柯理化也是闭包的一种运用
+        // 例如 两个值求和 
+        // function add(a,b){
+        //     return a+b
+        // }
+        // 可以改写  在不传参数的时候 进行最终的计算 
+        // function add(a){
+        //     return function(b){
+        //         return function(){
+        //             return a+b
+        //         }
+        //     }
+        // }
+        // 那么如果参数 很多个的时候呢  该如何进行处理
+        // function fn(callback) {
+        //     // 把传入的参数进行存储
+        //     let _args = []
+        //     return function () {
+        //         _args.push(...arguments)
+        //         // 后面一直重复这个操作 callee 可以实现匿名函数的自调用
+        //         if (arguments.length == 0) {
+        //             // return _args.reduce((prev,current)=>{
+        //             //     return prev+current
+        //             // })
+        //             return callback(_args)
+        //         }
+        //         // 继续调用 retuen function(){
+        //         //     _args.push(...arguments)
+        //         // }
+        //         return arguments.callee
+        //     }
+        // }
+        // let add = fn(callback)
+        // function callback(a, b, c) {
+        //     return a + b + c
+        // }
+        function callback() {
+            return arguments.reduce((a, b) => {
+                return a + b;
+            })
+        }
+
+        // 函数柯理化的封装
+        // function currying(callback){
+        //     let _args=[]
+        //     return function(){
+        //         _args.push(...arguments)
+        //         if(arguments.length==0){
+        //             return callback(_args)
+        //         }
+        //         return arguments.callee
+        //     }
+        // }
+        // 限制传递参数的封装
+        // function currying(callback) {
+        //     let _args = []
+        //     let len = callback.length
+        //     return function () {
+        //         _args.push(...arguments)
+        //         if (_args.length >= len) {
+        //             return callback(..._args)
+        //         }
+        //         return arguments.callee
+        //     }
+        // }
+        // 不限定参数 隐式转换
+        function currying(callback) {
+            return function () {
+                let _args = [...arguments]
+                function func() {
+                    _args.push(...arguments)
+                    return func
+                }
+                func.toString = function () {
+                    return callback(_args)
+                }
+                return func
+            }
+        }
+        function callback(arr) {
+            return arr.reduce((a, b) => {
+                return a + b;
+            })
+        }
+        let sum = currying(callback)
+        let res=sum(1)(2)(3)(4)(5)(6)
+        console.log(+res);
+
+    </script>
+</body>
+
+</html>

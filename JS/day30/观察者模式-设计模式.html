@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 观察者模式
+        class Observer {
+            constructor() {
+                this.message = {
+
+                }
+            }
+            on(type, fn) {
+                if (!this.message[type]) {
+                    this.message[type] = [fn]
+                }
+                else {
+                    this.message[type].push(fn)
+                }
+            }
+            emit(type, ...arg) {
+                if (!this.message[type]) retuen
+                let event = {
+                    type: type,
+                    arg: arg || {}
+                }
+                this.message[type].forEach(item => {
+                    item.call(this, event)
+                })
+            }
+            off(type,fn) {
+                if(!this.message[type]) return
+                this.message[type].forEach((item,index)=>{
+                    if(fn==item){
+                        this.message[type].splice(index,1)
+                    }
+                })
+            }
+        }
+        let o = new Observer()
+        function aaa() {
+            console.log('woshiaaa');
+        }
+        function bbb() {
+            console.log('woshibbb');
+        }
+        o.on('aaa', aaa)
+        o.on('aaa', bbb)
+        console.log(o.message);
+        o.emit('aaa', 100, 3000, 20000)
+        o.off('aaa',bbb)
+        o.emit('aaa', 100, 3000, 20000)
+    </script>
+</body>
+
+</html>

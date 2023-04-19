@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Cat(name,color){
+            this.name=name;
+            this.color=color;
+            this.say=function(){
+                console.log('我是自己的');
+            }
+        }
+        // 公共的方法  放在原型里 供实例化对象使用
+        Cat.prototype.say=function(){
+            console.log(this);
+            console.log('我是',this.name);
+        }
+        var tom=new Cat('tom','black')
+        var ketty=new Cat('ketty','pink')
+        
+        console.dir(Cat);
+        console.dir(tom);
+        console.dir(ketty);
+        // 原型中的公共方法的this 指向   不是指向原型对象  
+        // 指向调用的实例化对象 
+        console.log(tom.say());
+        // 公共的不会执行
+        console.log(tom['say']());
+        // 获取实例化对象的原型
+        // Object.getPrototypeOf()
+        console.log(Object.getPrototypeOf(tom)===Cat.prototype);
+        console.log(tom instanceof Cat);
+        console.log(ketty instanceof Cat);
+        // 自己找不到就会往上找 ， 再找不到就是往Object.prototype
+        console.log(tom.nihao);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // 工厂函数 重复声明变量方法   函数和对象没有关联关系 
+        //  function cat(name,color){
+        //     let obj={
+        //         name,
+        //         color,
+        //         say(){
+        //             return `我是${this.name}`
+        //         }
+        //     }
+        //     return obj
+        //  }
+        //  let Tom=cat('Tom','black')
+        //  let Ketty=cat('Ketty','black')
+        //  console.log(Tom.say());
+        //  console.log(Ketty.say());
+        //  console.dir(Cat);
+
+    </script>
+</body>
+</html>

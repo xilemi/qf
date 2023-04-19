@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function ajax(type, url) {
+            return new Promise((resolve, reject) => {
+                let xhr = new XMLHttpRequest()
+                xhr.open(type, url)
+                xhr.send()
+                // 监听状态  0 1 2 3 4 
+                // promise的状态 只有 未完成 到完成  未完成到失败
+                // 所以在验证请求状态和 http状态要分开  
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (/^2\d{2}$/.test(xhr.status)) {
+                            resolve(JSON.parse(xhr.responseText))
+                        }
+                        else {
+                            reject(222)
+                        }                                           
+                    }
+
+                }
+            })
+        }
+        ajax('get', 'http://www.xiongmaoyouxuan.com/api/tabs').then(res => {
+            console.log(res);
+        }).catch(err => {
+            console.log(err);
+        })
+    </script>
+</body>
+
+</html>

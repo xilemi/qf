@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Person{
+            constructor(name,age){
+                this.name=name
+                this.age=age
+            }
+            say(){
+                console.log('我是',this.name);
+            }
+        }
+        class Animate extends Person{
+            constructor(name,age,variety){
+                // 继承父级的属性
+                super(name,age)
+                this.variety=variety
+            }
+            say(){
+                // 不完全重写父类的方法
+                super.say()
+                console.log(this.variety);
+            }
+        }
+        let cat=new Animate('猫',18,'猫科')
+        cat.say()
+    </script>
+</body>
+</html>

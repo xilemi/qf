@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: antiquewhite;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        // 打断就要重新开始  只执行最后一次
+        // 鼠标在盒子内移动就改变数字
+        const div = document.querySelector('div')
+        function mouseMove() {
+            div.innerHTML++
+        }
+        // 只执行最后一次
+        // function debounce(fn,t){
+        //     let timer
+        //     // 返回的函数使用了 外部函数的变量
+        //     return function(){
+        //         if(timer) clearTimeout(timer)
+        //         timer=setTimeout(function(){
+        //             fn()
+        //         },t)
+        //     }
+        // }
+        // 利用定时器实现 在函数中每次之前 如果存在定时器  就清除定时器   再开启  这样就可以保证 只能执行最后一次
+        // debugger
+        // div.addEventListener('mousemove',debounce(mouseMove,500));
+        // 节流：在单位时间内平凡触发，只会执行一次  厕所思想
+        function throttle(fn, t) {
+            let timer
+            return function () {
+                if (timer) return
+                timer=setTimeout(function () {
+                    fn()
+                    timer = null
+                }, t)
+            }
+        }
+        function log() {
+            console.log(11111);
+        }
+        setInterval(throttle(log,1000),10)
+        div.addEventListener('click', throttle(mouseMove, 1000));
+        // div.addEventListener('click',function(){
+        //     mouseMove()
+        // });
+    </script>
+</body>
+
+</html>

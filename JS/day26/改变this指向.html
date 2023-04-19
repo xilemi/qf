@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <script>
+        // call()
+        // 调用函数
+        // 传入第一参数，会将函数的this指向改为第一参数
+        // 需要接收参数，可以从第二参数开始传参
+        // apply()
+        // 第二参数为数组     与call()的区别 
+        // bind()
+        // 根据原函数返回新的函数  两者不全等 this指向 bind()方法的第一参数
+        // 伪数组转真数组的应用
+        let lis = document.querySelectorAll('ul>li')
+        let arr = [12, 34, 543, 647, 34, 62, 999]
+        // 借用 数组的slice方法
+        let res = Array.prototype.slice.call(lis)
+        console.log(res instanceof Array);
+        // apply() 展开数组 
+        let res1 = Math.max.apply(null, arr)
+        console.log(res1);
+    </script>
+</body>
+
+</html>

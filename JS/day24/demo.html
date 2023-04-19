@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .demo {
+            width: 1226px;
+            height: 460px;
+            margin: 50px auto;
+            position: relative;
+        }
+
+        .demo img {
+            width: 1226px;
+            height: 460px;
+        }
+        .demo>.lis {
+            list-style: none;
+            display: flex;
+            position: absolute;
+            bottom: 20px;
+            z-index: 100;
+        }
+        .lis span {
+            width: 20px;
+            height: 20px;
+            border-radius: 20px;
+            background-color: #757575;
+            margin-right: 20px;
+            cursor: pointer;
+        }
+
+        .lis span.active {
+            background-color: #fff;
+        }
+    </style>
+    <script src="./swiper/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="./swiper/swiper-bundle.min.css">
+</head>
+
+<body>
+    <div class="swiper demo">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="../day23/轮播图/images/1.jpg" alt=""> </div>
+            <div class="swiper-slide"><img src="../day23/轮播图/images/2.jpg" alt=""> </div>
+            <div class="swiper-slide"><img src="../day23/轮播图/images/3.webp" alt=""> </div>
+            <div class="swiper-slide"><img src="../day23/轮播图/images/4.webp" alt=""></div>
+
+        </div>
+        <!-- 如果需要分页器 -->
+        <div class="lis" style="left: 1000px;">
+            </dixc>
+            <!-- 如果需要导航按钮 -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+
+            <!-- 如果需要滚动条 -->
+        </>
+        <!-- 导航等组件可以放在Swiper容器之外 -->
+        <script>
+            // 构造函数
+            var mySwiper = new Swiper('.swiper', {
+                direction: 'horizontal', // 垂直切换选项
+                loop: true, // 循环模式选项
+                speed:500,
+                autoplay: {
+                    delay: 2000
+                },
+
+                // 如果需要分页器
+                pagination: {
+                    el: '.lis',
+                    clickable: true,
+                },
+
+                // 如果需要前进后退按钮
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+
+                // 如果需要滚动条
+
+            })    
+        </script>
+</body>
+
+</html>

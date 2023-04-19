@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./animate.js"></script>
+    <link rel="stylesheet" href="./fonts/iconfont.css">
+    <style>
+        .box {
+            width: 1226px;
+            height: 460px;
+            margin: auto;
+            overflow: hidden;
+            position: relative;
+        }
+        .img-box {
+            display: flex;
+            height: 460px;
+            position: absolute;
+            left: 0;
+        }
+        ul {
+            list-style: none;
+            display: flex;
+            position: absolute;
+            right: 50px;
+            bottom: 20px;
+        }
+        li {
+            width: 20px;
+            height: 20px;
+            border-radius: 20px;
+            background-color:#757575;
+            margin-right: 20px;
+            cursor: pointer;
+        }
+        li.active {
+            background-color:#fff;
+        }
+        .iconfont {
+            font-size: 40px;
+            color: black;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        .icon-xiangzuojiantou {
+            left: 0;
+        }
+
+        .icon-xiangyoujiantou {
+            right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="img-box">
+            <img src="./images/1.jpg" alt="">
+            <img src="./images/2.jpg" alt="">
+            <img src="./images/3.webp" alt="">
+            <img src="./images/4.webp" alt="">
+            <img src="./images/1.jpg" alt="">
+        </div>
+        <ul>
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <span class="iconfont icon-xiangzuojiantou"></span>
+        <span class="iconfont icon-xiangyoujiantou"></span>
+    </div>
+    <script>
+        const ul = document.querySelector('ul')
+        const lis = document.querySelectorAll('li')
+        const imgBox = document.querySelector('.img-box')
+        const imgs=document.querySelectorAll(".img-box>img")
+        const box = document.querySelector('.box')
+        const btns = document.querySelectorAll('.iconfont')
+        let timer = null
+        // 全局下标
+        let i = 0
+        function autoPlay() {
+            clearInterval(timer)
+            timer = setInterval(function () {
+                i++
+                step()
+            }, 1000)
+        }
+        autoPlay();
+        // 进入停止
+        box.onmouseenter = function () {
+            clearInterval(timer)
+        }
+        box.onmouseleave = function () {
+            autoPlay()
+        }
+        //点击圆点切换
+        lis.forEach((item, index) => {
+            item.onclick = function () {
+                i = index
+                document.querySelector('li.active').classList.remove('active')
+                lis[i].classList.add('active')
+                move(imgBox, 'left', -i * 1226, 'ease-out')
+            }
+        })
+        btns[0].onclick = function () {
+            i--
+            step()
+        }
+        btns[1].onclick = function () {
+            i++
+            step()
+        }
+        function step() {
+            // 左切 临界值
+            if (i < 0) {
+                imgBox.style.left = -(lis.length) * 1226 + 'px'
+                i = lis.length - 1
+            }
+            // 右切临界值
+            console.log(i);
+            if (i > lis.length) {
+                imgBox.style.left = 0
+                i = 1
+            }
+            // 点的临界值
+            let activeLi = i
+            if (activeLi >= lis.length) {
+                activeLi = 0
+            }
+            document.querySelector('li.active').classList.remove('active')
+            lis[activeLi].classList.add('active')
+            move(imgBox, 'left', -i * 1226, 'ease-out', function () {
+                if (i >= lis.length) {
+                    imgBox.style.left = 0
+                    i = 0
+                }
+            })
+        }
+        // 窗口失焦   停止轮播
+        window.onblur=function(){
+            clearInterval(timer)
+        }
+        window.onfocus=function(){
+            autoPlay()
+        }
+        // 圆点个数
+        
+        // 障眼法  第五张 是假的第一张   切到第五张  满足条件  可以执行 回调函数 
+        // 回调函数的内容 为  将left改为 0 下标0回到第一张 
+        // 右切临界值  放在动画没有执行完  没法 进入回调函数判断  导致i一直+
+        //  左切临界值   下标为0 后 让图标回到假的第一张  并且立即 下标 到倒数第二张 执行动画
+        // 点的临界值 到最后一张时  下标归零 并且不要动下标的值
+    </script>
+</body>
+
+</html>

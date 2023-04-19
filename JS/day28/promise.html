@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 第一个参数成功  第二个参数失败   catch() 方法  捕捉异常
+        let promise=new Promise((resovle,reject)=>{
+            if(1){
+                resovle()
+            }else(
+                reject()
+            )
+        })
+        promise.then(()=>{
+            console.log('同意');
+        },()=>{
+            console.log('拒绝');
+        })
+    </script>
+</body>
+</html>

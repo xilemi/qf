@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        div,
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: beige;
+            position: fixed;
+        }
+    </style>
+</head>
+
+<body>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+</body>
+<script>
+    class Move{
+        constructor(ele){
+            this.target=ele
+            this.dragStart()
+        }
+        posX=0;
+        posY=0;
+        dragStart(){
+            // 一个需要元素  一个需要实例化对象的属性
+            // 方法中的this指向实例化对象
+            this.target.style.backgroundColor=this.randomColor()
+            this.target.onmousedown=(e)=>{
+                // 使用箭头函数  让事件中的this指向参照与父级  也是指向实例化对象对象
+                this.posX=e.offsetX
+                this.posY=e.offsetY
+                this.target.style.left=e.pageX-this.posX+'px'
+                this.target.style.top=e.pageY-this.posY+'px'
+                this.dragMove()
+                this.dragEnd()
+            }
+        }
+        dragMove(){
+            document.onmousemove=e=>{
+                this.target.style.left=e.pageX-this.posX+'px'
+                this.target.style.top=e.pageY-this.posY+'px'
+            }
+        }
+        dragEnd(){
+            this.target.onmouseup=e=>{
+                document.onmousemove=null
+            }
+        }
+        randomColor(){
+            let r=Math.floor(Math.random()*256)
+            let g=Math.floor(Math.random()*256)
+            let b=Math.floor(Math.random()*256)
+            return `rgb(${r},${g},${b})`
+        }
+    }
+    const boxs = document.querySelectorAll('div')
+    // 就不能再内部再去获取元素
+    for (let i = 0; i < boxs.length; i++) {
+        // 由于构造函数内的选择器问题  没都是绑定的第一个
+        let res = new Move(boxs[i])
+    }
+    
+
+</script>
+
+</html>

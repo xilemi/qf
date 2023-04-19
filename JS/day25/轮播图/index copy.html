@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./animate.js"></script>
+    <link rel="stylesheet" href="./fonts/iconfont.css">
+    <style>
+        .box {
+            width: 1226px;
+            height: 460px;
+            margin: auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .img-box {
+            display: flex;
+            height: 460px;
+            position: absolute;
+            left: 0;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+            position: absolute;
+            right: 50px;
+            bottom: 20px;
+        }
+
+        li {
+            width: 20px;
+            height: 20px;
+            border-radius: 20px;
+            background-color: #757575;
+            margin-right: 20px;
+            cursor: pointer;
+        }
+
+        li.active {
+            background-color: #fff;
+        }
+
+        .iconfont {
+            font-size: 40px;
+            color: black;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        .icon-xiangzuojiantou {
+            left: 0;
+        }
+
+        .icon-xiangyoujiantou {
+            right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="img-box">
+            <img src="./images/1.jpg" alt="">
+            <img src="./images/2.jpg" alt="">
+            <img src="./images/3.webp" alt="">
+            <img src="./images/4.webp" alt="">
+            <img src="./images/1.jpg" alt="">
+        </div>
+        <ul>
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <span class="iconfont icon-xiangzuojiantou"></span>
+        <span class="iconfont icon-xiangyoujiantou"></span>
+    </div>
+    <script>
+        // 障眼法  第五张 是假的第一张   切到第五张  满足条件  可以执行 回调函数 
+        // 回调函数的内容 为  将left改为 0 下标0回到第一张 
+        // 右切临界值  放在动画没有执行完  没法 进入回调函数判断  导致i一直+
+        //  左切临界值   下标为0 后 让图标回到假的第一张  并且立即 下标 到倒数第二张 执行动画
+        // 点的临界值 到最后一张时  下标归零 并且不要动下标的值
+        // 传入轮播 最大的盒子 要找到改动的元素
+        function Swiper(ele) {
+            this.ele = document.querySelector(`${ele}>.img-box`)
+            this.i = 0
+            this.point = document.querySelectorAll(`${ele} li`)
+            this.btns = document.querySelectorAll(`${ele} span`)
+            this.timer
+            this.autoPlay()
+            this.pointClick(this.point)
+            this.hover()
+            this.prev(this.btns)
+            this.next(this.btns)
+            this.windowBlur()
+        }
+        // 移动
+        Swiper.prototype.step = function () {
+            // 左切 临界值
+            if (this.i < 0) {
+                this.ele.style.left = -(this.point.length) * 1226 + 'px'
+                this.i = this.point.length - 1
+            }
+            // 右切临界值
+            if (this.i > this.point.length) {
+                this.ele.style.left = 0
+                this.i = 1
+            }
+            // 点的临界值
+            let activeLi = this.i
+            if (activeLi >= this.point.length) {
+                activeLi = 0
+            }
+            document.querySelector('li.active').classList.remove('active')
+            this.point[activeLi].classList.add('active')
+            move(this.ele, 'left', -this.i * 1226, 'ease-out', () => {
+                if (this.i >= this.point.length) {
+                    this.ele.style.left = 0
+                    this.i = 0
+                }
+            })
+        }
+        // 自动轮播
+        Swiper.prototype.autoPlay = function () {
+            clearInterval(this.timer)
+            this.timer = setInterval(() => {
+                this.i++
+                this.step()
+            }, 1000)
+        }
+        // 点击圆点切换
+        Swiper.prototype.pointClick = function (point) {
+            point.forEach((item, index) => {
+                item.onclick = () => {
+                    this.i = index
+                    document.querySelector('li.active').classList.remove('active')
+                    point[this.i].classList.add('active')
+                    move(this.ele, 'left', -this.i * 1226, 'ease-out')
+                }
+            })
+        }
+        Swiper.prototype.hover = function () {
+            this.ele.parentElement.onmouseenter = () => {
+                clearInterval(this.timer)
+            }
+            this.ele.parentElement.onmouseleave = () => {
+                this.autoPlay()
+            }
+        }
+        Swiper.prototype.prev = function (ele) {
+            ele[0].onclick = () => {
+                this.i--
+                this.step()
+            }
+        }
+        Swiper.prototype.next = function (ele) {
+            ele[1].onclick = () => {
+                this.i++
+                this.step()
+            }
+        }
+        Swiper.prototype.windowBlur = function () {
+            window.onblur =  () =>{
+                clearInterval(this.timer)
+            }
+            window.onfocus =  ()=> {
+                this.autoPlay()
+            }
+        }
+        let swiper = new Swiper('.box')
+        console.dir(swiper);
+
+    </script>
+</body>
+
+</html>

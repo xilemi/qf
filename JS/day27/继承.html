@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function Cat(name,age) {
+                this.name = name
+                this.age = age
+            
+            // 区别 属性只会存在 实例化对象中
+            height = 175;
+            //这里的this指向任然是实例化对象
+            // 方法只会存在构造函数的原型对象中
+         
+        }
+        Cat.prototype.say=function(){
+            console.log(this.name);
+        }
+        function Person(name){
+            this.name=name
+        }
+        // 直接让Person的原型属性  指向 Cat的原型属性   浅复制  缺点 给Person添加了方法  就会影响到Cat
+        console.log(Cat.prototype);
+        // Person.prototype=Cat.prototype
+        let person=new Person('zhangsna')
+        // person.say()
+        // 此时 Person原型方法和Cat是关联的 是浅复制 
+        // 修改  Person的原型属性
+        // Person.prototype.hellow=function(){
+        //     console.log('hellow');
+        // }
+        // 也同时被修改了 
+        console.log(Cat.prototype);
+        // 第二种关关联方式   把 Cat实例化对象给 Person 会多出cat的属性 
+        let cat=new Cat('ketty',18)
+        console.dir(cat);
+        delete cat.name
+        delete cat.age
+        Person.prototype=cat
+        console.dir(Person);
+        // 第三种  寄生继承 创建一个 的函数  来接收 Cat的原型属性  再把 空函数的原型属性 给 Person  
+        // 这个空函数就是为了保证 Cat的原型属性不被改变 
+        function Fn(){
+
+        }
+        
+        Fn.prototype=Cat.prototype
+        Person.prototype=Fn.prototype
+
+        // 第四种  创建一个空的对象  将 Cat的原型属性  给对象   再将对象的属性 给Person
+        // let obj={}
+        // Object.setPrototypeOf(obj,Cat.prototype)
+        // 第五种   这一套操作 被封装了 
+        let obj=Object.create(Cat)
+        console.dir(obj);
+      
+
+    </script>
+</body>
+
+</html>

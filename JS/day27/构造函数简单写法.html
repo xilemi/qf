@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 使用class
+        class Cat {
+            static x=1
+            static say1(){
+                console.dir(this);
+                console.log(this.x,this.#count);
+            }
+            #count=2
+            constructor(name, age) {
+                this.name = name
+                this.age = age
+            }
+            // 区别 属性只会存在 实例化对象中
+            height = 175;
+            //这里的this指向任然是实例化对象
+            // 方法只会存在构造函数的原型对象中
+            say() {
+                console.log('我是', this.name,this.#count);
+            }
+        }
+        let tansuqing = new Cat('tansuqing', 18)
+        console.log(tansuqing);
+        tansuqing.say()
+        // 自定义静态属性和方法 给类使用的 实例化对象并不能使用
+        console.log(Cat.x);
+        console.log(Cat.say1());
+        // 私有属性  #count
+        // 私有属性只能类的内部 进行使用 
+        // console.log(tansuqing.#count);
+    </script>
+</body>
+
+</html>

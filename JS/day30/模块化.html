@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="module">
+        // 正常的按需导入导出  都需要添加花括号
+        // 导出导入的默认值 不需要 
+        // 两者同时导入的时候  默认值在前
+        // 多模块中存在相同的变量和函数 ，建议使用全部导出  或者导出时使用别名
+        // 或者导入的时候使用别名 (尽量使用这种方式)
+        // import c,{A,FN} from './test.js'
+
+        // 全部导入
+        import * as test from './test.js'
+        import {fn1,a1,log} from './test1.js'
+        // console.log(A);
+        // console.log(FN());
+        // console.log(a1);
+        console.log(log());
+        // 全部导入时的使用
+        // console.log(test.a);
+        // console.log(test.fn());
+        // console.log(test.c);
+        // console.log(fn1());
+        // 修改导入的变量 不被允许
+        // a=10000
+    </script>
+</body>
+
+</html>

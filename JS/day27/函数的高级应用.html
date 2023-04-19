@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 回调函数：把函数作为参数传入函数  ，可以自定义函数的执行的内容
+        // 闭包：函数在执行过程中 返回了另一个函数或者对象，返回的函数引用了函数的局部变量，导致函数的执行空间一直不能被释放 
+        // 优点 
+        // 1.减少全局变量 
+        // 2.函数外访问函数内部的变量 
+        // 3.数据暂时存储  数据持久化
+        function fn(){
+            let a=10
+            function fn1(){
+                a++
+                console.log(a);
+            }
+            return fn1
+        }
+        debugger
+        // 会导致newFn一直不会被释放 就会导致a值会接着上次的
+        let newFn=fn()
+        newFn()
+        newFn()
+        newFn()
+        newFn()
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       function Singleton(fn){
+            let instance=null
+            return function(){
+                if(!instance){
+                    instance =new fn(...arguments)
+                }
+                return instance
+            }
+        }
+        // 先使用singleton生成一个单例模式的函数
+        function Cat(name){
+            this.name=name
+        }
+        let bigCat=Singleton(Cat)
+        console.log(bigCat);
+        let res =bigCat('tansuqin')
+        console.log(res);
+        // 
+        function Person(name,age){
+            this.name=name
+            this.age=age
+        }
+        let yPerson=(function (){
+            let instance=null
+            return function(name,age){
+                if(!instance){
+                    instance=new Person(name,age)
+                }
+                return instance
+            }
+        })()
+        let yp1=new yPerson('zhangsan',19)
+        console.log(yp1);
+        function sl(fn){
+            let instance=null
+            return function(name,age){
+                if(!instance){
+                    instance= new fn(name,age)
+                }
+                return instance
+            }
+        }
+        function A(name,age){
+            this.name=name
+            this.age=age
+        }
+        let aa=sl(A)
+        console.log(aa);
+        let res3=aa('lisi',19)
+        console.log(res3);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

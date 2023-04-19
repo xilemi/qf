@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Cat{
+            constructor(name){
+                this.name=name
+            }
+            call(){
+                console.log(this.name);
+            }
+        }
+        class Dog{
+            constructor(name){
+                this.name=name
+            }
+            call(){
+                console.log(this.name);
+            }
+        }
+        class Pig{
+            constructor(name){
+                this.name=name
+            }
+            call(){
+                console.log(this.name);
+            }
+        }
+        // 传入对象
+        function animateCall(animate){
+            animate.call()
+        }
+        let cat=new Cat('mao')
+        let dog=new Dog('dog')
+        let pig=new Pig('pig')
+        animateCall(cat)
+        animateCall(dog)
+        animateCall(pig)
+    </script>
+</body>
+</html>

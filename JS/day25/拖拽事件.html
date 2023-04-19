@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        div,
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: beige;
+            position: fixed;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+    </div>
+    <div class="box"></div>
+    <script>
+        // 封装拖拽事件 控制盒子的边界  控制 盒子的left 和top的位置
+        // const box = document.querySelector('div')
+        // function move() {
+        // const box = document.querySelector('div')
+        // 监听鼠标移入
+        // box.onmousedown = function (e) {
+        //     // 鼠标按下的位置和偏移量的间隔   
+        //     // 鼠标与盒子的位置关系  之前让鼠标居中   让盒子往左和上走 自身一半 
+        //     // 现在是走  鼠标按下位置 与 盒子偏移量的间隔 
+        //     let posX=e.pageX-box.offsetLeft
+        //     let posY=e.pageY-box.offsetTop
+        //     // 如果是在盒子内运动  需要减掉外部盒子 ，没有就不需要
+        //     box.style.left = e.pageX  -posX  + 'px'
+        //     box.style.top = e.pageY -posY + 'px'
+        //     console.log(e);
+        //     document.onmousemove = function (e) {
+        //         box.style.left = e.pageX  -posX + 'px'
+        //         box.style.top = e.pageY - posY + 'px'
+        //     }
+        // }
+        // 移出
+        // box.onmouseup = function () {
+        //     document.onmousemove = null
+        // }
+        // }
+        // move()
+        // function Move(ele) {
+        //     this.target = document.querySelector(ele);
+        //     this.posX = 0
+        //     this.posY = 0
+        //     this.dragStart()
+        // }
+        // Move.prototype.dragEnd = function () {
+        //     this.target.onmouseup =  ()=> {
+        //       document.onmousemove=null
+        //     }
+        // }
+        // Move.prototype.dragMove = function () {
+        //         document.onmousemove = (e) => {
+        //             this.target.style.left = e.pageX - this.posX + 'px'
+        //             this.target.style.top = e.pageY - this.posY + 'px'
+        //         }
+        //     }
+        // Move.prototype.dragStart = function () {
+        //     this.target.onmousedown =  (e)=> {
+        //         this.posX = e.offsetX
+        //         this.posY = e.offsetY
+        //         // 如果是在盒子内运动  需要减掉外部盒子 ，没有就不需要
+        //         this.target.style.left = e.pageX - this.posX + 'px'
+        //         this.target.style.top = e.pageY - this.posY + 'px'
+        //         this.dragMove();
+        //         this.dragEnd()
+        //     }
+        // }
+        function Move(ele){
+            this.target=document.querySelector(ele)
+            this.posX=0
+            this.posY=0
+            this.init()
+        }
+        Move.prototype.dragStart=function(){
+            let _this=this//指向实例化对象
+            _this.target.style.backgroundColor=_this.randomColor()
+            this.target.onmousedown=function(e){
+                // 事件里的this指向 调用事件的元素
+                _this.posX=e.offsetX
+                _this.posY=e.offsetY
+                _this.target.style.left=e.pageX-_this.posX+'px'
+                _this.target.style.top=e.pageY-_this.posY+'px'
+                _this.dragMove()
+                _this.dragEnd()
+            }
+        }
+        Move.prototype.dragMove=function(){
+            let _this=this
+            document.onmousemove=function(e){
+                _this.target.style.left=e.pageX-_this.posX+'px'
+                _this.target.style.top=e.pageY-_this.posY+'px'
+            }
+        }
+        Move.prototype.dragEnd=function(){
+            this.target.onmouseup=function(){
+                document.onmousemove=null
+            }
+        }
+        Move.prototype.randomColor=function(){
+            let r=Math.floor(Math.random()*256)
+            let g=Math.floor(Math.random()*256)
+            let b=Math.floor(Math.random()*256)
+            return `rgb(${r},${g},${b})`
+        }
+        Move.prototype.init=function(){
+            this.dragStart()
+        }
+        let moveBox = new Move('div')
+        let moveBox1 = new Move('.box')
+    </script>
+</body>
+
+</html>

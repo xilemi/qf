@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="div"></div>
+    <script>
+        console.log(JSON);
+        let obj={
+            name:'zhangsan',
+            arr:[1,2,3,4]
+        }
+        // json字符串化
+        console.log(JSON.stringify(obj));
+        // 转回来
+        console.log(JSON.parse(JSON.stringify(obj)));
+        // 其实是封装的eval()   能够把传入的数据 直接作为js代码执行
+        let arr1=['nama','age']
+        div.setAttribute('class',JSON.stringify(arr1))
+        let res=div.getAttribute('class')
+        console.log(JSON.parse(res));
+    </script>
+</body>
+
+</html>

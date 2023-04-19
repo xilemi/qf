@@ -30,7 +30,7 @@
             border-radius: 50%;
             background-color: aliceblue;
             position: absolute;
-            left: 50px;
+            left: 0;
         }
     </style>
 </head>
@@ -44,60 +44,92 @@
     <div class="box">
         <div class="ball"></div>
     </div>
+    <div class="btn">
+        <button class="start">开始</button>
+        <button class="pause">暂停</button>
+        <button class="back">返回</button>
+    </div>
+    <div class="box">
+        <div class="ball"></div>
+    </div>
+    <div class="btn">
+        <button class="start">开始</button>
+        <button class="pause">暂停</button>
+        <button class="back">返回</button>
+    </div>
+    <div class="box">
+        <div class="ball"></div>
+    </div>
 </body>
 <script>
-    const start = document.querySelector('.start')
-    const pause = document.querySelector('.pause')
-    const back = document.querySelector('.back')
-    const box=document.querySelector('.box')
-    const ball = document.querySelector('.ball')
+    const start = document.querySelectorAll('.start')
+    const pause = document.querySelectorAll('.pause')
+    const back = document.querySelectorAll('.back')
+    const box = document.querySelector('.box')
+    const ball = document.querySelectorAll('.ball')
     let timer = null;
     let speed = null
-    // attribute 为对象{left:}
-    function move(end,attribute) {
-        let first=ball.offsetLeft
-        if(Math.abs(first<end)){
-            speed=11
+    function move(ele, end, attribute, callback) {
+        let first = getStyle(ele, attribute)
+        if (Math.abs(first < end)) {
+            speed = 11
         }
-        else if(Math.abs(first>end)){
-            speed=-11
+        else if (Math.abs(first > end)) {
+            speed = -11
         }
-        else{
-            speed=0
+        else {
+            speed = 0
         }
-        clearInterval(timer)
-        timer = setInterval(() => {
-            first+=speed
-            ball.style.left = first +'px'
-            if(Math.abs(end-first)<=Math.abs(speed)){
-                clearInterval(timer)
-                ball.style.left = end +'px'
+        clearInterval(ele.timer)
+        ele.timer = setInterval(function () {
+            first += speed
+            ele.style[attribute] = first + 'px'
+            if (Math.abs(end - first) <= Math.abs(speed)) {
+                clearInterval(ele.timer)
+                ele.style[attribute] = end + 'px'
+                if(callback&&typeof callback=='function'){
+                    callback()
+                }
             }
         }, 25)
     }
-    /* function backBall() {
-        console.log(i);
-        if (!flag) return
-        flag = false
-        timer = setInterval(() => {
-            if (i <= 5) {
-                i = 5
-                clearInterval(timer)
-                flag = true
-                return
-            }
-            i--
-            ball.style.left = speed * i + 'px'
-        }, 25)
-    } */
-    start.onclick = () => {
-        move(700)
+    // 链式调用
+
+    // 多元素  事件委托
+    document.onclick=function(e){
+        let target=e.target
+        if(target.className=='start'){
+            let index=Array.from(start).indexOf(target)
+            move(ball[index],700,'left')
+        }
+        if(target.className=='pause'){
+            let index=Array.from(pause).indexOf(target)
+            clearInterval(ball[index].timer)
+        }
+        if(target.className=='back'){
+            let index=Array.from(back).indexOf(target)
+            move(ball[index],0,'left')
+        }
     }
-    pause.onclick = () => {
-        clearInterval(timer)
-    }
-    back.onclick = () => {
-        move(50)
+
+
+    // start.onclick = () => {
+    //     move(ball, 700, 'left',function(){
+    //         move(ball,500,'top',function(){
+    //             move(ball,0,'left',function(){
+    //                 move(ball,0,'top')
+    //             })
+    //         })
+    //     })
+    // }
+    // pause.onclick = () => {
+    //     clearInterval(ball.timer)
+    // }
+    // back.onclick = () => {
+    //     move(ball, 0, 'left')
+    // }
+    function getStyle(ele, attribute) {
+        return parseFloat(getComputedStyle(ele)[attribute])
     }
 </script>
 

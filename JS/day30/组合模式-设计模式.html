@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 组合模式 :批处理工具
+        class Door{
+            init(){
+                console.log('onen the door');
+            }
+        }
+        class Sound{
+            init(){
+                console.log('open the sound');
+            }
+        }
+        class Air{
+            init(){
+                console.log("open the air");
+            }
+        }
+        class Compose{
+            constructor(){
+                this.list=new Set()
+            }
+            add(instance){
+                this.list.add(instance)
+            }
+            del(instance){
+                this.list.delete(instance)
+            }
+            excute(){
+                this.list.forEach(item=>item.init())
+            }
+        }
+        let nm=new Compose()
+        let door=new Door()
+        let sound=new Sound()
+        let air=new Air()
+        nm.add(door)
+        nm.add(sound)
+        nm.add(air)
+        nm.excute()
+        nm.del(door)
+        nm.excute()
+    </script>
+</body>
+</html>

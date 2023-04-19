@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="title">
+        标题
+    </div>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+    </ul>
+    <script>
+        //     let obj={
+        //         ele:document.querySelectorAll('ul>li'),
+        //         getText:function(){
+        //             return this.ele[0].innerHTML
+        //         },
+        //         setText:function(con){
+        //             for(let i=0;i<this.ele.length;i++){
+        //                 this.ele[i].innerHTML=con
+        //             }
+        //         }
+        //     }
+        //    console.log(obj.getText());
+        //    obj.setText('121221')
+
+        //    function GetEle(selector){
+        //     this.ele=document.querySelectorAll(selector)
+        //     this.getText=function(){
+        //         return this.ele[0].innerHTML
+        //     }
+        //     this.setText=function(con){
+        //         for(let i=0;i<this.ele.length;i++){
+        //             this.ele[i].innerHTML=con
+        //         }
+        //     }
+        //    }
+        // function GetEle(selector) {
+        //     this.ele = document.querySelectorAll(selector)
+            
+        // }
+        function GetEle(selector) {
+            let ele = Array.from(document.querySelectorAll(selector))
+            Object.setPrototypeOf(ele, GetEle.prototype)
+            return ele
+        }
+        GetEle.prototype.text = function (con) {
+            if (arguments.length >= 1) {
+                for (let i = 0; i < this.length; i++) {
+                    this[i].innerHTML = con
+                }
+            } else {
+                return this[0].innerHTML
+            }
+        }
+        let a = new GetEle('.title')
+        let b = new GetEle('ul>li')
+        console.log(Object.getPrototypeOf(a));//指向构造函数GetEle的原型
+        console.log(Object.getPrototypeOf(Object.getPrototypeOf(a)));//
+        console.log(Object.getPrototypeOf(Object.getPrototypeOf(Object.getPrototypeOf(a))));
+        a.text("hdsjkhk")
+        console.log(a.text());
+        b.text('lololo')
+        console.log(b.text());
+    </script>
+</body>
+
+</html>

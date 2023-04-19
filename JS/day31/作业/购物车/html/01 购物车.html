@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>原生JS实现购物车结算功能代码</title>
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+
+<body>
+    <div class="catbox">
+        <table id="cartTable">
+            <thead>
+                <tr>
+                    <th><label>
+                            <input class="check-all check" type="checkbox" />&nbsp;&nbsp;全选</label></th>
+                    <th>商品</th>
+                    <th>单价</th>
+                    <th>数量</th>
+                    <th>小计</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+              
+
+            </tbody>
+        </table>
+        <div class="foot" id="foot">
+            <a class="fl" id="deleteAll" href="javascript:;">删除</a>
+            <div class="fr closing" onclick="getTotal();">结 算</div>
+            <input type="hidden" id="cartTotalPrice" />
+            <div class="fr total">合计：￥<span id="priceTotal">0.00</span></div>
+            <div class="fr selected" id="selected">已选商品<span id="selectedTotal">0</span>件<span
+                    class="arrow up">︽</span><span class="arrow down">︾</span></div>
+            <div class="selected-view">
+                <div id="selectedViewList" class="clearfix">
+                    <div><img src="../images/1.jpg"><span>取消选择</span></div>
+                </div>
+                <span class="arrow">◆<span>◆</span></span>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    let del = document.getElementsByClassName('delete')
+    const deleteAll = document.querySelector('#deleteAll')
+    const checkAll = document.getElementsByClassName('check-all')[0]
+    let checkOne = document.getElementsByClassName('check-one')
+    const selectedTotal = document.querySelector('#selectedTotal')
+    let countInput = document.getElementsByClassName('count-input')
+    let subtotal = document.getElementsByClassName('subtotal')
+    let price = document.getElementsByClassName('price')
+    let priceTotal = document.querySelector('#priceTotal')
+    let tbody = document.querySelector('tbody')
+    let tbodyTr = document.getElementsByTagName('tr')
+    let catBox = document.querySelector('.catbox')
+    let checkItem;
+    // 总价 勾选时计算
+    let xhr = new XMLHttpRequest()
+
+    xhr.open('get', '../../../data/shoppingCar.json', true)
+    xhr.send()
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            let res = JSON.parse(xhr.responseText)
+
+            res.forEach(({ goodsName, goodsImg, goodsPrice }) => {
+                const tr = document.createElement('tr')
+                tr.innerHTML = `
+                <td class="checkbox"><input class="check-one check" type="checkbox" /></td>
+                    <td class="goods"><img src="${goodsImg}" alt="" /><span>${goodsName}</span></td>
+                    <td class="price">${goodsPrice}</td>
+                    <td class="count"><span class="reduce"></span>
+                        <input class="count-input" type="text" value="1" />
+                        <span class="add">+</span>
+                    </td>
+                    <td class="subtotal">${goodsPrice}</td>
+                    <td class="operation"><span class="delete">删除</span></td>
+                `
+                tbody.append(tr)
+            })
+        }
+    }
+    window.onload=function(){
+    function total() {
+        let totalPrice = 0;
+        for (let i = 0; i < checkOne.length; i++) {
+            if (checkOne[i].checked) {
+                totalPrice += parseFloat(subtotal[i].innerHTML)
+            }
+        }
+        priceTotal.innerHTML = totalPrice.toFixed(2)
+    }
+    // 计算checkbox勾选的个数
+    function checkCount() {
+        let count = 0
+        if (checkOne.length == 0) {
+            checkAll.checked = false
+            checkAll.disabled = true
+        }
+        for (let i = 0; i < checkOne.length; i++) {
+            if (checkOne[i].checked) {
+                count++
+            }
+        }
+        return count
+    }
+    // 计算勾选的个数
+    function totalShop() {
+        let total = 0
+        for (let i = 0; i < checkOne.length; i++) {
+            if (checkOne[i].checked) {
+                total += parseInt(countInput[i].value)
+            }
+        }
+        selectedTotal.innerHTML = total
+    }
+    function getTotal() {
+        if (selectedTotal.innerHTML > 0) {
+            location.href = './pay.html'
+        }
+        else {
+            alert('请勾选商品')
+        }
+    }
+    // 单删
+    tbody.onclick = function (e) {
+        if (e.target.className == 'delete') {
+            e.target.parentElement.parentElement.remove()
+        }
+        if (checkCount() == checkOne.length) {
+            checkAll.checked = true
+        }
+        else {
+            checkAll.checked = false
+        }
+        checkCount()
+        // priceTotal.innerHTML = total()
+        // selectedTotal.innerHTML = totalShop()
+        total()
+        totalShop()
+    }
+    // 批量商品删除 
+    deleteAll.onclick = function () {
+        for (let i = checkOne.length - 1; i >= 0; i--) {
+            if (checkOne[i].checked) {
+                checkOne[i].parentElement.parentElement.remove()
+            }
+        }
+        // 用假设法  或者使用every数组方法
+        checkCount()
+        // priceTotal.innerHTML = total()
+        // selectedTotal.innerHTML = totalShop()
+        total()
+        totalShop()
+    }
+    // 全选
+    checkAll.addEventListener('click', function () {
+        for (let i = 0; i < checkOne.length; i++) {
+            checkOne[i].checked = checkAll.checked
+        }
+        if (checkAll.checked) {
+            // priceTotal.innerHTML = total()
+            // selectedTotal.innerHTML = totalShop()
+            total()
+            totalShop()
+        }
+        else {
+            priceTotal.innerHTML = 0
+            selectedTotal.innerHTML = 0
+        }
+    })
+    // 单选
+    for (let i = 0; i < checkOne.length; i++) {
+        checkOne[i].addEventListener('click', function () {
+            // priceTotal.innerHTML = total()
+            // selectedTotal.innerHTML = totalShop()
+            total()
+            totalShop()
+            if (checkCount() == checkOne.length) {
+                checkAll.checked = true
+            }
+            else {
+                checkAll.checked = false
+            }
+        })
+    }
+    // 数量
+    for (let i = 0; i < countInput.length; i++) {
+        countInput[i].previousElementSibling.onclick = function () {
+            let nextEle = this.nextElementSibling
+            if (nextEle.value > 1) {
+                nextEle.value--
+                if (nextEle.value == 1) {
+                    nextEle.previousElementSibling.innerHTML = ''
+                }
+            }
+            else {
+                nextEle.previousElementSibling.innerHTML = ''
+                nextEle.value = 1
+            }
+            nextEle.parentElement.nextElementSibling.innerHTML = (nextEle.value * nextEle.parentElement.previousElementSibling.innerHTML).toFixed(2)
+            // priceTotal.innerHTML = total()
+            // selectedTotal.innerHTML = totalShop()
+            total()
+            totalShop()
+        }
+        countInput[i].nextElementSibling.onclick = function () {
+            let preEle = this.previousElementSibling
+            preEle.value++
+            preEle.parentElement.nextElementSibling.innerHTML = (preEle.value * preEle.parentElement.previousElementSibling.innerHTML).toFixed(2)
+            // priceTotal.innerHTML = total()
+            // selectedTotal.innerHTML = totalShop()
+            total()
+            totalShop()
+            if (preEle.value > 1) {
+                preEle.previousElementSibling.innerHTML = '-'
+            }
+        }
+    }
+}
+</script>
+
+</html>

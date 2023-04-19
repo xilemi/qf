@@ -44,6 +44,11 @@
             return item==0
         })
         console.log('findIndex',res6);
+        // reduce(callback(prev,current),初始值)
+        let res7=arr.reduce(function(prev,current){
+            return  prev+current
+        },0)
+        console.log(res7);
     </script>
 </body>
 </html>

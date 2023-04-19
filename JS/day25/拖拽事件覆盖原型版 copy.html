@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        div,
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: beige;
+            position: fixed;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</body>
+<script>
+    function Move(ele) {
+        this.target = ele
+        this.posX = 0
+        this.posY = 0
+        this.init()
+    }
+    // 覆盖原型的用法
+    Move.prototype = {
+        constructor: Move,
+        dragStart: function () {
+            let _this = this//指向实例化对象
+            _this.target.style.backgroundColor = _this.randomColor()
+            this.target.onmousedown = function (e) {
+                // 事件里的this指向 调用事件的元素
+                _this.posX = e.offsetX
+                _this.posY = e.offsetY
+                _this.target.style.left = e.pageX - _this.posX + 'px'
+                _this.target.style.top = e.pageY - _this.posY + 'px'
+                _this.dragMove()
+                _this.dragEnd()
+            }
+        },
+        dragMove: function () {
+            // let _this = this
+            // document.onmousemove = function (e) {
+            //     _this.target.style.left = e.pageX - _this.posX + 'px'
+            //     _this.target.style.top = e.pageY - _this.posY + 'px'
+            // }
+            // 通过bind改变this的指向 bind会创建一个新的函数 传入一个参数 作为this的指向
+            document.onmousemove=function(e){
+                this.target.style.left=e.pageX-this.posX+'px'
+                this.target.style.top=e.pageY-this.posY+'px'
+            }.bind(this)
+        },
+        dragEnd: function () {
+            this.target.onmouseup = function () {
+                document.onmousemove = null
+            }
+        },
+        randomColor: function () {
+            let r = Math.floor(Math.random() * 256)
+            let g = Math.floor(Math.random() * 256)
+            let b = Math.floor(Math.random() * 256)
+            return `rgb(${r},${g},${b})`
+        },
+        init: function () {
+            this.dragStart()
+        }
+    }
+    const boxs = document.querySelectorAll('div')
+    // 就不能再内部再去获取元素
+    for (let i = 0; i < boxs.length; i++) {
+        // 由于构造函数内的选择器问题  没都是绑定的第一个
+        let res = new Move(boxs[i])
+    }
+
+</script>
+
+</html>

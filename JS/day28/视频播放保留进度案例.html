@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        video {
+            width: 1280px;
+            height: 720px;
+            display: block;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <video src="./1.mp4" controls id="video"></video>
+    <script>
+        // 节流案例 只保存最后一次的结果
+        // currentTime 当前时间 ontimeupdate 时间变化时
+        // 节流  降低当前时间在sessionStorage 存储的频率 
+        video.addEventListener('timeupdate', throttle(addTime, 1000))
+        function throttle(fn, t) {
+            let timer = null
+            return function () {
+                if (timer) return
+               timer=setTimeout(function () {
+                    fn()
+                    timer=null
+                }, t)
+            }
+        }
+        function addTime() {
+            sessionStorage.setItem("currentTime", video.currentTime)
+        }
+        video.currentTime=sessionStorage.getItem('currentTime')
+
+
+        //节流的应用
+    </script>
+</body>
+
+</html>

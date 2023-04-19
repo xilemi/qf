@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="title">
+        标题
+    </div>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+    </ul>
+    <input type="text" name="" id="">
+    <script>
+        function GetEle(selector) {
+            let ele = []
+            if (typeof selector == 'string') {
+                ele = document.querySelectorAll(selector)
+
+            } else if (selector instanceof Element) {
+                ele.push(selector)
+            } else if (typeof selector == 'object') {
+                ele = selector
+            }
+            ele = Array.from(ele)
+            Object.setPrototypeOf(ele, GetEle.prototype)
+            return ele
+        }
+        // 封装$函数 让使用GetEle 更加便捷
+        // 如何让实例化的对象可以链式操作呢   要求方法 返回的结果是和原数据相同的数据类型
+        // 还有数据的类型   如果是获取的值就不需要进行链式操作，主要是设置值，所以可以在最后返回this 
+        function $(selector) {
+            return new GetEle(selector)
+        }
+        GetEle.prototype.text = function (con) {
+            if (arguments.length >= 1) {
+                for (let i = 0; i < this.length; i++) {
+                    this[i].innerText = con
+                }
+                return this
+            } else {
+                return this[0].innerText
+            }
+        }
+        GetEle.prototype.val = function (con) {
+            if (arguments.length >= 1) {
+                this.each(function (item, i) {
+                    item.value = con
+                })
+                return this
+            } else {
+                return this[0].value
+            }
+        }
+        GetEle.prototype.html = function (con) {
+            if (arguments.length >= 1) {
+                this.each(function (item, i) {
+                    item.innerHTML = con
+                })
+                return this
+            } else {
+                return this[0].innerHTML
+            }
+        }
+        // 事件监听
+        GetEle.prototype.on = function (type, callback) {
+            this.each(function (item) {
+                // 这里只接收 回调函数  不是运行 所以不带括号
+                item.addEventListener(type, callback)
+            })
+        }
+        // 绑定具体的事件
+        GetEle.prototype.click = function () {
+            this.each(function (item) {
+                item.on('click', callback)
+            })
+        }
+        // 事件移除
+        GetEle.prototype.off = function (type, callback) {
+            this.each(function (item) {
+                item.removeEventListener(type, callback)
+            })
+        }
+        // 元素的隐藏
+        GetEle.prototype.hide = function () {
+            this.each(function (item) {
+                item.style.display = 'none'
+            })
+            return this
+        }
+        // 元素的显示
+        GetEle.prototype.show = function () {
+            this.each(function (item) {
+                item.style.display = 'block'
+            })
+            return this
+        }
+        // 设置元素的style样式
+        GetEle.prototype.css = function (attr, val) {
+            if (arguments.length >= 2) {
+                this.each(function (item) {
+                    item.style[attr] = val
+                })
+                return this
+            } else if (arguments.length >= 1) {
+                if (attr instanceof Object) {
+                    for (let key in attr) {
+                        this.css(key, attr[key])
+                    }
+                    return this
+                } else {
+                    let ele = this[0]
+                    return getComputedStyle(ele)[attr]
+                }
+            }
+        }
+        // 设置元素的属性
+        GetEle.prototype.attr = function (key, val) {
+            if (arguments.length >= 2) {
+                this.each(function (item, i) {
+                    item.setAttribute(key, val)
+                })
+                return this
+            }
+            else {
+                return this[0].getAttribute(key);
+            }
+        }
+        // 元素的classList
+        GetEle.prototype.addClass = function (val) {
+            if (arguments.length >= 1) {
+                this.each(function (item, i) {
+                    item.classList.add(...val.split(' '))
+                })
+                return this
+            }
+        }
+        GetEle.prototype.removeClass = function (val) {
+            if (arguments.length >= 1) {
+                this.each(function (item, i) {
+                    item.classList.remove(...val.split(' '))
+                })
+            }
+        }
+        GetEle.prototype.hasClass = function (className) {
+            if (arguments.length >= 1) {
+                let flag = false
+                this.each((item, i) => {
+                    if (item.className.contains(className)) {
+                        flag = true
+                    }
+                })
+                return flag
+            }
+        }
+        // eq获取指定元素
+        GetEle.prototype.eq = function (index) {
+            //通过传入的下标 获取this 的元素 
+            // 然后传入 $()
+            return $(this[index])
+        }
+        // 获取兄弟元素
+        GetEle.prototype.sibling = function () {
+            // 除了目标元素以外的元素 
+            let arr = []
+            //先获取到 该元素的父级元素  然后在找到该父级下的所有元素 
+            // 再遍历父级下的所有元素  判断是否相等  相等的插入  
+            // 最后  使用$() 修改获取到的元素的prototype
+            for (let item of this[0].parentElement.children) {
+                if (item != this[0]) {
+                    arr.push(item)
+                }
+            }
+            return $(arr)
+        }
+        // 遍历
+        GetEle.prototype.each = function (callback) {
+            for (let i = 0; i < this.length; i++) {
+                let item = this[i]
+                let index = i
+                if (callback && typeof callback == 'function') {
+                    callback(item, index)
+                }
+            }
+        }
+        // $("ul>li").css({
+        //     backgroundColor:'red',
+        //     fontSize:'20px',
+        //     color:'yellow',
+        //     textAlign:'center',
+        //     lineHeight:'200px',
+        //     width:'200px',
+        //     height:'200px',
+        //     listStyle:'none'
+        // })
+        $('.title').attr('id', 'wid')
+        $('ul>li').attr('class', 'id')
+        console.log($('ul>li'));
+        $('ul>li').each(function (item, i) {
+            $(item).attr('data-index', i)
+        })
+        $('ul>li').addClass('a b c')
+        console.log($("ul>li").eq(2));
+        console.log($('ul>li').sibling().attr('aaa', 'b').css('width','200px').css('height','200px').css('backgroundColor','red').css('listStyle','none'));
+    </script>
+</body>
+
+</html>

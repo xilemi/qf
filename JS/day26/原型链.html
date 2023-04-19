@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Cat(name,age){
+            this.name=name
+            this.age=age
+        }
+        Cat.prototype.say=function(){
+            console.log('我是',this.name);
+        }
+        // 最顶层的原型对象来自于  Object
+        // 寻找规则  先找自身的属性和方法  自身没有  找构造函数的原型对象  再没有  找 Object的原型对象(链式查找机制)
+        // 所以结论 万物皆是对象
+        // console.log(Object.getPrototypeOf(Object.prototype));
+        // console.log(Object.getPrototypeOf(arr));
+        // console.log(Object.getPrototypeOf(Object.getPrototypeOf(arr)));
+        let arr=new Array(1,2,3,4)
+        // 由此而知 数组的原型是指向 Array构造函数的原型
+        console.log(Object.getPrototypeOf(arr)==Array.prototype);
+        // 由此而知数组构造函数的原型指向Object的原型
+        console.log(Object.getPrototypeOf(Array.prototype)==Object.prototype);
+        // Object.prototype的原型指向 null
+        console.log(Object.getPrototypeOf(Object.prototype));
+        // 原型中的几个属性
+        console.dir(Object.getPrototypeOf(Object));
+        let cat=new Cat('ketty',10)
+        let tansuqin=new Cat('tansuqing',18)
+        // isPrototypeOf() 用来检查对象的原型是不是另外一个对象的原型
+        console.log(Object.getPrototypeOf(cat).isPrototypeOf(tansuqin));
+        // hasOwnProperty() 属性或者方法是不是 对象的自有属性
+        console.log(cat.hasOwnProperty('name'));
+        // say 不是公共
+        console.log(cat.hasOwnProperty('say'));
+        // 获取对象的属性和方法
+        // 这种方式可以获取对象的所有属性和方法名
+        for(let item in cat){
+            console.log(item);
+        }
+        console.log(name in cat);
+    </script>
+</body>
+</html>

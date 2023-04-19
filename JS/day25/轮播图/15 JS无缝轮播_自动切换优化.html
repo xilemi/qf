@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./animate.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        img {
+            vertical-align: top;
+        }
+
+        .swiper {
+            width: 1226px;
+            margin: 50px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .swiper-wrapper {
+            width: 500%;
+            display: flex;
+            position: relative;
+        }
+
+        .swiper-wrapper .slider-item {
+            width: 20%;
+        }
+
+        .swiper-wrapper .show {
+            display: block;
+        }
+
+        .swiper-wrapper .slider-item img {
+            width: 100%;
+        }
+
+        .navbar {
+            position: absolute;
+            right: 50px;
+            bottom: 20px;
+            display: flex;
+
+        }
+
+        .navbar li {
+            width: 10px;
+            height: 10px;
+            margin: 0 5px;
+            border-radius: 50%;
+            border: 1px solid #999999;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar .active {
+            background-color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- .swiper>.swiper-wrapper>.slider-item*4>img[src=../images/2.webp] -->
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            <div class="slider-item"><img src="./images/1.jpg" alt=""></div>
+            <div class="slider-item"><img src="./images/2.jpg" alt=""></div>
+            <div class="slider-item"><img src="./images/3.webp" alt=""></div>
+            <div class="slider-item"><img src="./images/4.webp" alt=""></div>
+            <div class="slider-item"><img src="./images/1.jpg" alt=""></div>
+        </div>
+        <ul class="navbar">
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</body>
+<script>
+
+    // 轮播的功能
+    // 1. 点击切换
+    // 2. 自动切换
+    // 3. 移入暂停 移出启动
+
+    var swiper = document.getElementsByClassName("swiper")[0];
+    var swiperWrapper = document.getElementsByClassName("swiper-wrapper")[0];
+    var swiperSlideItems = document.getElementsByClassName("slider-item");
+    var navBar = document.getElementsByClassName("nav")[0];
+    var dotList = document.getElementsByTagName("li");
+
+    var swiperWidth = swiper.clientWidth; // 一张图片的宽度
+
+    var timer = null; // 全局变量 记录轮播的编号(方便后续清除)
+    var index = 0;   // 全局变量 记录轮播的下标(方便下次轮播切换)
+
+
+    autoPlay(); // 页面加载时默认启动
+
+
+    // 点击切换 => 点击对应的导航,切换到对应的图片
+    // 1. 导航和图片的下标也是一一对应的
+    // 2. 向左滚动的图片张数 刚好 和下标对应
+    for (let i = 0; i < dotList.length; i++) {
+        let dot = dotList[i];
+        dot.onclick = function () {
+            console.log(this, i);
+
+            index = i;
+
+            // 导航切换
+            for (var j = 0; j < dotList.length; j++) {
+                dotList[j].className = "";
+            }
+            dotList[i].className = "active";
+
+            // 图片滚动
+            animate(swiperWrapper, "left", -swiperWidth * i, "ease-out");
+
+        }
+    }
+
+    // 移入暂停 移出启动
+    swiper.onmouseenter = function () {
+        clearInterval(timer);
+    }
+
+    swiper.onmouseleave = function () {
+        autoPlay()
+    }
+
+
+
+    // 自动切换  => 每隔3s自动切换下一张
+    function autoPlay() {
+        clearInterval(timer);
+        timer = setInterval(() => {
+            index++;
+            console.log(index);
+
+            // 如何优化  => 障眼法
+            // 在第四张图片 添加 第五张图片(同第一张)   => 等第四张滚动到第五张之后,立即切换到第一张 => 从视觉方面(感觉时第四张直接切换到第一张)
+
+            // 实现此效果中可能存在问题:
+            // 1. dot(点的问题)  => 此时有五张图片,如果向显示最后一张(下标的最大值 => 4),但是只有四个点(下标最大值 3)  => 如果切换到第五张时,没有dot与其对应 -> dotList[index] 超出最大值 
+            // 怎么解决?  
+            // 第五张其实是为了模拟第一张 => 切换到第五张时,(看起来像第一张),所以可以把第一个点变为活跃状态
+
+            // 2. 什么时候需要执行第五张直接切换到第一张  
+            // animate()中存在回调函数,可以在每一次运动接收之后,添加一个判断,判断是否是第五张
+
+            // 导航切换
+            for (var j = 0; j < dotList.length; j++) {
+                dotList[j].className = "";
+            }
+            var activeIndex = index >= dotList.length ? 0 : index;  // 如果是第五张(index == 4),把第一个点变为活跃状态
+            dotList[activeIndex].className = "active";
+
+            // 图片滚动
+            animate(swiperWrapper, "left", -swiperWidth * index, "ease-out", function () {
+                // 每次运动结束之后执行
+                console.log("本次运动结束", index);
+                if (index >= dotList.length) { // index >= 4  => 如果是第五张
+                    swiperWrapper.style.left = 0;
+                    index = 0;
+                }
+
+            });
+
+        }, 3000)
+    }
+
+
+
+
+
+</script>
+
+</html>

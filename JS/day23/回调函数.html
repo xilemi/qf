@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 回调函数 ：把函数作为参数放入另一个函数中调用
+        // 作用：把函数 传入到另外一个函数   让外部的函数 可以在另外一个函数内部使用
+        // 传入没有立即执行  只有在函数内部被调用时才执行
+        // 回调函数  能够自定要执行的操作
+        function fn(callback) {
+            callback()
+        }
+        // fn(function a() {
+        //     console.log('qq');
+        // })
+        let arr = [7, 20, 30, 40]
+        function myEach(arr, fn) {
+            var newArr = []
+            for (let i = 0; i < arr.length; i++) {
+                let item = arr[i]
+                let index = i;
+                let array = arr
+                let res = fn(item, index, array)
+                // if(res){
+                //     newArr.push(res)
+                // }
+                // if(!res){
+                //     newArr=false
+                //    break;
+                // }
+                if(res){
+                    newArr=true
+                    break;
+                }
+            }
+            return newArr
+        }
+        // 封装 forEach
+        // myEach(arr, function (item, index, array) {
+        //     console.log(item, index, array);
+        // })
+        // 封装的map
+        // let res = myEach(arr, function (item) {
+        //     return item * 10
+        // })
+        // console.log(res);
+        // filter every some 
+        // let res1 = myEach(arr, function (item) {
+        //     if (item > 10) {
+        //         console.log(item);
+        //         return item
+        //     }
+        // })
+        // console.log(res1);
+        // every
+        // let res2=myEach(arr,function(item){
+        //     if(item>10){
+        //         return true 
+        //     }
+        // })
+        // console.log(res2);
+        // some
+        // let res3=myEach(arr,function(item){
+        //     if(item>10){
+        //         return true
+        //     }
+        // })
+        // console.log(res3);
+    </script>
+</body>
+
+</html>

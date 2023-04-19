@@ -29,18 +29,35 @@
         const box = document.querySelector('.box')
         const btn1 = document.querySelector('.btn1')
         const btn2 = document.querySelector('.btn2')
+        // 封装动画的原理  用end的值 减掉 初始值  定时器改变属性值 
         // obj 表示元素的类名 attr 表示属性的对象  属性名 以及结束的位置 每次运动10 
         function move(obj, attr, time) {
+            let speed=0
+            clearInterval(obj.timer)
             obj.timer = setInterval(() => {
                 for (let key in attr) {
+                    if(attr[key]-getStyle(box,key)>0){
+                        // speed=10
+                        // speed++
+                        speed=(attr[key]-getStyle(box,key))/10
+                        // 无限接近与终点  但是不能到终点
+                    }else if(attr[key]-getStyle(box,key)<0){
+                        // speed=-10
+                        // speed--
+                        speed=(attr[key]-getStyle(box,key))/10
+                        speed=Math.floor(speed)
+                    }
+                    else{
+                        speed=0
+                    }
                     console.log(attr[key]);
                     if (Math.abs(getStyle(box, key) - attr[key])<10) {
                         clearInterval(obj.timer)
                         break;
                     }
-                    obj.style[key] = getStyle(box, key) + 10 + 'px'
+                    obj.style[key] = getStyle(box, key) + speed + 'px'
                 }
-            }, time / 100)
+            }, time / 200)
         }
         function getStyle(obj, attr) {
             return parseFloat(getComputedStyle(obj)[attr])
@@ -51,7 +68,9 @@
         btn2.onclick = () => {
             move(box, { left: 0, top: 0 }, 5000)
         }
+       
     </script>
+    
 </body>
 
 </html>

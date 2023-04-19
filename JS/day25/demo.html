@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button class="btn">点击</button>
+    <!-- 测试匿名函数的this指向问题 -->
+    <script>
+        let btn=document.querySelector('.btn')
+        let arr=[1,2,3,4]
+        // 使用_this=this  来存储 this的指向
+        // btn.onclick=function(){
+        //     let _this=this
+        //     arr.forEach(function(item,index){
+        //         console.log(_this);
+        //     })
+        // }
+        // 利用箭头函数没有自己的this指向，依赖于父级的this指向
+        btn.onclick=function(){
+            arr.forEach((item,index)=>{
+                console.log(this);
+            })
+        }
+    </script>
+</body>
+</html>

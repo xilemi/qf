@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 闭包的优点 
+        // 减少全局变量 
+        // 函数外部可以使用函数内部的变量
+        // 数据暂时存储 数据持久化
+        // 闭包缺点
+        // 数据泄露问题 外部可以使用函数内部数据   不安全
+        // 占用空间 内存空间不能及时被释放
+        function fn(){
+            let a=10
+            function add(){
+                a++
+                return a
+            }
+            function reduce(){
+                a--
+                return a
+            }
+            function getA(){
+                return a
+            }
+            return {
+                add:add,
+                reduce:reduce,
+                a:a
+            }
+        }
+        let {add}=fn()
+       console.log(add());
+       console.log(add());
+       console.log(add());
+       console.log(add());
+       console.log(add());
+    </script>
+</body>
+</html>

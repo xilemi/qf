@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 减少参数的传递
+        function currying(callback) {
+            return function () {
+                let _args = [...arguments]
+                function func() {
+                    _args.push(...arguments)
+                    return func
+                }
+                func.toString = function () {
+                    return callback(..._args)
+                }
+                return func
+            }
+        }
+        function aa(reg,str){
+            return reg.test(str)
+        }
+        let obj={
+            name:'zhangsna',
+            age:19
+        }
+        function checkName(obj){
+            return obj.hasOwnProperty('name')
+        }
+        let checkname=currying(checkName)
+        console.log(checkname(obj)==true);
+        // debugger
+        // 创造函数 同时 传入一些参数
+        // 封装后 只需要定义callback的内容即可
+        let isint=currying(aa)(/^\d+$/)
+        console.log(isint('5555')==true);
+    </script>
+</body>
+</html>

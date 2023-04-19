@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .fu {
+            width: 400px;
+            height: 300px;
+            background: blue;
+            overflow: hidden;
+        }
+
+        .zi {
+            width: 20px;
+            height: 20px;
+            background: red;
+            margin-top: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- margin-top 或者padding-top 设置百分比时都是相对于父级的宽度 -->
+    <!-- 如果是参照父级的高度 ，如果父级的高度改变（适应后代元素的宽度）  相应 边距也会改变 -->
+    <div class="fu">
+        <div class="zi"></div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 利用两次时间差来进行节流 Data.now()构造函数的自身方法
+        function throttle(fn,t){
+            let start=Date.now()
+            console.log(this);
+            console.log(arguments);
+            return function(){
+                let now =Date.now()
+                if(now-start>t){
+                    fn.apply(this,arguments)
+                    start=now
+                }
+            }
+        }
+        function log(){
+            console.log(111);
+            console.log(this,arguments);
+        }
+        // 利用setTimout进行节流
+        // function throttle(fn,t){
+        //     let timer=null
+        //     return function(){
+        //         if(timer) return
+        //         timer=setTimeout(()=>{
+        //             fn.apply(this,arguments)
+        //             timer=null
+        //         },t)
+        //     }
+        // }
+        setInterval(throttle(log,1000),10)
+    </script>
+</body>
+</html>

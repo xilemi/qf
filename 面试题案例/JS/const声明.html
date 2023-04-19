@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 声明的常量不能被修改
+        const a=99
+        // 声明的数组 对象是可以改变的 允许修改 使用数组方法  但是直接重新赋值是不可以
+        const b=[1,2,3]
+        const obj={age:99}
+        // console.log(a++ );
+        b.push(11)
+        obj.name='zhangsan'
+        console.log(b);
+        b.pop()
+        console.log(b);
+        console.log(obj);
+    </script>
+</body>
+</html>

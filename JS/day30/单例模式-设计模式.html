@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 单例模式 只创建一个对象  如果存在实例化对象  不再进行创建 
+        function Pet(name,age){
+            this.name=name
+            this.age=age
+        }
+        Pet.prototype.init=function(name,age){
+            this.name=name,
+            this.age=age
+        }
+        // let instance=null
+        // function bigPet(name,age){
+        //     // 单例模式
+        //     if(!instance){
+        //      instance= new Pet(name,age)
+        //     }
+        //     else{
+        //         instance.init(name,age)
+        //     }
+        //     return instance
+        // }
+        // 闭包优化
+        let bigPet=(function(){
+            let instance=null
+            return function(name,age){
+                if(!instance){
+                    instance=new Pet(name,age)
+                }
+                else{
+                    instance.init(name,age)
+                }
+                return instance
+            }
+        })()
+        //调用bigPet() 返回一个函数  再传入参数 
+        // 优化下  让函数自调用 此时  bigPet的结果 就是返回的新函数  再传入参数即可
+        let res1=bigPet('tom',18)
+        console.log(res1);
+        let res2=bigPet('tansuqin',19)
+        console.log(res2);
+        console.log(res1===res2);
+
+    </script>
+</body>
+</html>

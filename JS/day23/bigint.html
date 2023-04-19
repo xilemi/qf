@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // js表示数字的问题
+        // 1.精度问题 超过  2^53
+        // 2.超出2^1024无法表示 infinity
+        // m**n 等价于 m^n
+        console.log(Math.pow(2, 1024));
+        // 创建 后面加n BigInt 数据类型  BigInt 判断值的大小可以  类型判断就会false 输出到页面会自定去掉n
+        let bigint = 2n
+        console.log(bigint, typeof bigint, bigint == 2);
+        // 可以进行运算  但是不能和number类型进行混合运算
+        console.log(2n ** 1024n);
+        //报错  不能混合运算
+        // console.log(2n**1024);
+        // BigInt 类型 转换 
+        console.log(Number(bigint), bigint.toString(), Boolean(bigint));
+        console.log(Boolean(0n));//假
+        console.log(2**3);
+        // 链式判断运算符 
+        let aa={
+            name:11,
+
+        }
+        let a=aa?.name
+
+
+
+
+        let obj = {
+            name: 'xjisdg',
+            fn() {
+                console.log(this.name);
+            }
+        }
+        console.log(obj.fn());
+        function makeUser() {
+            return {
+                name: "John",
+                ref: this
+            };
+        }
+        let user = makeUser();
+    </script>
+</body>
+
+</html>

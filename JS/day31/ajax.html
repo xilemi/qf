@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 封装ajax  参数  用对象的形式传入  
+        // 请求方式  url 传入的数据(字符串类型或者对象类型)
+        //  请求成功的执行
+        // let xhr=new XMLHttpRequest()
+        // xhr.open('get','./data/data.json',true)
+        // xhr.send()
+        // xhr.onreadystatechange=function(){
+        //     if(xhr.readyState==4&&xhr.status==200){
+        //         let res=JSON.parse(xhr.responseText)
+        //         console.log(res);
+        //     }
+        // }
+
+        function ajax(options){
+            let {type='get',url,data,async,success}=options
+            let xhr=new XMLHttpRequest()
+            if(typeof data=="string"){
+                url=url+"?"+data
+            }
+            else if(data instanceof Object){
+                let str='?'
+                for(let key in data){
+                    str+=`${key}=${data[key]}&`
+                }
+                str=str.slice(1,str.length-1)
+                url=url+str
+            }
+           if(type=='get'){
+            xhr.open(type,url,async)
+            xhr.send()
+           }else if(type=='post'){
+            xhr.open(type,url,async)
+            xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded")
+            xhr.send(data)
+           }
+           xhr.onreadystatechange=function(){
+            if(xhr.readyState==4){
+                if(xhr.status>=200&&xhr.status<300){
+                    let res=JSON.parse(xhr.responseText)
+                    success(res)
+                }
+            }
+           }
+        }
+        ajax({
+            type:'get',
+            url:'./data/data.json',
+            data:'zhangsan',
+            async:true,
+            success:function(res){
+                console.log(res);
+            }
+        })
+    </script>
+</body>
+</html>

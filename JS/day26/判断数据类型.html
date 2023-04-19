@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // typeof  判断值类型准确  判断引用数据类型 会返回 Object
+        // 可以使用原型对象中的
+        // instanceof 也不准确   根源都是对象
+        // Array number有自己的toString()方法 
+        // 原理是借用 object原型对象里的toString方法，使用同样的方法  同样的检测机制   返回相同类型的结果
+        // 可以使用object.prototype.toString.call()
+        let num=100
+        let str='dbfsjdbg'
+        let arr=[1,2,3,4,5]
+        let obj={
+            name:'zhangsan',
+            age:18
+        }
+        // Map 和Set 使用自身的方法  放入数据
+        let map=new Map()
+        let set=new Set()
+        let sym=Symbol('sym')
+        console.log(Object.prototype.toString.call(num));
+        console.log(Object.prototype.toString.call(str));
+        console.log(Object.prototype.toString.call(arr));
+        console.log(Object.prototype.toString.call(obj));
+        console.log(Object.prototype.toString.call(map));
+        console.log(Object.prototype.toString.call(set));
+        console.log(Object.prototype.toString.call(sym));
+    </script>
+</body>
+</html>
