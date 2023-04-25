@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 注意表单必须包含name属性 否则用户填写的信息无法被采集到。 -->
+    <form id="form" enctype="application/x-www-form-urlencoded">
+        <input type="text" name="user" id="user">
+        <input type="text" name="pwd" id="pwd">
+        <input type="submit" name="" id="submit">
+    </form>
+    <script>
+        form.onsubmit = async function (e) {
+            e.preventDefault();
+            let xhr = new XMLHttpRequest()
+            let FD = new FormData(form)
+            xhr.open('post', 'http://121.43.116.41/demo/php/login_account.php',true)
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+            console.log([...FD]);
+            let [[user,userv],[pwd,pwdv]]=[...FD]
+            xhr.send(`user=${userv}&pwd=${pwdv}`)
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    let { user, message } = JSON.parse(xhr.responseText)
+                    console.log(message);
+                    console.log(user);
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>

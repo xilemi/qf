@@ -22,7 +22,7 @@
                 </tr>
             </thead>
             <tbody>
-              
+
 
             </tbody>
         </table>
@@ -58,21 +58,20 @@
     let checkItem;
     // 总价 勾选时计算
     let xhr = new XMLHttpRequest()
-
     xhr.open('get', '../../../data/shoppingCar.json', true)
     xhr.send()
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
             let res = JSON.parse(xhr.responseText)
             console.log(222);
-            res.forEach(({ goodsName, goodsImg, goodsPrice,buyNum }) => {
+            res.forEach(({ goodsName, goodsImg, goodsPrice, buyNum }) => {
                 const tr = document.createElement('tr')
                 tr.innerHTML = `
                 <td class="checkbox"><input class="check-one check" type="checkbox" /></td>
                     <td class="goods"><img src="${goodsImg}" alt="" /><span>${goodsName}</span></td>
                     <td class="price">${goodsPrice}</td>
-                    <td class="count"><span class="reduce"></span>
-                        <input class="count-input" type="text" value="1" />
+                    <td class="count"><span class="reduce">${buyNum > 1 ? '-' : ''}</span>
+                        <input class="count-input" type="text" value="${buyNum}" />
                         <span class="add">+</span>
                     </td>
                     <td class="subtotal">${goodsPrice}</td>
@@ -82,8 +81,70 @@
             })
         }
     }
-    window.onload=function(){
-        console.log(1111);
+    catBox.onclick = function (e) {
+        let target = e.target
+        if (target.classList.contains('check-all')) {
+            console.log('全选');
+            for (let i = 0; i < checkOne.length; i++) {
+                checkOne[i].checked = checkAll.checked
+            }
+            if (checkAll.checked) {
+                // priceTotal.innerHTML = total()
+                // selectedTotal.innerHTML = totalShop()
+                total()
+                totalShop()
+            }
+            else {
+                priceTotal.innerHTML = 0
+                selectedTotal.innerHTML = 0
+            }
+        }
+        else if (target.classList.contains('check-one')) {
+            console.log('danxuan');
+            total()
+            totalShop()
+            if (checkCount() == checkOne.length) {
+                checkAll.checked = true
+            }
+            else {
+                checkAll.checked = false
+            }
+        }
+        else if (target.className == 'add') {
+            console.log('add');
+            add.call(target)
+        }
+        else if (target.className == 'reduce') {
+            console.log('reduce');
+            reduce.call(target)
+        }
+        else if (target.className == 'delete') {
+            console.log('delete');
+            target.parentElement.parentElement.remove()
+            if (checkCount() == checkOne.length) {
+                checkAll.checked = true
+            }
+            else {
+                checkAll.checked = false
+            }
+            checkCount()
+            // priceTotal.innerHTML = total()
+            // selectedTotal.innerHTML = totalShop()
+            total()
+            totalShop()
+        }
+        else if (target.id == 'deleteAll') {
+            console.log('deleteAll');
+            for (let i = checkOne.length - 1; i >= 0; i--) {
+                if (checkOne[i].checked) {
+                    checkOne[i].parentElement.parentElement.remove()
+                }
+            }
+            checkCount()
+            total()
+            totalShop()
+        }
+    }
     function total() {
         let totalPrice = 0;
         for (let i = 0; i < checkOne.length; i++) {
@@ -125,102 +186,31 @@
             alert('请勾选商品')
         }
     }
-    // 单删
-    tbody.onclick = function (e) {
-        if (e.target.className == 'delete') {
-            e.target.parentElement.parentElement.remove()
-        }
-        if (checkCount() == checkOne.length) {
-            checkAll.checked = true
-        }
-        else {
-            checkAll.checked = false
-        }
-        checkCount()
-        // priceTotal.innerHTML = total()
-        // selectedTotal.innerHTML = totalShop()
-        total()
-        totalShop()
-    }
-    // 批量商品删除 
-    deleteAll.onclick = function () {
-        for (let i = checkOne.length - 1; i >= 0; i--) {
-            if (checkOne[i].checked) {
-                checkOne[i].parentElement.parentElement.remove()
-            }
-        }
-        // 用假设法  或者使用every数组方法
-        checkCount()
-        // priceTotal.innerHTML = total()
-        // selectedTotal.innerHTML = totalShop()
-        total()
-        totalShop()
-    }
-    // 全选
-    checkAll.addEventListener('click', function () {
-        for (let i = 0; i < checkOne.length; i++) {
-            checkOne[i].checked = checkAll.checked
-        }
-        if (checkAll.checked) {
-            // priceTotal.innerHTML = total()
-            // selectedTotal.innerHTML = totalShop()
-            total()
-            totalShop()
-        }
-        else {
-            priceTotal.innerHTML = 0
-            selectedTotal.innerHTML = 0
-        }
-    })
-    // 单选
-    for (let i = 0; i < checkOne.length; i++) {
-        checkOne[i].addEventListener('click', function () {
-            // priceTotal.innerHTML = total()
-            // selectedTotal.innerHTML = totalShop()
-            total()
-            totalShop()
-            if (checkCount() == checkOne.length) {
-                checkAll.checked = true
-            }
-            else {
-                checkAll.checked = false
-            }
-        })
-    }
-    // 数量
-    for (let i = 0; i < countInput.length; i++) {
-        countInput[i].previousElementSibling.onclick = function () {
-            let nextEle = this.nextElementSibling
-            if (nextEle.value > 1) {
-                nextEle.value--
-                if (nextEle.value == 1) {
-                    nextEle.previousElementSibling.innerHTML = ''
-                }
-            }
-            else {
+    function reduce() {
+        let nextEle = this.nextElementSibling
+        if (nextEle.value > 1) {
+            nextEle.value--
+            if (nextEle.value == 1) {
                 nextEle.previousElementSibling.innerHTML = ''
-                nextEle.value = 1
             }
-            nextEle.parentElement.nextElementSibling.innerHTML = (nextEle.value * nextEle.parentElement.previousElementSibling.innerHTML).toFixed(2)
-            // priceTotal.innerHTML = total()
-            // selectedTotal.innerHTML = totalShop()
-            total()
-            totalShop()
         }
-        countInput[i].nextElementSibling.onclick = function () {
-            let preEle = this.previousElementSibling
-            preEle.value++
-            preEle.parentElement.nextElementSibling.innerHTML = (preEle.value * preEle.parentElement.previousElementSibling.innerHTML).toFixed(2)
-            // priceTotal.innerHTML = total()
-            // selectedTotal.innerHTML = totalShop()
-            total()
-            totalShop()
-            if (preEle.value > 1) {
-                preEle.previousElementSibling.innerHTML = '-'
-            }
+        else {
+            nextEle.previousElementSibling.innerHTML = ''
+            nextEle.value = 1
         }
     }
-}
+    function add() {
+        let preEle = this.previousElementSibling
+        preEle.value++
+        preEle.parentElement.nextElementSibling.innerHTML = (preEle.value * preEle.parentElement.previousElementSibling.innerHTML).toFixed(2)
+        // priceTotal.innerHTML = total()
+        // selectedTotal.innerHTML = totalShop()
+        total()
+        totalShop()
+        if (preEle.value > 1) {
+            preEle.previousElementSibling.innerHTML = '-'
+        }
+    }
 </script>
 
 </html>

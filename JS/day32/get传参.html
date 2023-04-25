@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="inp" value="">
+    <span class="msg"></span>
+    <script>
+        let msg=document.querySelector('.msg')
+        let inp=document.querySelector('#inp')
+        inp.onblur=function(){
+            let user=inp.value
+            console.log(user);
+            let xhr=new XMLHttpRequest()
+            xhr.open('get','http://121.43.116.41/demo/php/isExistUser.php?user='+user,true)
+            xhr.send()
+            xhr.onreadystatechange=function(){
+                if(xhr.readyState==4&&xhr.status==200){
+                    console.log(xhr.responseText);
+                    let {status,message}=JSON.parse(xhr.responseText)
+                    msg.innerHTML=message
+                }
+            }
+        }
+    </script>
+</body>
+</html>

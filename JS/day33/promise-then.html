@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 未完成 完成 失败  
+        // 转变  未完成=>完成    未完成=>失败  不可逆
+        // then的返回值是一个新的promise对象
+        let promise=new Promise((resovle,reject)=>{
+            console.log('woshiprmise');
+            // 延迟转态改变
+            setTimeout(function(){
+                console.log(1111);
+                if(Math.random()>0.5){
+                    resovle()
+                }
+                else{
+                    reject()
+                }
+            },3000)
+        })
+        console.log(promise);
+        promise.then(()=>{
+            console.log('成功');
+            console.log(promise);
+        },()=>{
+            console.log('失败');
+            console.log(promise);
+        })
+        // promise创建就会被立即执行  先执行同步代码 
+        // 使用then方法 提前指定状态改变后执行的函数 
+        // 状态改变后 执行对应的函数·
+    </script>
+</body>
+</html>

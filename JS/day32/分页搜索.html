@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+
+        }
+
+        body {
+            background-color: #f4f4f4;
+        }
+
+        img {
+            vertical-align: top;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        .goods {
+            width: 1226px;
+            margin: 20px auto;
+        }
+
+        .goods-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: left;
+        }
+
+        .goods-list .goods-item {
+            width: 19%;
+            height: 300px;
+            margin-right: 1.25%;
+            margin-bottom: 10px;
+            background-color: #fff;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .goods-list .goods-item img {
+            width: 144px;
+            height: 144px;
+            display: block;
+            margin: 0 auto 30px;
+        }
+
+        .goods-list .goods-item .item-title {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+            -webkit-box-orient: vertical;
+        }
+
+        .goods-list .goods-item:nth-child(5n) {
+            margin-right: 0;
+        }
+
+        .search-box {
+            width: 500px;
+            margin: auto;
+        }
+
+        .search {
+            width: 400px;
+            height: 50px;
+            margin-right: 20px;
+            vertical-align: top;
+            box-sizing: border-box;
+        }
+
+        .btn {
+            width: 80px;
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="search-box">
+        <label><input type="text" placeholder="关键词" class="search"></label><button class="btn">搜索</button>
+    </div>
+    <div class="goods">
+        <ul class="goods-list">
+
+        </ul>
+    </div>
+</body>
+<script>
+    const ul = document.querySelector('ul')
+    const search = document.querySelector('.search')
+    const btn = document.querySelector('.btn')
+    btn.onclick = function () {
+        let xhr = new XMLHttpRequest()
+        xhr.open('get', `http://121.43.116.41/demo/php/searchGoodsOrderLimit.php?wd=${search}&col=id&type=asc&page=1&size=10`, true)
+        xhr.send()
+        // sql 语句有误
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                let { list: goodsList } = JSON.parse(xhr.responseText)
+                goodsList.forEach(({ list,current, total, maxPage }) => {
+                    const li = document.createElement('li')
+                    li.classList.add('goods-item')
+                    li.innerHTML = `<img src="${goodsImg}" alt="">
+                <div class="item-title">${goodsName}</div>
+                <div class="item-price">￥${goodsPrice}</div>`
+                    ul.append(li)
+                })
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button class="add">新增</button>
+    <button class="get">获取</button>
+    <button class="edit">修改</button>
+    <button class="del">删除</button>
+    <script>
+        const add = document.querySelector('.add')
+        const get = document.querySelector('.get')
+        const del = document.querySelector('.del')
+        const edit = document.querySelector('.edit')
+        add.onclick = function () {
+            setCookie('pwd', '12312', 3600, '/')
+            setCookie('user', '喜乐', 3600, '/')
+        }
+        function setCookie(name, value, time, path = '/') {
+            expires = time || 0
+            if (expires != 0) {
+                let date = new Date()
+                console.log(date.getSeconds());
+                date.setSeconds(date.getSeconds() + expires)
+                expires = date.toUTCString()
+            }
+            document.cookie = `${name}=${encodeURIComponent(value)};expires=${expires};path=${path}`
+        }
+        function getCookie(key) {
+            let res = document.cookie.replace(/\s/g, '')
+            // 到等号为name 到;为value
+            let obj = {}
+            for (let i = 0; i < res.split(';').length; i++) {
+                let item=res.split(';')[i]
+                let name = item.split('=')[0]
+                let value = item.split('=')[1]
+                obj[name] = value
+                if (key == name) {
+                    return decodeURIComponent(obj[key])
+                }
+            }
+            return ''
+        }
+        get.onclick = function () {
+            let res = getCookie('user')
+            console.log(res);
+        }
+        // 删除修改都是利用存储做的   修改重新赋值  删除 设置过期时间-1 
+        edit.onclick = function () {
+            setCookie('user', '1212121', 1000)
+        }
+        del.onclick = function () {
+            setCookie('user', '', -1)
+        }
+    </script>
+</body>
+
+</html>

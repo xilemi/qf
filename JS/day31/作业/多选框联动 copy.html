@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #district {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <select name="" id="province">
+        <option value="">请选择省</option>
+    </select>
+    <select name="" id="city">
+        <option value="" class="city-option">请选择市/区</option>
+    </select>
+    <select name="" id="district">
+        <option value="" class="district-option">请选择区</option>
+    </select>
+    <script>
+        let xhr = new XMLHttpRequest()
+        xhr.open('get', '../data/proData.json', true)
+        xhr.send()
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                let res = JSON.parse(xhr.responseText)
+                let { list: proList } = res
+                let html = ' <option value="">请选择省</option>'
+                proList.forEach(({ city_id, name }) => {
+                    html += ` <option value="${city_id}">${name}</option>`
+                })
+                province.innerHTML = html
+                province.onchange = function () {
+                    let thisPro = this.value
+                    if (thisPro) {
+                        let { list: cityList } = proList.find(({ city_id }) => thisPro == city_id)
+                        // 选择了具体的省
+                        let html = ' <option value="">请选择市/区</option>'
+                        cityList.forEach(({ city_id, name }) => {
+                            html += ` <option value="${city_id}">${name}</option>`
+                        })
+                        city.innerHTML = html
+                        city.onchange = function () {
+                            let thisCity = this.value
+                            if (thisCity) {
+                                let { list: disList } = cityList.find(({ city_id }) => thisCity == city_id)
+                                if (disList) {
+                                    district.style.display = 'inline-block'
+                                    // 存在三级
+                                    let html = ' <option value="">请选择区</option>'
+                                    disList.forEach(({ city_id, name }) => {
+                                        html += `<option value="${city_id}">${name}</option>`
+                                    })
+                                    district.innerHTML = html
+                                }
+                                else {
+                                    // 不存在三级
+                                    district.style.display = 'none'
+                                }
+                            }
+                            else {
+                                // 选择默认
+                                district.innerHTML = '<option value="">请选择区</option>'
+                            }
+                        }
+                    }
+                    else {
+                        // 选择默认
+                        city.innerHTML = '<option value="">请选择市/区</option>'
+                        district.innerHTML = '<option value="">请选择区</option>'
+                        district.style.display = 'none'
+                    }
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>

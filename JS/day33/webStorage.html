@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="add">添加</button>
+    <button id="del">删除</button>
+    <button id="edit">修改</button>
+    <button id="get">获取</button>
+    <script>
+        console.log(window.localStorage);
+        console.log(window.sessionStorage);
+        add.onclick=function(){
+            localStorage.setItem('user','1231213')
+            localStorage.setItem('pwd','1231213')
+            localStorage.setItem('phone','1231213')
+            localStorage.setItem('email','1231213')
+            // 添加的数据是引用数据类型 先转json字符串存   
+            localStorage.setItem('arr',JSON.stringify([1,2,3,4,4,5]))
+        }
+        del.onclick=function(){
+            localStorage.removeItem('user')
+        }
+        edit.onclick=function(){
+            // 修改使用setItem重新赋值即可
+            localStorage.setItem('pwd','123123123')
+        }
+        get.onclick=function(){
+            console.log(localStorage.getItem('pwd'));
+            // 读取的时 再转回来
+            console.log(JSON.parse(localStorage.getItem('arr')));
+        }
+    </script>
+</body>
+</html>
