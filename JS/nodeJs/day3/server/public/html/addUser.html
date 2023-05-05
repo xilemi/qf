@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        label {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <label>账号：<input type="text" name="" id="account" placeholder="账号/手机号/邮箱"></label>
+    <label>密码：<input type="text" name="" id="pwd"></label>
+    <label>邮箱：<input type="text" name="" id="email"></label>
+    <label>电话：<input type="text" name="" id="phone"></label>
+
+    <label><button class="login">注册</button></label>
+    <script type="module">
+        import { ajaxPromise } from '../javascripts/ajaxPromise.js'
+        const login = document.querySelector('.login')
+        login.onclick = async function () {
+            let res = await ajaxPromise({
+                type: 'post',
+                url: "/user/add",
+                data: {
+                    id: account.value,
+                    pwd: pwd.value,
+                    email:email.value,
+                    phone:phone.value,
+                },
+                dataType: 'json'
+            })
+            console.log(res);
+        }
+    </script>
+</body>
+
+</html>

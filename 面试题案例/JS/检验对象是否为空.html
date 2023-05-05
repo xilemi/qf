@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 利用 Object.getOwnPropertyeNames() 可以获取对象的所有 可以枚举和不可以枚举的属性 不含symbol
+
+
+
+        let  obj={
+            name:'zhangsna',
+            age:18
+        }
+        // 返回一个数组   检验数组长度
+        console.log(Object.getOwnPropertyNames(obj));
+    </script>
+</body>
+</html>

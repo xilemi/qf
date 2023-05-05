@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            width: 1200px;
+            /* height: 250px; */
+            margin: 50px auto;
+            border: 1px solid;
+            border-collapse: collapse;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        td,
+        th {
+            width: 200px;
+            height: 50px;
+            border: 1px solid;
+            text-align: center;
+        }
+
+        .shadow {
+            width: 200px;
+            height: 200px;
+            background-color: antiquewhite;
+            position: fixed;
+            left: 50%;
+            top: 30%;
+            z-index: 1;
+            display: none;
+        }
+
+        .add-box {
+            width: 1200px;
+            height: 100px;
+            margin: 50px auto;
+        }
+
+        .searchGrade {
+            width: 1200px;
+            display: flex;
+            margin: 0 auto;
+            justify-content: space-between;
+        }
+
+        .searchGrade>* {
+            margin-right: 20px;
+            line-height: 30px;
+        }
+
+        .searchGrade .searchBar {
+            width: 300px;
+            height: 29px;
+            border: 1px solid #333;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .searchGrade .searchBar .searchCon {
+            border: none;
+            outline: none;
+            flex: 1;
+            padding: 0;
+            text-indent: 5px;
+        }
+
+        .searchGrade .searchBar .searchBtn {
+            width: 60px;
+            height: 30px;
+            display: block;
+            background-color: #999;
+        }
+
+        .searchGrade .orderColBar,
+        .searchGrade .orderTypeBar {
+            border: 1px dashed #999;
+            padding: 0 20px;
+        }
+
+        .searchGrade label {
+            margin-right: 10px;
+        }
+
+        .searchGrade select {
+            height: 30px;
+        }
+
+        .searchGrade input[type="reset"] {
+            height: 30px;
+            width: 45px;
+        }
+
+        .pageBox {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .table-footer {
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        header {
+            width: 1226px;
+            height: 50px;
+            background-color: antiquewhite;
+            margin: 0 auto 20px;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        header ul {
+            display: flex;
+            line-height: 50px;
+        }
+
+        header ul li {
+            padding: 0 10px;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <ul>
+            <li>中国</li>
+            <li class="register">
+                <a href="./login.html">亲，请登录</a>
+                <a href="register.html">免费注册</a>
+            </li>
+            <li class="login hide">
+                <a href="#" class="userMsg">用户信息</a>
+                <a href="#" class="exit">退出</a>
+            </li>
+            <li>手机app</li>
+        </ul>
+    </header>
+    <form class="searchGrade" onsubmit="return false">
+        <div class="searchBar">
+            <input type="text" class="searchCon">
+            <a href="javascript:;" class="searchBtn">搜索</a>
+        </div>
+        <div class="orderColBar">
+            <!-- 排序的列名 -->
+            <label>默认<input type="radio" name="col" class="orderCol" value="id" checked=""></label>
+            <label>语文<input type="radio" name="col" class="orderCol" value="chinese"></label>
+            <label>数学<input type="radio" name="col" class="orderCol" value="math"></label>
+            <label>英语<input type="radio" name="col" class="orderCol" value="english"></label>
+            <label>总分<input type="radio" name="col" class="orderCol" value="total"></label>
+        </div>
+        <div class="orderTypeBar">
+            <!-- 排序的方式 -->
+            <label>升序<input type="radio" name="type" class="orderType" value="asc" checked=""></label>
+            <label>降序<input type="radio" name="type" class="orderType" value="desc"></label>
+        </div>
+        <div class="showNumSelect">
+            <select class="showNum">
+                <option value="5" selected="">每页显示5条</option>
+                <option value="10">每页显示10条</option>
+                <option value="15">每页显示15条</option>
+                <option value="20">每页显示20条</option>
+            </select>
+        </div>
+        <input type="reset" value="重置" id="reset">
+    </form>
+    <table class="grade">
+        <thead>
+            <tr>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>班级</th>
+                <th>语文</th>
+                <th>数学</th>
+                <th>英语</th>
+                <th>总分</th>
+                <th>编辑</th>
+                <th>删除</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+        <div class="shadow">
+            <input type="text" class="id" disabled>
+            <input type="text" class="name" disabled>
+            <input type="text" class="class" disabled>
+            <input type="text" class="ch">
+            <input type="text" class="mh">
+            <input type="text" class="eh">
+            <button class="sub">确认</button>
+            <input type="reset" class="canl" value="取消">
+        </div>
+        <div class="add-box">
+            <label>姓名:<input type="text" class="addname"></label>
+            <label>班级:<input type="text" class="addclass"></label>
+            <label>语文:<input type="text" class="addch"></label>
+            <label>数学:<input type="text" class="addmh"></label>
+            <label>英语:<input type="text" class="addeh"></label>
+            <button class="addsub">确认</button>
+            <input type="reset" class="addcanl" value="取消">
+        </div>
+    </table>
+    <div class="table-footer">
+        <button class="prev">上一页</button>
+        <span class="page">页码1/2</span>
+        <button class="next">下一页</button>
+    </div>
+    <div class="add-box">
+
+    </div>
+    <script type="module">
+        import { deleteGradeById, searchGradeById, updateGradeById, searchGradeOrderLimit, addGrade,getCookie, setCookie } from '../javascripts/api.js'
+        const tbody = document.querySelector('tbody')
+        const grade = document.querySelector('.grade')
+        const idv = document.querySelector('.id')
+        const name = document.querySelector('.name')
+        const classes = document.querySelector('.class')
+        const ch = document.querySelector('.ch')
+        const mh = document.querySelector('.mh')
+        const eh = document.querySelector('.eh')
+        const canl = document.querySelector('.canl')
+        const sub = document.querySelector('.sub')
+        const addname = document.querySelector('.addname')
+        const addclasses = document.querySelector('.addclass')
+        const addch = document.querySelector('.addch')
+        const addmh = document.querySelector('.addmh')
+        const addeh = document.querySelector('.addeh')
+        const addcanl = document.querySelector('.addcanl')
+        const addsub = document.querySelector('.addsub')
+        const shadow = document.querySelector('.shadow')
+        const searchCon = document.querySelector('.searchCon')
+        const prev = document.querySelector('.prev')
+        const next = document.querySelector('.next')
+        const pages = document.querySelector('.page')
+        const btnList = document.querySelector('.btn-list')
+        const searchGrade = document.querySelector('.searchGrade')
+        const registerMsg = document.querySelector('.register')
+        const loginMsg = document.querySelector('.login')
+        const userMsg = document.querySelector('.userMsg')
+        const exit = document.querySelector('.exit')
+        let wd = ''
+        let col = 'id'
+        let type = 'asc'
+        let size = 5
+        let page = 1
+        let maxPage
+        let current
+
+
+
+
+        loadGrade()
+        // 渲染列表
+        async function loadGrade() {
+            let res = await searchGradeOrderLimit({
+                wd,
+                col,
+                type,
+                page,
+                size
+            })
+            let { status } = res
+            current = res.current
+            maxPage = res.maxPage
+            if (status) {
+                let { list: gradeList } = res
+                let html = ''
+                gradeList.forEach(({ _id, name, class: classes, chinese, math, english, total }) => {
+                    html += `
+                    <tr data-index='${_id}'>
+                        <td>${_id}</td>
+                        <td>${name}</td>
+                        <td>${classes}</td>
+                        <td>${chinese}</td>
+                        <td>${math}</td>
+                        <td>${english}</td>
+                        <td>${total}</td>
+                        <td><a href="javascript:void(0)" class='edit'>编辑</a></td> 
+                        <td><a href="#" class='delete'>删除</a></td> 
+                    </tr> 
+            `
+                })
+                tbody.innerHTML = html
+                pages.innerHTML = `${current}/${maxPage}`
+                console.log(getCookie('user'));
+                if (getCookie('user')) {
+                    userMsg.innerHTML = getCookie('user')
+                    loginMsg.classList.remove('hide')
+                    registerMsg.classList.add('hide')
+                }
+            }
+        }
+        //退出
+        exit.onclick = function () {
+            setCookie('user', '', -1)
+            registerMsg.classList.remove('hide')
+            console.log(location.reload());
+        }
+        // 事件委托
+        // 事件委托 删除和编辑
+        grade.onclick = function (e) {
+            let target = e.target
+            let parentEle = target.parentElement.parentElement
+            let id = parentEle.dataset.index
+            if (target.className == 'delete') {
+                deleteGrade(id, parentEle)
+            }
+            else if (target.className == 'edit') {
+                edit(id)
+            }
+        }
+        function deleteGrade(id, parentEle) {
+            // 调用接口前 就判断是否删除
+            // 调用接口后 实际上就已经删除了(后端不参与是否删除的验证)
+            let token=localStorage.getItem('token')
+            if (confirm('是否删除')) {
+                deleteGradeById({ _id:id },{token}).then(() => {
+                    parentEle.remove()
+                    loadGrade()
+                })
+            }
+        }
+        // 修改的时候  是获取页面上的id  如果改了此id 是不是会导致修改到其他的id？
+        function edit(id) {
+            shadow.style.display = 'block'
+            searchGradeById({ _id:id}).then(res => {
+                let { status, data } = res
+                console.log(data);
+                // 多次请求同一个 不被允许？
+                if (status) {
+                    idv.value = data._id
+                    name.value = data.name
+                    classes.value = data.class
+                    ch.value = data.chinese
+                    mh.value = data.math
+                    eh.value = data.english
+                }
+            })
+        }
+        canl.onclick = function () {
+            canlEdit()
+            shadow.style.display = 'none'
+        }
+        sub.onclick = function () {
+            subEdit()
+        }
+        async function subEdit() {
+            let res = await updateGradeById({ id: idv.value, ch: ch.value, mh: mh.value, eh: eh.value })
+            let { status, data } = res
+            if (status) {
+                shadow.style.display = 'none'
+                loadGrade()
+            }
+        }
+        function canlEdit() {
+            idv.value = ''
+            name.value = ''
+            classes.value = ''
+            ch.value = ''
+            mh.value = ''
+            eh.value = ''
+        }
+        // 搜索后原数据如何处理   将 loadGrade 中的请求地址 换成 分页请求的相同 地址  
+        // 当wd 没有的时候相当于默认的获取全部数据
+        searchGrade.addEventListener('change', function (e) {
+            let target = e.target
+            if (target.className == 'searchCon') {
+                wd = searchCon.value
+                loadGrade()
+                console.log(target.value);
+            }
+            else if (target.className == 'orderCol') {
+                col = target.value
+                loadGrade()
+                console.log(target.value);
+            } else if (target.className == 'orderType') {
+                type = target.value
+                loadGrade()
+                console.log(target.value);
+            } else if (target.className == 'showNum') {
+                size = target.value
+                loadGrade()
+                if (page > maxPage) current = maxPage
+                console.log(target.value);
+            }
+        })
+        prev.onclick = function () {
+            page = current
+            if (page <= 1) return
+            page--
+            loadGrade()
+        }
+        next.onclick = function () {
+            if (page > maxPage) return
+            console.log(11);
+            page++
+            loadGrade()
+        }
+        addcanl.onclick = function () {
+            addname.value = ''
+            addclasses.value = ''
+            addch.value = ''
+            addmh.value = ''
+            addeh.value = ''
+        }
+        addsub.onclick = async function () {
+            let res = await addGrade({
+                name: addname.value,
+                class: addclasses.value,
+                ch: addch.value,
+                mh: addmh.value,
+                eh: addeh.value
+            })
+            loadGrade()
+            addname.value = ''
+            addclasses.value = ''
+            addch.value = ''
+            addmh.value = ''
+            addeh.value = ''
+        }
+        reset.onclick = function () {
+            console.log(1);
+            loadGrade()
+        }
+    </script>
+</body>
+
+</html>

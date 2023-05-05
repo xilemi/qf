@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="../font/iconfont.css"> -->
+
+    <style>
+        .createCode {
+            user-select: none;
+        }
+
+        .right {
+            font-size: 12px;
+            color: green;
+        }
+
+        .error {
+            font-size: 12px;
+            color: red;
+        }
+
+        .check {
+            width: 100px;
+            /* margin-left: 75px; */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <p>
+            <label for="">用户名:</label>
+            <input type="text" class="user">
+            <span class="user_span"></span>
+        </p>
+        <p>
+            <label for="">密&emsp;码:</label>
+            <input type="password" class="pwd">
+            <span class="pwd_span"></span>
+        </p>
+        <p>
+            <label for="">手机号:</label>
+            <input type="text" class="phone">
+            <span class="phone_span"></span>
+        </p>
+        <p>
+            <label for="">邮&emsp;箱:</label>
+            <input type="text" class="email">
+            <span class="email_span"></span>
+        </p>
+        <p>
+            <label for="">验证码:</label>
+            <input type="text" class="checkInp">
+            <button class="check">获取验证码</button>
+        </p>
+        <p>
+            <button class="btn">提交</button>
+        </p>
+    </div>
+</body>
+<script type="module">
+    import { register, isExistEmail, isExistPhone, isExistUser } from '../javascripts/api.js'
+    // 用户名
+    // 由数字 大小写字母 _ $ 组成 , 6-12位,且不能以数字开头 (一步到位)
+
+    // 从易到难的顺序(拆分判断)
+    // a. 长度  6-12位
+    // b. 不能以数字开头
+    // c. 由数字 大小写字母 _ $ 组成  (所有的字符都必须在合法字符的范围内,只要有一个不是合法的字符 报错   => 判断字符串中是否能含有非法字符)
+
+
+    // 密码
+    // 由数字 大小写字母 _ $ 组成   6-12位
+
+    // 判断密码强度
+    // 数字,大写,小写,特殊字符  中 只出现一种   11111   aaaaaa  AAAAAA   弱
+    // 数字,大写,小写,特殊字符  中 出现2种      11111a  a1111   aAAAAA   中
+    // 数字,大写,小写,特殊字符  中 出现3种      1aA     1Aa   A1a        强
+    // 数字,大写,小写,特殊字符  中 出现4种      1aA_                     超强
+
+    // 是否存在数字  / 大写 /小写 / 特殊字符
+
+    // true + true + true + false  => 3
+
+    // 手机号
+
+
+    // 邮箱
+
+    // !! 验证码:      ["a","b","c","d","e","f","g","h"]  => 从数组中随机四个字符形成验证码 (升级版: 不允许出现重复字符) 
+
+
+
+    // 要求:
+    // 1. 失焦时对 用户名 密码 手机号 邮箱 验证码 进行验证
+    // 2. 用户名 密码 手机号 邮箱 全都正确的前提下  => 点击注册 弹出可以注册
+
+    let regUser = /^[a-zA-Z_$][\w$]{5,11}/;
+    let regPwd = /^[\w$]{6,12}$/;
+    let regPhone = /^1[3-9]\d{9}$/;
+    let regEmail = /\w{6,}@\w+\.\w/;
+    const user = document.querySelector('.user')
+    const pwd = document.querySelector('.pwd')
+    const phone = document.querySelector('.phone')
+    const email = document.querySelector('.email')
+    const userSpan = document.querySelector('.user_span')
+    const pwdSpan = document.querySelector('.pwd_span')
+    const phoneSpan = document.querySelector('.phone_span')
+    const emailSpan = document.querySelector('.email_span')
+    const check = document.querySelector('.check')
+    const btn = document.querySelector('.btn')
+    const checkInp = document.querySelector('.checkInp')
+    let flagUser = false
+    let flagPwd = false
+    let flagPhone = false
+    let flagEmail = false
+    user.addEventListener('blur', async function () {
+        if (user.value.length > 0) {
+            if (regUser.test(user.value)) {
+                userSpan.innerHTML = '√'
+                let res = await isExistUser({
+                    user: user.value
+                })
+                let { status, message } = res
+                if (status) {
+                    flagUser = true
+                    userSpan.innerHTML = message
+                } else {
+                    userSpan.innerHTML = message
+
+                }
+            }
+            else {
+                flagUser = false
+                userSpan.innerHTML = "请输入合法用户名"
+                if (user.value.length > 12 || user.value.length < 6) {
+                    userSpan.innerHTML += '长度在6-12位'
+                }
+                if (/^\d/.test(user.value)) {
+                    userSpan.innerHTML += '不能以数字开头'
+                }
+                if (/[^/w_$]/.test(user.value)) {
+                    userSpan.innerHTML += '只能包含数字,字母,下划线,$'
+                }
+            }
+        }
+    })
+    user.addEventListener('click', function () {
+        userSpan.innerHTML = ''
+    })
+    pwd.onblur = function () {
+        if (pwd.value.length > 0) {
+            if (regPwd.test(pwd.value)) {
+                flagPwd = true
+                pwdSpan.innerHTML = '√'
+                // // 校验大写
+                // /[A-Z]/.test(pwd.value)
+                // 校验小写
+                // /[a-z]/.test(pwd.value)
+                // /[_$]/.test(pwd.value)
+                // /\d/.test(pwd.value)
+                let count = /[A-Z]/.test(pwd.value) + /[a-z]/.test(pwd.value) + /[_$]/.test(pwd.value) + /\d/.test(pwd.value)
+                switch (count) {
+                    case 1:
+                        pwdSpan.innerHTML += '弱'
+                        break;
+                    case 2:
+                        pwdSpan.innerHTML += '中'
+                        break;
+                    case 3:
+                        pwdSpan.innerHTML += '强'
+                        break;
+                    case 4:
+                        pwdSpan.innerHTML += '超强'
+                        break;
+
+                }
+            }
+            else {
+                flagPwd = false
+                pwdSpan.innerHTML = '请输入正确密码'
+            }
+        }
+    }
+    pwd.onclick = function () {
+        pwdSpan.innerHTML = ''
+    }
+    phone.onblur = async function () {
+        if (phone.value.length > 0) {
+            if (regPhone.test(phone.value)) {
+                phoneSpan.innerHTML = '√'
+                let res = await isExistPhone({ phone: phone.value })
+                let { status, message } = res
+                if (status) {
+                    flagPhone = true
+                    phoneSpan.innerHTML = message
+                } else {
+                    phoneSpan.innerHTML = message
+
+                }
+            }
+        }
+        else {
+            flagPhone = false
+            phoneSpan.innerHTML = "请正确手机号"
+        }
+    }
+    phone.onclick = function () {
+        phoneSpan.innerHTML = ''
+    }
+    email.onblur = function () {
+        if (email.value.length > 0) {
+            if (regEmail.test(email.value)) {
+                emailSpan.innerHTML = '√'
+                isExistEmail({ email: email.value }).then(res => {
+                    let { status, message } = res
+                    if (status) {
+                        flagEmail = true
+                        emailSpan.innerHTML = message
+                    } else {
+                        emailSpan.innerHTML = message
+
+                    }
+                })
+            }
+        }
+    }
+    email.onclick = function () {
+        emailSpan.innerHTML = ''
+    }
+    check.onclick = function () {
+        check.innerHTML = randomCode(4)
+    }
+    btn.onclick = async function () {
+        if (flagUser && flagPwd && flagPhone && flagEmail && check.innerHTML == checkInp.value) {
+            let userv = user.value
+            let pwdv = pwd.value
+            let phonev = phone.value
+            let emailv = email.value
+            let res = await register({
+                user: userv,
+                pwd: pwdv,
+                phone: phonev,
+                email: emailv
+            })
+            let { status, message } = res
+            if (status) {
+                window.open('./login.html')
+                console.log(message);
+            }
+        }
+        else {
+            alert('请检查输入的内容')
+        }
+    }
+    function randomCode(length) {
+        //限定传参 如果没有传入实参 默认为4
+        // 必须传入大于0的整数
+        length = length || 4
+        if (length < 0 || length % 1 != 0) {
+            // 抛出错误 
+            throw new Error('请传入大于0的整数')
+        }
+        let str = []
+        let arr = ["a", "b", "c", "d", "e", "f", "g", "h", 1, 2, 3, 4, 5, 6, 7, 8, 9]
+        while (str.length < length) {
+            let item = arr[Math.floor(Math.random() * arr.length)]
+            if (str.indexOf(item) == -1) {
+                str.push(item)
+            }
+        }
+        return str.join('')
+    }
+</script>
+
+</html>
