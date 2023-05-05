@@ -34,7 +34,7 @@
             background-color: antiquewhite;
             position: fixed;
             left: 50%;
-            top: 30%;
+            top: 50%;
             z-index: 1;
             display: none;
         }
@@ -108,10 +108,43 @@
             width: 300px;
             margin: 0 auto;
         }
+        header{
+            width: 1226px;
+            height: 50px;
+            background-color: antiquewhite;
+            margin: 0 auto 20px;
+        }
+        ul,li{
+            list-style: none;
+        }
+        header ul{
+            display: flex;
+            line-height: 50px;
+        }
+        header ul li{
+            padding: 0 10px;
+        }
+        .hide{
+            display: none;
+        }
     </style>
 </head>
 
 <body>
+    <header>
+        <ul>
+            <li>中国</li>
+            <li class="register">
+                <a href="./login.html">亲，请登录</a>
+                <a href="#">免费注册</a>
+            </li>
+            <li class="login hide">
+                <a href="#">用户信息</a>
+                <a href="#">退出</a>
+            </li>
+            <li>手机app</li>
+        </ul>
+    </header>
     <form class="searchGrade" onsubmit="return false">
         <div class="searchBar">
             <input type="text" class="searchCon">

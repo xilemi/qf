@@ -108,10 +108,49 @@
             width: 300px;
             margin: 0 auto;
         }
+
+        header {
+            width: 1226px;
+            height: 50px;
+            background-color: antiquewhite;
+            margin: 0 auto 20px;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        header ul {
+            display: flex;
+            line-height: 50px;
+        }
+
+        header ul li {
+            padding: 0 10px;
+        }
+
+        .hide {
+            display: none;
+        }
     </style>
 </head>
 
 <body>
+    <header>
+        <ul>
+            <li>中国</li>
+            <li class="register">
+                <a href="./login.html">亲，请登录</a>
+                <a href="register.html">免费注册</a>
+            </li>
+            <li class="login hide">
+                <a href="#" class="userMsg">用户信息</a>
+                <a href="#" class="exit">退出</a>
+            </li>
+            <li>手机app</li>
+        </ul>
+    </header>
     <form class="searchGrade" onsubmit="return false">
         <div class="searchBar">
             <input type="text" class="searchCon">
@@ -185,7 +224,8 @@
 
     </div>
     <script type="module">
-        import { ajax } from './ajax.js'
+        // import { ajaxPromise } from './ajaxPromise.js'
+        import { deleteGradeById, searchGradeById, updateGradeById, searchGradeOrderLimit, addGrade, getCookie, setCookie } from './api.js'
         const tbody = document.querySelector('tbody')
         const grade = document.querySelector('.grade')
         const idv = document.querySelector('.id')
@@ -204,11 +244,16 @@
         const addcanl = document.querySelector('.addcanl')
         const addsub = document.querySelector('.addsub')
         const shadow = document.querySelector('.shadow')
-        let searchCon = document.querySelector('.searchCon')
+        const searchCon = document.querySelector('.searchCon')
         const prev = document.querySelector('.prev')
         const next = document.querySelector('.next')
         const pages = document.querySelector('.page')
         const btnList = document.querySelector('.btn-list')
+        const searchGrade = document.querySelector('.searchGrade')
+        const registerMsg = document.querySelector('.register')
+        const loginMsg = document.querySelector('.login')
+        const userMsg = document.querySelector('.userMsg')
+        const exit = document.querySelector('.exit')
         let wd = ''
         let col = 'id'
         let type = 'asc'
@@ -216,11 +261,59 @@
         let page = 1
         let maxPage
         let current
-        loadGrade()
-        // 事件委托
-        let searchGrade = document.querySelector('.searchGrade')
 
+
+
+
+        loadGrade()
+        // 渲染列表
+        async function loadGrade() {
+            let res = await searchGradeOrderLimit({
+                wd,
+                col,
+                type,
+                page,
+                size
+            })
+            let { status } = res
+            current = res.current
+            maxPage = res.maxPage
+            if (status) {
+                let { list: gradeList } = res
+                let html = ''
+                gradeList.forEach(({ id, name, class: classes, chinese, math, english, total }) => {
+                    html += `
+                    <tr data-index='${id}'>
+                        <td>${id}</td>
+                        <td>${name}</td>
+                        <td>${classes}</td>
+                        <td>${chinese}</td>
+                        <td>${math}</td>
+                        <td>${english}</td>
+                        <td>${total}</td>
+                        <td><a href="javascript:void(0)" class='edit'>编辑</a></td> 
+                        <td><a href="#" class='delete'>删除</a></td> 
+                    </tr> 
+            `
+                })
+                tbody.innerHTML = html
+                pages.innerHTML = `${current}/${maxPage}`
+                console.log(getCookie('user'));
+                if (getCookie('user')) {
+                    userMsg.innerHTML = getCookie('user')
+                    loginMsg.classList.remove('hide')
+                    registerMsg.classList.add('hide')
+                }
+            }
+        }
+        //退出
+        exit.onclick = function () {
+            setCookie('user', '', -1)
+            registerMsg.classList.remove('hide')
+            console.log(location.reload());
+        }
         // 事件委托
+        // 事件委托 删除和编辑
         grade.onclick = function (e) {
             let target = e.target
             let parentEle = target.parentElement.parentElement
@@ -236,37 +329,25 @@
             // 调用接口前 就判断是否删除
             // 调用接口后 实际上就已经删除了(后端不参与是否删除的验证)
             if (confirm('是否删除')) {
-                ajax({
-                    type: 'get',
-                    url: 'http://121.43.116.41/demo/php/deleteGradeById.php',
-                    data: {
-                        id
-                    },
-                    success(res) {
-                        parentEle.remove()
-                        loadGrade()
-                    }
+                deleteGradeById({ id }).then(() => {
+                    parentEle.remove()
+                    loadGrade()
                 })
             }
         }
         // 修改的时候  是获取页面上的id  如果改了此id 是不是会导致修改到其他的id？
         function edit(id) {
             shadow.style.display = 'block'
-            ajax({
-                type: 'get',
-                url: 'http://121.43.116.41/demo/php/searchGradeById.php',
-                data: `id=${id}`,
-                success(res) {
-                    let { status, data } = res
-                    // 多次请求同一个 不被允许？
-                    if (status) {
-                        idv.value = data.id
-                        name.value = data.name
-                        classes.value = data.class
-                        ch.value = data.chinese
-                        mh.value = data.math
-                        eh.value = data.english
-                    }
+            searchGradeById({ id }).then(res => {
+                let { status, data } = res
+                // 多次请求同一个 不被允许？
+                if (status) {
+                    idv.value = data.id
+                    name.value = data.name
+                    classes.value = data.class
+                    ch.value = data.chinese
+                    mh.value = data.math
+                    eh.value = data.english
                 }
             })
         }
@@ -277,25 +358,13 @@
         sub.onclick = function () {
             subEdit()
         }
-        function subEdit() {
-            ajax({
-                type: "post",
-                url: "http://121.43.116.41/demo/php/updateGradeById.php",
-                data: {
-                    id: idv.value,
-                    ch: ch.value,
-                    mh: mh.value,
-                    eh: eh.value
-                },
-                success(res) {
-                    let { status, data } = res
-                    // 多次请求同一个 不被允许？
-                    if (status) {
-                        shadow.style.display = 'none'
-                        loadGrade()
-                    }
-                }
-            })
+        async function subEdit() {
+            let res = await updateGradeById({ id: idv.value, ch: ch.value, mh: mh.value, eh: eh.value })
+            let { status, data } = res
+            if (status) {
+                shadow.style.display = 'none'
+                loadGrade()
+            }
         }
         function canlEdit() {
             idv.value = ''
@@ -304,46 +373,6 @@
             ch.value = ''
             mh.value = ''
             eh.value = ''
-        }
-        function loadGrade() {
-            ajax({
-                type: 'get',
-                url: 'http://121.43.116.41/demo/php/searchGradeOrderLimit.php',
-                data: {
-                    wd,
-                    col,
-                    type,
-                    page,
-                    size
-                },
-                success(res) {
-                    let { status } = res
-                    current = res.current
-                    maxPage = res.maxPage
-                    console.log(current, maxPage);
-                    if (status) {
-                        let { list: gradeList } = res
-                        let html = ''
-                        gradeList.forEach(({ id, name, class: classes, chinese, math, english, total }) => {
-                            html += `
-                    <tr data-index='${id}'>
-                        <td>${id}</td>
-                        <td>${name}</td>
-                        <td>${classes}</td>
-                        <td>${chinese}</td>
-                        <td>${math}</td>
-                        <td>${english}</td>
-                        <td>${total}</td>
-                        <td><a href="javascript:void(0)" class='edit'>编辑</a></td> 
-                        <td><a href="#" class='delete'>删除</a></td> 
-                    </tr> 
-            `
-                        })
-                        tbody.innerHTML = html
-                        pages.innerHTML = `${current}/${maxPage}`
-                    }
-                }
-            })
         }
         // 搜索后原数据如何处理   将 loadGrade 中的请求地址 换成 分页请求的相同 地址  
         // 当wd 没有的时候相当于默认的获取全部数据
@@ -388,26 +417,24 @@
             addmh.value = ''
             addeh.value = ''
         }
-        addsub.onclick = function () {
-            ajax({
-                type: 'get',
-                url: 'http://121.43.116.41/demo/php/addGrade.php',
-                data: {
-                    name: addname.value,
-                    class: addclasses.value,
-                    ch: addch.value,
-                    mh: addmh.value,
-                    eh: addeh.value
-                },
-                success(res) {
-                    loadGrade()
-                    addname.value = ''
-                    addclasses.value = ''
-                    addch.value = ''
-                    addmh.value = ''
-                    addeh.value = ''
-                }
+        addsub.onclick = async function () {
+            let res = await addGrade({
+                name: addname.value,
+                class: addclasses.value,
+                ch: addch.value,
+                mh: addmh.value,
+                eh: addeh.value
             })
+            loadGrade()
+            addname.value = ''
+            addclasses.value = ''
+            addch.value = ''
+            addmh.value = ''
+            addeh.value = ''
+        }
+        reset.onclick = function () {
+            console.log(1);
+            loadGrade()
         }
     </script>
 </body>

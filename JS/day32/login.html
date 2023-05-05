@@ -26,19 +26,18 @@
 
     <label><button class="login">登录</button></label>
     <script type="module">
-        import { login as loginApi } from './api.js'
+        import { login as loginApi,setCookie } from './api.js'
         const login = document.querySelector('.login')
-        login.onclick = function () {
-            loginApi({
+        login.onclick =async function () {
+            let res=await loginApi({
                 account: account.value,
                 pwd: pwd.value
-            }).then(res => {
-                let { status, message, user } = res
-                if (status) {
-                    window.open('./index.html')
-                }
             })
-
+            let { status, message, user } = res
+                if (status) {
+                    window.open('./成绩页.html')
+                    setCookie('user',user,10000,'/')
+                }
         }
     </script>
 </body>

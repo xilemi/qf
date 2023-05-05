@@ -57,60 +57,32 @@
     const section = document.querySelector('section')
 
     async function search(key) {
-        fetch(`http://iwenwiki.com:3000/search?keywords=${key}`)
-            .then(res => {
-                if (res.status == 200) {
-                    hotSearch.remove()
-                    return res.json()
-                } else {
-                    throw new Error('请求错误')
-                }
-            })
-            .then(data => {
-                //用解构赋值试试
-                let {code,result:{songs}}=data
-                document.querySelector('.music').remove()
-                const music = document.createElement('div')
-                music.className = 'music'
-                for (let song of songs) {
-                    const musicItem = document.createElement('div')
-                    musicItem.className = 'music-item'
-                    musicItem.innerHTML = `
-                <a href="#" class="item">
-                        <div class="music-name">
-                            <p>${song.name}</p>
-                            <p class="iconfont icon-erji">${song.artists[0].name} - ${song.album.name}</p>
-                        </div>
-                        <span class="iconfont icon-bofang"></span>
-                    </a>
-                `
-                    music.append(musicItem)
-                }
-                section.append(music)
-            })
-            .catch(err => {
-                console.log(err);
-            })
+        let res = await fetch(`http://iwenwiki.com:3000/search?keywords=${key}`)
+        hotSearch.remove()
+        let data = await res.json()
+        let { code, result: { songs } } = data
+        document.querySelector('.music').remove()
+        const music = document.createElement('div')
+        music.className = 'music'
+        for (let song of songs) {
+            const musicItem = document.createElement('div') 
+            musicItem.className = 'music-item'
+            musicItem.innerHTML = `
+            <a href="#" class="item">
+                    <div class="music-name">
+                        <p>${song.name}</p>
+                        <p class="iconfont icon-erji">${song.artists[0].name} - ${song.album.name}</p>
+                    </div>
+                    <span class="iconfont icon-bofang"></span>
+                </a>
+            `
+            music.append(musicItem)
+        }
+        section.append(music)
     }
     inp.onchange = () => {
         search(inp.value)
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     // async function search(key) {

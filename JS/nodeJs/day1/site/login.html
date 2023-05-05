@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        label {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <label>账号：<input type="text" name="" id="account" placeholder="账号/手机号/邮箱"></label>
+
+    <label>密码：<input type="password" name="" id="pwd"></label>
+
+    <label><button class="login">登录</button></label>
+    <script type="module">
+        import { login as loginApi,setCookie } from './js/api.js'
+        const login = document.querySelector('.login')
+        login.onclick =async function () {
+            let res=await loginApi({
+                account: account.value,
+                pwd: pwd.value
+            })
+            let { status, message, user } = res
+                if (status) {
+                    window.open('./index.html')
+                    setCookie('user',user,10000,'/')
+                }
+        }
+    </script>
+</body>
+
+</html>

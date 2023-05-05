@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let obj = {
+            name: 'xile',
+            age: null,
+            add: undefined,
+            obj1: {
+                hh: '1',
+                hhh: null,
+                hhhhh: undefined
+            }
+        }
+        let arr = [1, 2, 3, 4]
+        // Object.keys 用于获取数组对象的key值 返回一个数组
+        console.log(Object.keys(obj));
+        console.log(Object.keys(arr));
+        let newObj = {}
+        Object.keys(obj).forEach(item => {
+            if (obj[item]) {
+                newObj[item] = obj[item]
+            }
+        })
+        console.log(newObj);
+        function remove(obj) {
+            let newObj = {}
+            Object.keys(obj).forEach(item => {
+                if (Object.prototype.toString.call(obj[item]) == '[object Object]') {
+                    newObj[item] = remove(obj[item])//等价于 newObj={hh:'1'}
+                } else {
+                    if (obj[item]) {
+                        newObj[item] = obj[item]
+                    }
+                }
+            })
+            return newObj
+        }
+        // debugger 
+        console.log(remove(obj));
+        // 数组对象去重
+        let res = [
+            { name: 12 },
+            { name: 12 },
+            { name: 12 },
+            { name: 12 },
+        ]
+        // 数组内的对象中有重复的去重？
+
+    </script>
+</body>
+
+</html>

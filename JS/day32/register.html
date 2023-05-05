@@ -117,22 +117,21 @@
     let flagPwd = false
     let flagPhone = false
     let flagEmail = false
-    user.addEventListener('blur', function () {
+    user.addEventListener('blur', async function () {
         if (user.value.length > 0) {
             if (regUser.test(user.value)) {
                 userSpan.innerHTML = '√'
-                isExistUser({
-                    user:user.value
-                }).then(res=>{
-                    let { status, message } = res
-                        if (status) {
-                            flagUser = true
-                            userSpan.innerHTML = message
-                        } else {
-                            userSpan.innerHTML = message
-
-                        }
+                let res = await isExistUser({
+                    user: user.value
                 })
+                let { status, message } = res
+                if (status) {
+                    flagUser = true
+                    userSpan.innerHTML = message
+                } else {
+                    userSpan.innerHTML = message
+
+                }
             }
             else {
                 flagUser = false
@@ -189,20 +188,19 @@
     pwd.onclick = function () {
         pwdSpan.innerHTML = ''
     }
-    phone.onblur = function () {
+    phone.onblur = async function () {
         if (phone.value.length > 0) {
             if (regPhone.test(phone.value)) {
                 phoneSpan.innerHTML = '√'
-                isExistPhone({ phone: phone.value }).then(res => {
-                    let { status, message } = res
-                    if (status) {
-                        flagPhone = true
-                        phoneSpan.innerHTML = message
-                    } else {
-                        phoneSpan.innerHTML = message
+                let res = await isExistPhone({ phone: phone.value })
+                let { status, message } = res
+                if (status) {
+                    flagPhone = true
+                    phoneSpan.innerHTML = message
+                } else {
+                    phoneSpan.innerHTML = message
 
-                    }
-                })
+                }
             }
         }
         else {
@@ -236,24 +234,23 @@
     check.onclick = function () {
         check.innerHTML = randomCode(4)
     }
-    btn.onclick = function () {
+    btn.onclick = async function () {
         if (flagUser && flagPwd && flagPhone && flagEmail && check.innerHTML == checkInp.value) {
             let userv = user.value
             let pwdv = pwd.value
             let phonev = phone.value
             let emailv = email.value
-            register({
+            let res = await register({
                 user: userv,
                 pwd: pwdv,
                 phone: phonev,
                 email: emailv
-            }).then(res => {
-                let { status, message } = res
-                if (status) {
-                    window.open('./login.html')
-                    console.log(message);
-                }
             })
+            let { status, message } = res
+            if (status) {
+                window.open('./login.html')
+                console.log(message);
+            }
         }
         else {
             alert('请检查输入的内容')

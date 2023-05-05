@@ -24,20 +24,21 @@ export function ajaxPromise(options) {
             xhr.send(data)
         }
         xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4) {
-                if (xhr.status >= 200 && xhr.status < 300) {
-                    let res = xhr.responseText
-                    if (dataType == 'json') {
-                        res = JSON.parse(xhr.responseText)
+            try {
+                if (xhr.readyState == 4) {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        let res = xhr.responseText
+                        if (dataType == 'json') {
+                            res = JSON.parse(xhr.responseText)
+                        }
+                        // 要对数据进行处理
+                        return reslove(res)
                     }
-                    // 要对数据进行处理
-                    return reslove(res)
-                }
-                else {
-                    throw new Error('请求错误')
                 }
             }
-
+            catch {
+                return reject()
+            }
         }
 
     })

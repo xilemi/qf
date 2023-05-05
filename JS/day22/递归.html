@@ -23,7 +23,7 @@
         // debugger
         console.log( fn(9, 0));
         // 深拷贝
-        let arr=[1,2,3,4,5,6,[1,2,3],7,8]
+        let arr=[1,2,3,4,5,6,[1,2,3,[4,5,6]],7,8]
         function deepCopy(arr){
             let newArr=[]
             for(let item of arr){
