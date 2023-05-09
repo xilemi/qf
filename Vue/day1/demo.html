@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h2>{{msg}}</h2>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        let app=new Vue({
+            el:'#app',
+            data() {
+                return {
+                    msg:'hello vue'
+                }
+            },
+        })
+        console.log(app);
+        console.log(app.$data);
+        console.log(app.$data.msg);
+        console.log(app.msg);
+    </script>
+</body>
+</html>

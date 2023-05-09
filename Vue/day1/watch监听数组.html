@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+
+</style>
+<body>
+    <div id="app">
+        <h2 v-for="item in list">{{item}}</h2>
+        <button @click="addArr()">添加</button>
+    </div>
+
+    <script>
+        const app = new Vue({
+            data() {
+                return{
+                    list:[1,2,4,353462,42,573]
+                }
+            },
+            methods: {
+                addArr(){
+                   this.list.push(Math.floor(Math.random()*10))
+                }
+            },
+            computed:{
+                // 将数组深拷贝一封 监听新的数组
+                newList(){
+                   return this.list.slice()
+                }
+            },
+            watch:{
+                // 新旧数组一样
+                newList(newVal,oldVal){
+                    console.log('change');
+                    console.log(newVal);
+                    console.log(oldVal);
+                }
+            }
+        });
+       app.$mount('#app')
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+    #app {
+        height: 500px;
+        overflow-y: scroll
+    }
+</style>
+
+<body>
+    <!-- passive 
+     这里一般用在滚动监听，@scoll，@touchmove 。因为滚动监听过程中，移动每个像素都会产生一次事件，每次都使用内核线程查询prevent会使滑动卡顿。我们通过passive将内核线程查询跳过，可以大大提升滑动的流畅度。
+    -->
+    <div id="app" @scroll.passive="bb($event)" ref="app">
+        全部<input type="text" name="" id="" @keydown="aa($event)">
+        <!-- 组合按键 -->
+        系统修饰键Ctrl<input type="text" name="" id="" @keydown.ctrl="aa($event)">
+        系统修饰键shift<input type="text" name="" id="" @keydown.shift="aa($event)">系统修饰键shift<input type="text" name=""
+            id="" @keydown.shift="aa($event)">系统修饰键shift<input type="text" name="" id=""@keydown.shift="aa($event)">
+            系统修饰键shift<input type="text" name="" id=""@keydown.229.shift="aa($event)">
+
+    </div>
+
+    <script>
+        // 指定按键才能被触发 enter pageup 
+        // 系统修饰键.Ctrl .shift .meta .alt 
+
+
+
+        const app = new Vue({
+            data() {
+                return {
+
+                }
+            },
+            methods: {
+                aa($event) {
+                    console.log($event);
+                    console.log($event.code);
+                },
+                bb($event) {
+                    console.log($event);
+                }
+
+            },
+        });
+        app.$mount('#app')
+    </script>
+</body>
+
+</html>

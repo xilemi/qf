@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+
+</style>
+<body>
+    <div id="app">
+        <!-- <input type="text" v-model.lazy="msg">
+        <p>{{msg}}</p> -->
+        <!-- <input type="text" v-model.number="msg">
+        <p>{{msg}}</p>
+        <p>{{typeof msg}}</p> -->
+        <input type="text" v-model.trim="msg">
+        <p>{{msg}}</p>
+    </div>
+
+    <script>
+        // v-model的修饰符  
+        // .lazy修饰符  让input框的input事件转化为change事件 每次输入完后  失焦 或者回车才同步改变
+        // .number 将获取到的值 转为number类型 并且非数子 不能被存储
+        // .trim 去掉空格
+        const app = new Vue({
+            data() {
+                return{
+                    msg:'123'
+                }
+            },
+            methods: {
+
+            },
+        });
+       app.$mount('#app')
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+   <style>
+    .two{
+        width: 200px;
+        height: 200px;
+        background-color: aliceblue;
+    }
+   </style>
+<body>
+    <div id="app">
+        <div v-bind:class="classStr">
+            v-bind
+        </div>
+        <!-- 简写为:,让html标签的属性动态绑定 -->
+        <div :class="classStr">
+            v-bind
+        </div>
+        <!-- 直接解析对象时 不能使用 简写 -->
+        <div v-bind="obj">
+            v-bind
+        </div>
+        <!-- 绑定的属性也可以是动态的 使用[]包裹-->
+        <div :[attr[0]]="classStr">111</div>
+    </div>
+    <script>
+        const app = new Vue({
+            data() {
+                return{
+                    idStr:'one',
+                    classStr:"two",
+                    obj:{
+                        id:'one',
+                        class:'two',
+                        style:"color: yellow;",
+                    },
+                    attr:['class','id','name']
+                }
+            },
+            methods: {
+
+            },
+        });
+       app.$mount('#app')
+    </script>
+</body>
+
+</html>

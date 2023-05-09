@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+
+</style>
+<body>
+    <div id="app">
+        <h2>{{obj.name}}</h2>
+        <h2>{{obj.age}}</h2>
+        <button @click="addObj()">添加</button>
+        <input type="text" name="" id="" v-model="obj.name">
+        <input type="text" name="" id="" v-model="obj.age">
+    </div>
+
+    <script>
+        // 深度监听 添加deep属性为true 但是有一个新的问题 对象的新值和旧值会相同。
+        // 可以使用计算属性深复制一次，然后监听深复制后的值
+        const app = new Vue({
+            data() {
+                return{
+                    obj:{
+                        name:'xile',
+                        age:19
+                    }  
+                }
+            },
+            methods: {
+                
+                addObj(){
+                    // 这种方式不会被vue检测到
+                    // this.obj.sex='男'
+                    // 可以被监听
+                    this.$set(this.obj,'sex','nan')
+                    console.log(this.obj);
+                }
+            },
+            computed:{
+                objCopy(){
+                    return JSON.parse(JSON.stringify(this.obj))
+                }
+            },
+            watch:{
+                // 没有开启深度监听，不能识别到对象内部的修改
+                // 开启后改变就触发 
+                // 但是新旧值还是不能区别
+                obj:{
+                    handler(newVal,oldVal){
+                        console.log('改变了',newVal,oldVal);
+                    },
+                    deep:true
+                },
+                // 新旧值的问题 可以通过计算属性进行深复制一份 监听深复制后的值
+               /*  objCopy(newVal,oldVal){
+                    console.log('change');
+                    console.log(newVal);
+                    console.log(oldVal);
+                } */
+                // 单独监听对象中的某个属性 也可以有新旧值
+                'obj.name':function(newVal,oldVal){
+                    console.log('chnege');
+                    console.log(newVal);
+                    console.log(oldVal);
+                }
+            }
+        });
+       app.$mount('#app')
+    </script>
+</body>
+
+</html>

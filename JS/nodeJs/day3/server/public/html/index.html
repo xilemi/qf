@@ -224,7 +224,7 @@
 
     </div>
     <script type="module">
-        import { deleteGradeById, searchGradeById, updateGradeById, searchGradeOrderLimit, addGrade,getCookie, setCookie } from '../javascripts/api.js'
+        import { deleteGradeById, searchGradeById, updateGradeById, searchGradeOrderLimit, addGrade, getCookie, setCookie } from '../javascripts/api.js'
         const tbody = document.querySelector('tbody')
         const grade = document.querySelector('.grade')
         const idv = document.querySelector('.id')
@@ -260,7 +260,7 @@
         let page = 1
         let maxPage
         let current
-
+        let token = localStorage.getItem('token')
 
 
 
@@ -327,18 +327,25 @@
         function deleteGrade(id, parentEle) {
             // 调用接口前 就判断是否删除
             // 调用接口后 实际上就已经删除了(后端不参与是否删除的验证)
-            let token=localStorage.getItem('token')
+            // 在前端验证token
+            let token = localStorage.getItem('token')
             if (confirm('是否删除')) {
-                deleteGradeById({ _id:id },{token}).then(() => {
-                    parentEle.remove()
-                    loadGrade()
+                deleteGradeById({ _id: id }, { token }).then((res) => {
+                    let {status,message}=res
+                    if(status){
+                        parentEle.remove()
+                        loadGrade()
+                    }
+                    else{
+                        alert(message)
+                    }
                 })
             }
         }
         // 修改的时候  是获取页面上的id  如果改了此id 是不是会导致修改到其他的id？
         function edit(id) {
             shadow.style.display = 'block'
-            searchGradeById({ _id:id}).then(res => {
+            searchGradeById({ _id: id }).then(res => {
                 let { status, data } = res
                 console.log(data);
                 // 多次请求同一个 不被允许？
@@ -360,11 +367,15 @@
             subEdit()
         }
         async function subEdit() {
-            let res = await updateGradeById({ id: idv.value, ch: ch.value, mh: mh.value, eh: eh.value })
-            let { status, data } = res
+            let token = localStorage.getItem('token')
+            let res = await updateGradeById({ _id: idv.value, chinese: ch.value, math: mh.value, english: eh.value },{token})
+            let { status, data, message } = res
             if (status) {
                 shadow.style.display = 'none'
                 loadGrade()
+            }
+            else{
+                alert(message)
             }
         }
         function canlEdit() {

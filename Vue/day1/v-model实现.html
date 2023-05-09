@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+
+</style>
+<body>
+    <div id="app">
+        <!-- 实现原理 -->
+        <input type="text" name="" id="" :value="msg" @input='hanlder($event)'>
+        {{msg}}
+    </div>
+    
+    <script>
+        // 获取到input的value值 监听input事件  将value动态绑定 将获取到的值 同时又通过事件修改data中的msg
+        const app = new Vue({
+            data() {
+                return{
+                    msg:'hello'
+                }
+            },
+            methods: {
+                hanlder(event){
+                    this.msg=event.target.value
+                }
+            },
+        });
+       app.$mount('#app')
+    </script>
+</body>
+
+</html>

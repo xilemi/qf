@@ -9,7 +9,8 @@ export const deleteGradeById = (data,headers) => ajaxPromise({
     type: 'get',
     url: 'http://localhost:3000/score/del',
     data,
-    headers
+    headers,
+    dataType:'json'
 })
 
 /* export const searchGradeById = data => ajaxPromise({
@@ -24,10 +25,17 @@ export const searchGradeById = data => ajaxPromise({
     data,
     dataType: 'json'
 })
-export const updateGradeById = data => ajaxPromise({
+/* export const updateGradeById = data => ajaxPromise({
     type: 'post',
     url: baseURL + '/updateGradeById.php',
     data,
+    dataType: 'json'
+}) */
+export const updateGradeById = (data,headers) => ajaxPromise({
+    type: 'post',
+    url:"http://localhost:3000/score/updateGradeById",
+    data,
+    headers,
     dataType: 'json'
 })
 /* export const searchGradeOrderLimit = data => ajaxPromise({

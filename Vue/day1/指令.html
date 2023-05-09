@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 指令内也是放js表达式 -->
+       <div v-html="html">hhh</div>
+       <div v-html="message">hhh</div>
+       <div v-html="a">hhh</div>
+       <div v-html="b">hhh</div>
+       <div v-html="say()">hhh</div>
+       <div v-html="count>2? '真的':'假的'">hhh</div>
+       <div v-html="arr.map(item=>item*10)">hhh</div>
+       <div v-html="obj.name">hhh</div>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        const app=new Vue({
+            data() {
+                return {
+                    html:`<div>11111</div>`,
+                    message:'string',
+                    count:10,
+                    a:null,
+                    b:undefined,
+                    arr:[12,3,4,5],
+                    obj:{name:'xile',age:18}
+                }
+            },
+            methods: {
+                say(){
+                    return 'hello vue'
+                }
+            },
+        })
+        app.$mount('#app')
+    </script>
+</body>
+</html>

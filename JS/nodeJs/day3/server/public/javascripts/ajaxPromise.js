@@ -26,12 +26,12 @@ export function ajaxPromise(options) {
         }
         if (type == 'post') {
             xhr.open(type, url, async)
-            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
             if (Object.prototype.toString.call(headers) == '[object Object]') {
                 for (let key in headers) {
                    xhr.setRequestHeader(key,headers[key])
                }
             }
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
             xhr.send(data)
         }
         xhr.onreadystatechange = function () {

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+
+</style>
+
+<body>
+    <div id="app">
+        <p>{{fn()}}</p>
+        <p>{{fn2}}</p>
+        <p>{{count}}</p>
+        <button @click="count++;a++">点击</button>
+    </div>
+
+    <script>
+        // methods computed 区别 
+        // 每次虚拟dom更新  methods的方法都要重新执行 不管数据有没有与之有关
+        // 计算属性可以解决这个问题 初始化时执行一次  后续在有关的数据改变才会执行
+        // 没有发生改变使用缓存的值
+        const app = new Vue({
+            data() {
+                return {
+                    count: 0,
+                    a: 898,
+                }
+            },
+            methods: {
+                fn() {
+                    console.log('虚拟dom更新我就会被调用');
+                }
+            },
+            computed: {
+                fn2() {
+                    // 和我有关系的改变才执行 fn2 不是一个函数  因此 不用写括号 
+                    this.a
+                    console.log('但是我只一次');
+                }
+
+            }
+        });
+        app.$mount('#app')
+    </script>
+</body>
+
+</html>

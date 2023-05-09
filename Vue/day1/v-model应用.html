@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+
+</style>
+<body>
+    <div id="app">
+        <!-- input的使用 拿到value -->
+        <!-- <input type="text" v-model="msg">
+        {{msg}} -->
+        <!--  多个单元框使用 直接拿到value -->
+        <!-- <label><input type="radio" name="sex" v-model="sex" value="0">男</label>
+        <label><input type="radio" name="sex" v-model="sex" value="1">女</label>
+        <label><input type="radio" name="sex" v-model="sex" value="2">人妖</label>
+        <p>性别{{sex}}</p> -->
+        <!-- 单个多选框使用 直接拿到checked值 为true or false  还可以值绑定  true-value false-value-->
+        <!-- <label><input type="checkbox" v-model="ischecked">是否选中</label>
+        <p>{{ischecked}}</p> -->
+        <!-- 多个多选框使用 拿到value值  并且存储数据的为数组 -->
+        <!-- <label><input type="checkbox" value="sing" v-model='hoby'>sing</label>
+        <label><input type="checkbox" value="dance" v-model='hoby'>dance</label>
+        <label><input type="checkbox" value="rap" v-model='hoby'>rap</label>
+        <label><input type="checkbox" value="basktball" v-model="hoby">basktball</label>
+        <p>hoby{{hoby}}</p> -->
+        <!-- 下拉选框使用  单选拿到的是选项的value  多选得到的是数组-->
+        <select  v-model="selectd" multiple>
+            <option value="2001">2001</option>
+            <option value="2002">2002</option>
+            <option value="2003">2003</option>
+            <option value="2004">2004</option>
+            <option value="2005">2005</option>
+            <option value="2006">2006</option>
+            <option value="2007">2007</option>
+            <option value="2008">2008</option>
+            <option value="2009">2009</option>
+            <option value="2010">2010</option>
+        </select>
+        <p>{{selectd}}</p>
+    </div>
+
+    <script>
+        // 特点能自动识别标签绑定获取的属性
+        const app = new Vue({
+            data() {
+                return{
+                    msg:'',
+                    sex:1,
+                    ischecked:true,
+                    hoby:[],
+                    selectd:''
+                }
+            },
+            methods: {
+
+            },
+        });
+       app.$mount('#app')
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+
+</style>
+<body>
+    <div id="app">
+        <h2>count:{{count}}</h2>
+        <button @click="count+=1;doubleCount+=2">count</button>
+        <h2>doubleCount:{{doubleCount}}</h2>
+    </div>
+
+    <script>
+        // 计算属性中存在 set get  默认是存在get获取计算属性的值  
+        // set 是当修改计算属性的值 才会被调用
+        // 不支持异步 
+        const app = new Vue({
+            data() {
+                return{
+                    count:1
+                }
+            },
+            methods: {
+
+            },
+            computed:{
+                doubleCount:{
+                    get(){
+                        return this.count*2
+                    },
+                    set(val){
+                        console.log(11);
+                        this.count=val+5
+                    }
+                }
+            }
+        });
+       app.$mount('#app')
+    </script>
+</body>
+
+</html>

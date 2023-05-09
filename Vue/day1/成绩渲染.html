@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+</style>
+<body>
+    <div id="app">
+        <table>
+            <thead>
+                <tr>
+                    <th v-for="item,index in title" :key="index">{{item}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- <tr v-for="item in grades">
+                    <td>{{item.name}}</td>
+                    <td>{{item.chinese}}</td>
+                    <td>{{item.math}}</td>
+                    <td>{{item.english}}</td>
+                    <td>{{item.english+item.math+item.chinese}}</td>
+                </tr> -->
+                <!-- 也可以使用解构实现拿到对象内的数据 但是会有问题  当数据改变是 解构的数据 页面数据不会重新渲染 -->
+                <tr v-for="item in grades">
+                    <td v-for="val,key,index in item">{{val}}--{{key}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- v-for的优先级更高 -->
+        <li v-for="item in num" v-if="item%2==0" :key="item">{{item}}</li>
+    </div>
+
+    <script>
+        // 列表渲染 更新使用就地更新 为了方便vue跟踪元素
+        // 为了便于vue快速找到dom  因此给 v-for 渲染的虚拟dom 添加key自定义属性
+        const app = new Vue({
+            data() {
+                return{
+                    num:[1,2,3,4,5,6,7,8,9],
+                    title:['姓名','语文','数学','英语','总分'],
+                    grades:[
+                        {name:'xile',chinese:98,math:9229,english:1020},
+                        {name:'xile1',chinese:98,math:919,english:1200},
+                        {name:'xile2',chinese:9,math:994,english:1020},
+                        {name:'xile3',chinese:8,math:929,english:1020},
+                        {name:'xile4',chinese:981,math:992,english:1020},
+                    ]
+                }
+            },
+            methods: {
+
+            },
+        });
+       app.$mount('#app')
+    </script>
+</body>
+
+</html>

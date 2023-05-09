@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+
+</style>
+<body>
+    <div id="app">
+        <!-- 复选框 -->
+        <!-- <label><input v-model="msg" type="checkbox" true-value="是" false-value="否">是否已经选中？</label>
+        <p>{{msg}}</p> -->
+        <!-- 单选框 -->
+        <!-- <label><input type="radio" v-model="checkOne" :value="a">单选</label>
+        <p>{{checkOne}}---{{a}}</p> -->
+        <!-- 下拉选框 可以通过对象中的一个字段的到一个对象-->
+        <select v-model="grade"> 
+            <option :value="item" v-for="item,index in grades" :key="index">{{item.name}}</option>
+        </select>
+        <p>{{grade}}</p>
+    </div>
+
+    <script>
+        // 值绑定 
+        // 复选框 使用 true-value false-value 来绑定 此时的msg得到的值 不是true or false 
+        //是得到true-value or false-value绑定的值
+        // -------------------------------------------------
+        // 单选框 当被选中后 单选框的value值 和v-和v-model绑定的值相等
+        // 下拉选框 动态绑定value值 当value的值数个对象时   选中的选项的值 又与对象中的某个健值相等 就可以取出整个值
+        const app = new Vue({
+            data() {
+                return{
+                    msg:'',
+                    checkOne:false,
+                    a:'1111',
+                    grades:[
+                        {id:1,name:'xile',math:99},
+                        {id:2,name:'xile1',math:94},
+                        {id:3,name:'xile3',math:92},
+                        {id:4,name:'xile2',math:91},
+                    ],
+                    grade:''
+                }
+            },
+            methods: {
+
+            },
+        });
+       app.$mount('#app')
+    </script>
+</body>
+
+</html>

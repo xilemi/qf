@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <template v-if="getToken()">
+            <a href="javascript;">欢迎{{user}}</a>
+            <a href="javascript;">退出</a>
+        </template>
+        <template v-else>
+            <a href="javascript;">免费注册</a>
+            <a href="javascript;">登录</a>
+        </template>
+    </div>
+
+    <script>
+        const app = new Vue({
+            data() {
+                return{
+                    user:'xile'
+                }
+            },
+            methods: {
+                setToken(){
+                    localStorage.setItem('token',this.user)
+                },
+                getToken(){
+                   return localStorage.getItem('token')
+                }
+            },
+            created() {
+                // this.setToken()
+            },
+            mounted() {
+                this.setToken()
+            },
+        });
+       app.$mount('#app')
+       console.log(app);
+    </script>
+</body>
+
+</html>

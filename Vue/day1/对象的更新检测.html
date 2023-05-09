@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+
+</style>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="item in obj">{{item}}</li>
+        </ul>
+        <button @click="addObj()">点击</button>
+    </div>
+
+    <script>
+        // 对象的添加删除不会被更新 vue对对象只有取值拦截和赋值拦截，对于新增的属性就没有取值拦截和赋值拦截。
+        // 解决方案  还是使用this.$set(obj,key,val) 或者使用$forceUpdate()
+        const app = new Vue({
+            data() {
+                return{
+                    obj:{
+                        name:'xile',
+                        age:19,
+                        height:198
+                    }
+                }
+            },
+            methods: {
+                addObj(){
+                    //方案一  使用this.$set(obj,key,val)
+                    // this.$set(this.obj,'sex','男')
+                    // 方案二 使用this.$forceUpdate()
+                    this.obj.set='男'
+                    this.$forceUpdate()
+                }
+            },
+        });
+       app.$mount('#app')
+    </script>
+</body>
+
+</html>

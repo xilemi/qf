@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{message}}</p>
+        <p>{{count}}</p>
+    </div>
+    <script>
+
+        function MyVue(options) {
+            let { el, data } = options
+            this.$el=el
+            this.$data=data
+            let ele = document.querySelector(el)
+            let html = ele.innerHTML
+            // 把{{message}} {{count}} 用data内的数据进行替换
+            // 正则匹配
+            function render() {
+                let reg = /\{\{(\w+)\}\}/g
+                let result = null
+                let newHtml = html
+                while (result = reg.exec(html)) {
+                    let matchStr = result[0]
+                    let replaceStr = result[1].trim()
+                    newHtml = newHtml.replace(matchStr, data[replaceStr])
+                }
+                ele.innerHTML = newHtml
+            }
+            render()
+            // 在值发生改变后进行重新渲染
+            for (let key in data) {
+                let initVal = data[key]
+                Object.defineProperty(data, key, {
+                    get: function () {
+                        return initVal
+                    },
+                    set: function (val) {
+                        initVal = val
+                        render()
+                    }
+                })
+            }
+            //    给实例对象也绑定data内的属性
+            for (let key in data) {
+                this[key] = data[key]
+            }
+            setTimeout(function () {
+                data.count = 3000
+            }, 5000)
+        }
+        let app = new MyVue({
+            el: '#app',
+            data: {
+                message: "hello vue",
+                count: 10
+            }
+        })
+        console.log(app);
+        //模拟封装 对传入的对象进行解构  本质是替换模板内的数据  通过正则进行匹配
+    </script>
+</body>
+
+</html>

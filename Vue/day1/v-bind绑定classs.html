@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+
+</style>
+<body>
+    <div id="app">
+        <!-- 直接传入数组 -->
+        <h2 :class="['one','two','three']">111</h2>
+        <!-- 传入对象  对象健名作为class名-->
+        <h2 :class="{one:true,two:false}">222</h2>
+        <!-- 传入对象 使用data内的数据 可以动态改变class是否添加 -->
+        <h2 :class="{one:isActive,two:hasError}">333</h2>
+    </div>
+
+    <script>
+        const app = new Vue({
+            data() {
+                return{
+                    isActive:true,
+                    hasError:false,
+                }
+            },
+            methods: {
+
+            },
+        });
+       app.$mount('#app')
+    </script>
+</body>
+
+</html>

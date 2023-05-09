@@ -1,14 +1,15 @@
 const express = require('express')
 const { scoreModel } = require('../lib/appMode')
 const { verifyToken } = require('../lib/token.js')
+const {isToken}=require('../service/token.js')
 let Router = express.Router()
-
 Router.get('/', (req, res) => {
     res.send('/score')
 })
-Router.post('/add', (req, res) => {
+Router.post('/add', isToken,(req, res) => {
     let body = req.body
     let { name, class: _class, chinese, math, english } = req.body
+    // if(!isToken(req)) return
     if (name && _class && chinese && math && english) {
         scoreModel.insertMany([{
             name, class: _class, chinese, math, english
@@ -31,24 +32,27 @@ Router.post('/add', (req, res) => {
         })
     }
 })
-Router.post('/update', (req, res) => {
-    let { name, chinese, english, math } = req.body
-    scoreModel.updateOne({ name }, { $set: { chinese, english, math } }).then(result => {
-        console.log(result);
-        if (result.modifiedCount > 0) {
-            res.send({
+Router.post('/updateGradeById', isToken,(req, res) => {
+    // if(!isToken(req)) return
+    let { _id, chinese, english, math } = req.body
+    scoreModel.findByIdAndUpdate(_id, { $set: { chinese, english, math } }).then(result => {
+        // 匹配到并数据修改
+        // 匹配到但是没修改数据（只是点了确认）
+        // 没匹配到
+        if (result) {
+            res.json({
                 status: true,
-                message: '修改成功'
+                message:'修改成功'
             })
-        } else if (result.modifiedCount == 0) {
-            res.send({
-                status: true,
-                message: '没有找到数据'
+        } else {
+            res.json({
+                status: false,
+                message:'修改失败'
             })
         }
     }).catch(err => {
         res.send({
-            status: true,
+            status: false,
             message: err.message
         })
     })
@@ -94,52 +98,36 @@ Router.get('/search', async (req, res) => {
 Router.get('/all', (req, res) => {
     // 返回的数组
     scoreModel.find({}).then(result => {
-        res.json(result)
+        console.log(result);
+        res.send({
+            list:result
+        })
         // 返回给前端的数据
     }).catch(err => {
         console.log(err.stack);
     })
 })
-Router.get('/del', (req, res) => {
+Router.get('/del', isToken,(req, res) => {
     // 在发送请求时候 需要在headers里携带token 信息
-    let { _id } = req.query
-    var token = req.headers.token
-    if (token) {
-        let info =verifyToken(token)
-        if (info) {
-            // 能够解析
-            scoreModel.deleteOne({ _id }).then(result => {
-                console.log(result);
-                if (result.deletedCount > 0) {
-                    res.send({
-                        status: true,
-                        message: '删除成功'
-                    })
-                } else {
-                    res.send({
-                        status: false,
-                        message: '未找到'
-                    })
-                }
-            }).catch(err => {
-                res.send({
-                    status: false,
-                    message: '删除失败'
-                })
+    let {_id}=req.query
+    scoreModel.deleteOne({ _id }).then(result => {
+        console.log(result);
+        if (result.deletedCount > 0) {
+            res.send({
+                status: true,
+                message: '删除成功'
             })
         } else {
-            // 不能解析
-            res.json({
+            res.send({
                 status: false,
-                message:'请重新登录,token过期'
+                message: '未找到'
             })
         }
-    } else {
-        // 没有token信息
-        res.json({
+    }).catch(err => {
+        res.send({
             status: false,
-            message: '请登录'
+            message: '删除失败'
         })
-    }
+    })
 })
 module.exports = Router

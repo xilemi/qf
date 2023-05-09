@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+
+</style>
+<body>
+    <div id="app" :key="key">
+        <p v-for="item in list">{{item}}</p>
+        <!-- 赋值修改 数组更新不能被vue检测到 使用Vue.set 或者 app.$set-->
+        <button @click="editList()">赋值修改</button>
+        <!-- 修改数组长度也不能被检测到 使用splice() -->
+        <button @click="editListLength()">修改数组长度</button>
+    </div>
+
+    <script>
+        // vue不能检测数数组对象的变化
+        // 对应下标重新赋值 改变数组长度  不能被检测
+        // 使用Vue.set(item,indexofitem,val)
+        // 或者Vue.forceUpdate()
+        const app = new Vue({
+            data() {
+                return{
+                    list:[12,3,4,5,6,99,7],
+                    key:0
+                }
+            },
+            methods: {
+                editList(){
+                    this.list[2]=30
+                    // this.$set(this.list,2,40)
+                    // 元素绑定的key值改变了也会重新进行渲染 key-changing
+                    this.key++
+                    // 强制重新渲染
+                    // this.$forceUpdate()
+                },
+                editListLength(){
+                    // 
+                    this.list.splice(-1)
+                }
+            },
+        });
+        Vue.prototype.$console=window.console
+       app.$mount('#app')
+       console.log(app);
+    </script>
+</body>
+
+</html>

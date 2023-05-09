@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>成绩{{grade}}</h1>
+        <h2 v-show="grade>60">及格</h2>
+        <h2 v-show="grade<60">不及格</h2>
+        <h2>
+            等级：
+            <!-- 惰性  第一个满足 就不会在加载后面的的   比如  83 满足的B 但是 后面的C D都是满足的 不会被加载 -->
+            <span v-if="grade>90">A</span>
+            <span v-else-if="grade>80">B</span>
+            <span v-else-if="grade>70">C</span>
+            <span v-else-if="grade>60">D</span>
+            <span v-else>E</span>
+        </h2>
+    </div>
+
+    <script>
+        // v-if v-else v-else-if   只显示满足条件的 写很多条件  但不会都渲染出来 
+        // v-show 必须要有条件 都会被渲染  只是改变了 display属性
+        // 区别 v-if有条件的渲染  v-show都会被渲染  切换display属性值
+        //      v-show的初始渲染成本较高 切换成本低
+        const app = new Vue({
+            data() {
+                return{
+                    grade:Math.floor(Math.random()*101)   
+                }
+            },
+            methods: {
+
+            },
+        });
+       app.$mount('#app')
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+
+</style>
+<body>
+    <div id="app">
+        <h2>
+            {{count}}
+            {{events}}
+        </h2>
+        <p v-for="item in list">{{item.name}}</p>
+        <!-- 不加()等价于在这写函数 -->
+        <button @click="">加1</button>
+        <!-- 加括号 直接调用函数 -->
+        <!-- <button v-on:click="addCount()">加</button> -->
+        <button @click="addCount()">加</button>
+        <!-- <button v-on:click="reduceCount()">减</button> -->
+        <button @click="reduceCount()">减</button>
+        <button @[events]="getEvent()">点击</button>
+        <button @click="getList()">请求</button>
+       
+    </div>
+
+    <script>
+        
+        const app = new Vue({
+            data() {
+                return{
+                    count:1,
+                    event:['click','change','blur'],
+                    events:'click',
+                    list:[]
+                }
+            },
+            methods: {
+                addCount(){
+                    return this.count++
+                },
+                reduceCount(){
+                    return this.count--
+                },
+                randomEvent(){
+                    let index=Math.floor(Math.random()*3)
+                    return this.event[index]
+                },
+                
+                getEvent(){
+                    this.events=this.randomEvent()
+                    console.log(this);
+                    return this.events
+                },
+                async getList(){
+                    let res=await fetch('http://121.43.116.41/demo/php/searchAllGrade.php')
+                    let {list}=await res.json()
+                    this.list=list
+                    console.log(this.list);
+                }
+            },
+        });
+        app.$mount('#app')
+        console.log(app);
+    </script>
+</body>
+
+</html>

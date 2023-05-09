@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+
+</style>
+
+<body>
+    <div id="app">
+        <h2>{{count}}</h2>
+        <button @click="randomCount()">改count</button>
+        <button @click="addObj()">添加对象</button>
+    </div>
+
+    <script>
+        // 侦听器 当监听的值发生改变时 做出一系列的操作
+        const app = new Vue({
+            data() {
+                return {
+                    count: 1,
+                    obj: {
+                        name: 'xile',
+                        age: 19
+                    }
+                }
+            },
+            methods: {
+                randomCount() {
+                    this.count = Math.floor(Math.random() * 180)
+
+                },
+                addObj() {
+                    this.$set(this.obj, 'age', Math.floor(Math.random() * 180))
+                    console.log(this.obj);
+                }
+            },
+            watch: {
+                // 可以直接以监听的值的名字 直接写函数
+                count(newVal, oldVal) {
+                    setTimeout(() => {
+                        console.log('count发生改变', newVal, oldVal);
+                    }, 2000)
+                },
+                // 深度监听 添加deep属性
+                obj: {
+                    handler(oldVal,newVal) {
+                        console.log('改了');
+                        console.log(oldVal, newVal);
+                        console.log(this.obj);
+                    },
+                    deep:true
+                }
+            },
+        });
+        app.$mount('#app')
+    </script>
+</body>
+
+</html>

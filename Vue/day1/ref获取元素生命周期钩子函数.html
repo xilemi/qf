@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+
+</style>
+
+<body>
+    <div id="app">
+        <p ref="test">{{msg}}</p>
+        <p ref="test">{{msg}}</p>
+        <p ref="test">{{msg}}</p>
+        <p ref="test">{{msg}}</p>
+        <button @click="getEle()">点击</button>
+    </div>
+
+    <script>
+        // 获取vue中的dom元素 可以通过 给元素绑定ref属性 
+        // 通过 this.$refs.name 获取到该元素
+        const app = new Vue({
+            data() {
+                return {
+                    msg: 123
+                }
+            },
+            methods: {
+                getEle() {
+                    console.dir(this.$refs.test);
+                },
+                aa(){
+                    console.log('被创建前');
+                },
+                bb(){
+                    console.log('被创建后');
+                }
+            },
+            beforeCreate() {
+                console.log(111);
+            },
+            created() {
+                this.aa()
+                this.bb()
+            },
+        });
+        app.$mount('#app')
+    </script>
+</body>
+
+</html>
