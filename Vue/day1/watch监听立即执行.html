@@ -22,12 +22,23 @@
         const app = new Vue({
             data() {
                 return{
-                    
+                    count:1
                 }
             },
             methods: {
 
             },
+            watch:{
+                //旧值为undefined
+                count:{
+                    handler(newVal,oldVal){
+                        console.log('首次');
+                        console.log(newVal);
+                        console.log(oldVal);
+                    },
+                    immediate:true
+                }
+            }
         });
        app.$mount('#app')
     </script>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+
+</style>
+
+<body>
+    <div id="app">
+        <h2>count:{{count}}</h2>
+        <h2>countChanga:{{countChanga}}</h2>
+        <button @click="addCount()">+</button>
+        <button @click="$destroy()">销毁</button>
+    </div>
+
+    <script>
+        const app = new Vue({
+            data() {
+                return {
+                    msg: 'hello vue',
+                    count: 1,
+                    timer:null,
+                }
+            },
+            methods: {
+                addCount() {
+                    this.count++
+                }
+            },
+            computed: {
+                countChanga(){
+                    return this.count/2
+                }
+            },
+            watch:{
+                count(newVal,oldVal){
+                    console.log('change',newVal,oldVal);
+                }
+            },
+            beforeCreate() {
+                // 创建Vue实例化
+                // 计算属性 方法不存在
+                // this.addCount()
+                // console.log(this.count);
+            },
+            created() {
+                // 解析实例化对象配置 此时$el为undefined
+                // 可以修改数据
+                console.log(this.$el);
+                this.addCount()
+                console.log(this.count);
+                console.log(this.countChanga);
+            },
+            beforeMount() {
+                // 选定挂载元素  此时的$el为空的模板
+                console.log(this.$el);
+                this.addCount()
+                console.log(this.count);
+                console.log(this.countChanga);
+            },
+            mounted() {
+                // 根据模板进行解析 $el 为解析后的模板
+                // 常用于请求数据
+                console.log(this.$el);
+                this.addCount()
+                console.log(this.count);
+                console.log(this.countChanga);
+                document.onclick=function(){
+                    console.log(1111);
+                }
+                this.timer=setInterval(()=>{
+                    this.count++
+                },1000)
+            },
+            beforeUpdate() {
+                
+            },
+            updated() {
+                
+            },
+            beforeDestroy() {
+                // console.log(this.timer);
+                // //  方法，数据监听，计算属性，data都已经失效
+                // document.onclick=null
+                // clearInterval(this.timer)
+                // console.log(1111);
+            },
+            destroyed() {
+                //  方法，数据监听，计算属性 都停止工作， data还能获取到 也可以进行操作
+                // console.log(this.timer);
+                // document.onclick=null
+                // clearInterval(this.timer)
+                // console.log(1111);
+                this.count++
+                console.log(this.count);
+                console.log(this.$data);
+                console.log(this);
+            },
+        });
+        app.$mount('#app')
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+
+</style>
+<body>
+
+
+
+    <div id="app">
+        <h2 ref="msg">{{msg}}</h2>
+        <button @click="handler()">change</button>
+    </div>
+
+    <script>
+        // nextTick() 是微任务 接收回调函数  如果不添加  则返回一个promise
+        const app = new Vue({
+            data() {
+                return{
+                    msg:'hello vue'
+                }
+            },
+            methods: {
+                handler(){
+                    this.msg=Math.floor(Math.random()*10)
+                    console.log(this.$refs.msg);
+                }
+            },
+            watch:{
+                msg(newVal,oldVal){
+                    console.log("newVal",newVal);
+                    console.log("oldVal",oldVal);
+                    //data数据改变页面重新渲染是微任务 所以 获取到页面的内容是修改前的内容 
+                    console.log(this.$refs.msg.innerHTML);
+                    // 使用宏任务  让其在微任务执行完成后立即执行 得到新的内容
+                    setTimeout(()=>{
+                        console.log(this.$refs.msg.innerHTML);
+                    },0)
+                    // 或者使用$nextTick(callback) 在渲染完成后 立即执行下一步操作  也是微任务
+                    // this.$nextTick(()=>{
+                    //     console.log(this.$refs.msg.innerHTML);
+                    // })
+                    // 如果不接受回调函数  那么得到的是promise对象  使用 then操作
+                    this.$nextTick().then(res=>{
+                        console.log(res.$refs.msg.innerHTML);
+                    })
+                }
+            }
+        });
+       app.$mount('#app')
+    </script>
+</body>
+
+</html>
