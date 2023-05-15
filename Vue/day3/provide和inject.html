@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+
+</style>
+<body>
+    
+    <div id="app">
+        {{count}}
+        <button @click="count++">+</button>
+        <button @click="count--">-</button>
+        <com-a></com-a>
+    </div>
+    <template id="one">
+        <div>
+            <h1>第一个</h1>
+            {{msg}}
+            {{count}}
+            {{get()}}
+            <com-b></com-b>
+            
+        </div>
+    </template>
+    <template id="two">
+        <div>
+            <h2>第二个</h2>
+            {{count}}
+            {{msg}}
+            <com-c></com-c>
+        </div>
+    </template>
+    <template id="three">
+        <div>
+            <h3>第三个</h3>
+        </div>
+    </template>
+    <script>
+        // provide   对象或者返回对象得函数
+        // inject 字符串数组或者对象
+        // 对象配置得时候键值为字符串
+        // from 接受值
+        // default 默认值
+        let comC={
+            template:'#three'
+        }
+        let comB={
+            inject:{
+                // 引用的是字符串
+                msg:{
+                    from:"msg",
+                    default:'hhhh'
+                },
+                count:{
+                    from:"count",
+                    default:999
+                }
+            },
+            template:'#two',
+            components:{
+                comC
+            }
+        }
+        let comA={
+            inject:['msg','count','get'],
+            template:'#one',
+            data() {
+                return {
+
+                }
+            },
+            components:{
+                comB
+            },
+            mounted() {
+                this.get()    
+            },
+        }
+        
+        const app = new Vue({
+            data() {
+                return{
+                    msg:'tansuqin',
+                    count:100
+                }
+            },
+            methods: {
+
+            },
+            components:{
+                comA
+            },
+            // 如果直接作为对象  那么传入得值只能为定值  不能访问到data内得数据
+            // 作为函数  返回一个对象 this 指向实例化对象
+            provide(){
+                return{
+                    msg:this.msg,
+                    count:this.count,
+                    //  传入的函数中的this 指向 使用该函数的组件的实例化对象
+                    get:()=>{
+                       return this.count
+                    },
+                    set:(val)=>{
+                        this.color=val
+                    }
+
+                    // 传箭头函数  动态获取数据
+                }
+            }
+        });
+       app.$mount('#app')
+    </script>
+</body>
+
+</html>

@@ -33,3 +33,21 @@ v-model 双向绑定数据    值绑定
 ## watch 和响应式的区别
 ## 对象深拷贝的方式
 ## reder 函数的作用 将模板的html传入对应的reder函数中 进行渲染
+# vue2 和vue3 区别
+## 创建使用createApp()
+## data 必须是个函数放回一个对象
+## 没有.sync
+## 组件的v-model不同
+使用 props:['modelValue'] 接受值
+使用 emits:['update:modelValue'] 接受事件
+## 没el 挂在模板  使用Vue.mount('') 比vue2 少了$
+
+
+# 脚手架搭建项目文件结构 
+public 项目出口
+assets 静态资源
+router 路由
+components 组件 复用
+view  布局相关
+app.vue 默认暴露 挂在到根实例
+main.js 入口文件

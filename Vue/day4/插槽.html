@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+
+</style>
+
+<body>
+    <div id="app">
+        <button @click="msg++">+</button>
+        <button @click="msg--">-</button>
+        <com>
+            <template slot="a">
+                这里写的内容会被放入插槽,但是有多个插槽怎么放呢
+            </template>
+            <template slot="b">
+                放在插槽b
+            </template>
+            <template slot="c">
+                放在插槽c
+            </template>
+            放在默认
+            <template slot="msg">
+                <!-- 可以使用父级的内容 -->
+                {{msg}}
+            </template>
+        </com>
+    </div>
+    <template id="com">
+        <div>
+            <h1>
+                <slot name="a"></slot>
+                <slot name="b"></slot>
+                <slot name="c"></slot>
+                <slot name="default"></slot>
+                <slot name="msg"></slot>
+            </h1>
+        </div>
+    </template>
+    <script>
+        //  接受组件标签内的内容 之前组件标签内都没有写内
+
+        // slot 可以写默认内容
+        // 如何选择传入的位置 选择传入那个插槽 
+        // 作用让组件的内容也动态起来 组件套组件？ 优势在哪里
+        // 如何使用子组件的数据
+        let com = {
+            template: "#com"
+        }
+        const app = new Vue({
+            data() {
+                return {
+                    msg:123
+                }
+            },
+            methods: {
+
+            },
+            components: {
+                com
+            }
+        });
+        app.$mount('#app')
+    </script>
+</body>
+
+</html>

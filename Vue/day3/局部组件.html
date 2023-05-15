@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+
+</style>
+
+<body>
+    <div id="app" ref="app">
+        <com-b ref="comB">
+        </com-b>
+        <com-d ref="comD">
+        </com-d>
+        <button @click="getChild()">获取组件</button>
+    </div>
+
+    <script type="module">
+        import comA from './comp/coma.js'
+        import comC from './comp/comc.js'
+        let comB = {
+            data() {
+                return {
+                    msg: '我是组件B'
+                }
+            },
+            template: ` <div>
+                
+                
+                <h1>{{msg}}<com-a></com-a></h1>
+            <button @click=" getParent()">获取父组件</button>
+            
+                
+                </div>
+            `,
+            methods:{
+                getParent(){
+                    console.log(this.$parent);
+                    console.log(this.$root);
+                }
+
+            },
+            components: {
+                comA
+            }
+        }
+       
+        let comD = {
+            data() {
+                return {
+                    msg: '我是组件D'
+                }
+            },
+            template: ` <div>
+                <h1>{{msg}}<com-c></com-c></h1>
+            <button @click="getParent()">获取父组件</button>   
+                </div>`,
+            components: {
+                comC
+            },
+            methods:{
+                getParent(){
+                    console.log(this.$parent);
+                    console.log(this.$root);
+                }
+
+            },
+        }
+        const app = new Vue({
+            el: '#app',
+            data() {
+                return {
+
+                }
+            },
+            methods: {
+                getChild(){
+                    // console.log(this.$children);
+                    // for(let item of this.$children){
+                    //     console.log(item);
+                    // }
+                    // 精确获取组件 
+                    console.log(this.$refs.comB);
+                    console.log(this.$refs.comD);
+                }
+            },
+            components: {
+                comB,
+                comD,
+            }
+        });
+        app.$mount("#app")
+    </script>
+</body>
+
+</html>

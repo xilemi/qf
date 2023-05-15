@@ -16,53 +16,54 @@
 </style>
 
 <body>
-    <div class="catbox" id="app">
-        <table id="cartTable">
-            <thead>
-                <tr>
-                    <th><label>
-                            <input ref="check-all" v-model="checkAll" class="check-all check" type="checkbox"
-                                :disabled="goods.length==0" />&nbsp;&nbsp;全选</label></th>
-                    <th>商品</th>
-                    <th>单价</th>
-                    <th>数量</th>
-                    <th>小计</th>
-                    <th>操作</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="(item,index) in goods" :key="index">
-                    <td class="checkbox"><input v-model="item.isChecked" class="check-one check" type="checkbox" /></td>
-                    <td class="goods"><img :src="item.goodsImg" alt="" /><span>{{item.goodsName}}</span></td>
-                    <td class="price">{{item.goodsPrice}}</td>
-                    <td class="count">
-                        <span class="reduce" v-if="item.count>1"
-                            @click="item.count>1?item.count--:item.count=1">-</span>
-                        <span class="reduce" v-else="" @click="item.count>1?item.count--:item.count=1"></span>
-                        <input class="count-input" type="text" v-model="item.count" />
-                        <span class="add" :data-index="item.id" @click="item.count++">+</span>
-                    </td>
-                    <td class="subtotal">{{item.count*item.goodsPrice}}</td>
-                    <td class="operation"><span class="delete" @click='del(item.id)'>删除</span></td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="foot" id="foot">
-            <a class="fl" id="deleteAll" href="javascript:;" @click="goods=[]">删除</a>
-            <div class="fr closing" onclick="getTotal();">结 算</div>
-            <input type="hidden" id="cartTotalPrice" />
-            <div class="fr total">合计：￥<span id="priceTotal">{{total.totalPrice}}</span></div>
-            <div class="fr selected" id="selected">已选商品<span id="selectedTotal">{{total.totalCount}}</span>件<span
-                    class="arrow up">︽</span><span class="arrow down">︾</span></div>
-            <div class="selected-view">
-                <div id="selectedViewList" class="clearfix">
-                    <div><img src="../images/1.jpg"><span>取消选择</span></div>
+    <div id="app">
+        <div class="catbox">
+            <table id="cartTable">
+                <thead>
+                    <tr>
+                        <th><label>
+                                <input ref="check-all" v-model="checkAll" class="check-all check" type="checkbox"
+                                    :disabled="goods.length==0" />&nbsp;&nbsp;全选</label></th>
+                        <th>商品</th>
+                        <th>单价</th>
+                        <th>数量</th>
+                        <th>小计</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(item,index) in goods" :key="index">
+                        <td class="checkbox"><input v-model="item.isChecked" class="check-one check" type="checkbox" />
+                        </td>
+                        <td class="goods"><img :src="item.goodsImg" alt="" /><span>{{item.goodsName}}</span></td>
+                        <td class="price">{{item.goodsPrice}}</td>
+                        <td class="count">
+                            <span class="reduce" @click="reduceCount(item)">{{item.count>1?'-':''}}</span>
+
+                            <input class="count-input" type="text" v-model="item.count" />
+                            <span class="add" @click="addCount(item)">+</span>
+                        </td>
+                        <td class="subtotal">{{item.count*item.goodsPrice}}</td>
+                        <td class="operation"><span class="delete" @click='delOne(item)'>删除</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="foot" id="foot">
+                <a class="fl" id="deleteAll" href="javascript:;" @click="delAll()">删除</a>
+                <div class="fr closing" onclick="getTotal();">结 算</div>
+                <input type="hidden" id="cartTotalPrice" />
+                <div class="fr total">合计：￥<span id="priceTotal">{{total.totalPrice}}</span></div>
+                <div class="fr selected" id="selected">已选商品<span id="selectedTotal">{{total.totalCount}}</span>件<span
+                        class="arrow up">︽</span><span class="arrow down">︾</span></div>
+                <div class="selected-view">
+                    <div id="selectedViewList" class="clearfix">
+                        <div><img src="../images/1.jpg"><span>取消选择</span></div>
+                    </div>
+                    <span class="arrow">◆<span>◆</span></span>
                 </div>
-                <span class="arrow">◆<span>◆</span></span>
             </div>
         </div>
     </div>
-
     <script>
         const app = new Vue({
             data() {
@@ -71,11 +72,24 @@
                 }
             },
             methods: {
-                del(id) {
-                    this.goods = this.goods.filter(item => {
-                        return item.id != id
+                // 统一传
+                delOne(item) {
+                    this.goods = this.goods.filter(v => {
+                        return v.id != item.id
                     })
+                },
+                delAll() {
+                    this.goods = this.goods.filter(item => {
+                        return item.isChecked == false
+                    })
+                },
+                addCount(item) {
+                    item.count++
+                },
+                reduceCount(item) {
+                    item.count > 1 ? item.count-- : item.count = 1
                 }
+
             },
             async mounted() {
                 let res = await fetch('../goods.json')
@@ -93,29 +107,26 @@
                         this.goods.forEach(item => {
                             item.isChecked = val
                         })
-                    }
+                    },
+
                 },
                 total() {
-                    // 被勾选时计算总价
-                    let checked = this.goods.filter(item => {
-                        return item.isChecked == true
-                    })
-                    if (checked.length == 0) {
-                        return { totalCount: 0, totalPrice: 0 }
-                    }
-                    else {
-                        let sum = 0
-                        let count = 0
-                        checked.forEach(item => {
-                            count += item.count
-                            sum += item.count * item.goodsPrice
-                        })
-                        return { totalCount: count, totalPrice: sum }
-                    }
-
+                    // 先过滤出 被选中的值 
+                    // 再进行reduce 操作  prev 表示求和 current 表示当前值 回调函数内的参数
+                    // 第二个参数为初始值  如果没有 第一个current 表示初始值
+                   let totalPrice= this.goods.filter(item => {
+                        return item.isChecked
+                    }).reduce((prev, { count, goodsPrice }) => {
+                         return prev + count * goodsPrice
+                    },0)
+                    let totalCount=this.goods.filter(item => {
+                        return item.isChecked
+                    }).reduce((prev, { count }) => {
+                         return prev + count 
+                    },0)
+                    return {totalPrice,totalCount}
                 }
             },
-
         });
         app.$mount('#app')
     </script>

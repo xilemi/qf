@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+
+</style>
+
+<body>
+    <div id="app">
+        <h1>倒计时</h1>
+        <time-com :second="time"></time-com>
+    </div>
+    <template id="time-com">
+        <div>
+            {{day}}天{{hour}}时{{min}}分{{sec}}秒
+        </div>
+    </template>
+    <script>
+        // 时间倒计时组件 父组件传递时间到子组件  子组组件倒计时
+        let timeCom = {
+            props: {
+                second: {
+                    type: String,
+                    required: true,
+                    validator(val) {
+                        if (val > 0 && val % 1 == 0) {
+                            return true
+                        }
+                        return false
+                    }
+                }
+            },
+            data() {
+                return {
+                    // 作为初始化值
+                    time: this.second,
+                    timer: null
+                }
+            },
+            template: "#time-com",
+            computed: {
+                day() {
+                    return Math.floor(this.time / (24 * 60 * 60))
+                },
+                hour() {
+                    let res = Math.floor((this.time / (60 * 60)) % 24)
+                    return res > 9 ? res : '0' + res
+                },
+                min() {
+                    let res = Math.floor((this.time / 60) % 60)
+                    return res > 9 ? res : '0' + res
+                },
+                sec() {
+                    let res = Math.floor(this.time % 60)
+                    return res > 9 ? res : '0' + res
+                }
+            },
+            methods: {
+                start() {
+                    this.timer = setInterval(() => {
+                        if (this.time <= 0) this.timer = null
+                        this.time--
+                    }, 1000)
+                }
+            },
+            mounted() {
+                this.start()
+            },
+
+        }
+        const app = new Vue({
+            data() {
+                return {
+                    time: "123312"
+                }
+            },
+            components: {
+                timeCom
+            },
+            methods: {
+
+            },
+        });
+        app.$mount('#app')
+    </script>
+</body>
+
+</html>

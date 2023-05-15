@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+
+</style>
+<body>
+    <div id="app">
+        <!-- 不需要括号 默认接收 -->
+        <!-- .sync -->
+        <com @com-click="getItem"></com>
+    </div>
+    <template id="com">
+        <div>
+            <button v-for="(item) in list" :key="item.id" @click="itemclick(item)">{{item.name}}</button>
+        </div>
+    </template>
+    <script>
+        let com={
+            data() {
+                return {
+                    list:[
+                        {id:1,name:'xile0'},
+                        {id:2,name:'xile1'},
+                        {id:3,name:'xile2'},
+                        {id:4,name:'xile3'},
+                    ]
+                }
+            },
+            template:'#com',
+            methods:{
+                itemclick(item){
+                    // 发射的事件名和数据
+                    this.$emit('com-click',item)
+                }
+            }
+        }
+        const app = new Vue({
+            data() {
+                return{
+                    msg:11
+                }
+            },
+            methods: {
+                getItem(item){
+                    console.log(item);
+                }
+            },
+            components:{
+                com
+            }
+        });
+       app.$mount('#app')
+    </script>
+</body>
+
+</html>

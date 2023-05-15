@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet"
+        href="https://cdn.cnbj1.fds.api.mi-img.com/mi.com-assets/shop/pro/css/buy/cart2.382798e6.css">
+    <script src="../vue.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .checkbox {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 1px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+            margin: 5px;
+            user-select: none;
+        }
+
+        .checkbox i {
+            display: block;
+            width: 20px;
+            height: 20px;
+            /* 没有切换之前的状态 */
+            background-color: #fff;
+            color: #fff;
+            text-align: center;
+            line-height: 20px;
+        }
+
+        .checkbox i:hover {
+            color: #333;
+        }
+
+        /* 变为选中之后的状态 */
+        .checkbox input[type='checkbox']:checked+i.iconfont {
+            background-color: #ff6700;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="bool=!bool">{{bool}}</button>
+        <br>
+        <lw-check-box v-model="bool"></lw-check-box>
+    </div>
+</body>
+<script>
+    // 定义组件的v-model  => 本质上和.sync修饰符是类似的  => 目的也是为了实现父子组件通信
+    // 组件中使用v-model需要注意:
+    // 组件内需要设置model属性 => 
+    // 1. 定义一个属性prop,用于接收父组件传入v-model的指令的值
+    // 2. 定义一个属性event,用于接收父组件更改指令的的事件
+
+    let lwCheckBox = { 
+        model:{
+            // 定义组件内接受v-model的值 和 props配套使用
+            prop:'aa',
+            event:'update:checked'
+        },
+        // 正常的使用props 接受v-model 传入的值 定义model属性 给传入的值 添加事件 
+        // 同时绑定 v-model
+        props:{
+            aa:{
+                type:Boolean,
+                default:false
+            }
+        },
+        data() {
+            return {
+
+            }
+        },
+        template: `<label class="checkbox">
+            <input type="checkbox" :checked='aa' @change="$emit('update:checked',$event.target.checked)" hidden name="" id="">
+            <i class="iconfont">√</i>
+        </label>`,
+        
+    }
+
+
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            bool:false,
+        },
+        components: {
+            lwCheckBox
+        }
+    })
+
+</script>
+
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+
+</style>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="inp">
+        {{count}}
+        <button @click="count++">父组件修改</button>
+        <!-- 前面是接受的值 后面是接受的值 -->
+        <p>父组件的count{{count}}</p>
+        <com-a :inp="inp" :count="count" id="id" class="_calss" :name="name" title="aaa"></com-a>
+    </div>
+    <template id="comA">
+        <!-- 没有被props接收的数据  默认放在根组件 -->
+        <div>
+            {{comAMsg}}
+            <!-- <p>{{name}}</p>         -->
+            <p :name="$attrs.name">{{age}}</p>
+            <p>{{inp}}</p>
+            <p>{{count}}</p>
+            <button @click="count++">修改</button>
+        </div>
+    </template>
+    <script>
+        // 1.静态传递  得到的是字符串类型的
+        // 2.动态传递 使用v-bind 得到是原类型的 
+        // 直接修改父组件传递过来的值  当父组件传递过来值发生变化时  会把子组件内的值给覆盖掉
+        // 子组件做出的修改就无法缓存
+        // 那么只能渲染的时候传递一次？ 利用计算属性 依赖的值发生改变了  会重新计算 
+        // props 类型验证 必填 默认值 
+        // 透传  没有被props接收的数据   会传入到组件的根元素上 存储在$attrs上  calss style 会拼接  其他的会替换 
+        // 如何禁止透传 使用inheritAttrs:false  然后给指定的标签绑定需要的数据
+        let comA = {
+
+            inheritAttrs: false,
+            // 类型验证 type 传递值的类型  required是否必须传入  default 默认值 
+            props: {
+                inp: {
+                    type: String,
+                    required: true
+                },
+                age: {
+                    type: Number,
+                    required: false,
+                    default: 99
+                }, 
+                count:{
+                    type:Number
+                }
+            },
+            data() {
+                return {
+                    comAMsg: '我是子组件',
+                    comACount: this.count
+                }
+            },
+            template: '#comA',
+            mounted() {
+                console.log(this);
+            },
+        }
+        const app = new Vue({
+            data() {
+                return {
+                    name: 'xile',
+                    age: 18,
+                    inp: '',
+                    count: 1
+                }
+            },
+            methods: {
+
+            },
+            components: {
+                comA
+            }
+        });
+        app.$mount('#app')
+    </script>
+</body>
+
+</html>

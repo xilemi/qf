@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+
+</style>
+
+<body>
+    <div id="app">
+        <com>
+            <template v-slot:one="slotScope">
+                    给a插槽
+                    {{slotScope}}
+                    <h1>msg:{{slotScope.msg}}</h1>
+                    <h1>age:{{slotScope.age}}</h1>
+            </template>
+        </com>
+    </div>
+    <template id="com">
+        <div>
+            <slot :msg="msg" :age="age" name="one"></slot>
+        </div>
+    </template>
+    <script>
+        // 插槽作用 父组件内使用 子组件的数据
+        // 通过插槽作用域实现  在插槽上动态绑定传出   
+        // 在父组件内使用 使用 v-slot：name 接收 可以使用#代替v-slot
+        // 使用v-slot绑定插槽作用  就可以不用slot绑定指定插槽
+        let com = {
+            template: '#com',
+            data() {
+                return {
+                    msg: 'xile',
+                    age: 19
+                }
+            },
+        }
+        const app = new Vue({
+            data() {
+                return {
+
+                }
+            },
+            methods: {
+
+            },
+            components: {
+                com
+            }
+        });
+        app.$mount('#app')
+    </script>
+</body>
+
+</html>

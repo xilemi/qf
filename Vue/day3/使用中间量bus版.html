@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+
+</style>
+<body>
+    <div id="app">
+        <select-color :color="color"></select-color>
+        <txt></txt>
+    </div>
+    <template id="selectColor">
+        <div>
+            <input type="color" :value="color" @change="handler">
+        </div>
+    </template>
+    <template id="txt">
+        <div :style="{color}">
+            <h2> 传入的函数中的this 指向 使用该函数的组件的实例化对象 传入的函数中的this 指向 使用该函数的组件的实例化对象</h2>
+        </div>
+    </template>
+    <script>
+        // 添加$bus属性  让所有的vue实例都能访问   $bus 就是一个vue实例  能够使用原型上的方法和属性
+        Vue.prototype.$bus=new Vue()
+        let selectColor={
+            template:'#selectColor',
+            props:['color'],
+            methods: {
+                handler(e){
+                    // 激发阶段可以传入值
+                    this.$bus.$emit('update:color',e.target.value)
+                }
+            },
+            mounted(){
+                // 这些东西都被放置在$bus内
+                console.log(this.$bus);
+            }
+        }
+        let txt={
+            template:'#txt',
+            data() {
+                return {
+                    color:'#ff0000'
+                }
+            },
+            mounted() {
+                // 发布事件  以及事件执行的操作 
+                this.$bus.$on('update:color',(val)=>{
+                    this.color=val
+                })
+                console.log(this.$bus);
+            },
+        }
+        // 父组件要把color 传递出去 
+        const app = new Vue({
+            data() {
+                return{
+                    color:'#ff0000'
+                }
+            },
+            methods: {
+
+            },
+            components:{
+                selectColor,
+                txt
+            },
+        });
+       app.$mount('#app')
+    </script>
+</body>
+
+</html>

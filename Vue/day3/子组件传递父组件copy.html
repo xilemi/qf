@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+
+</style>
+<body>
+    <div id="app">
+        父：{{msg}}
+        <!-- <com :msg="msg" @update:msg="updatedMsg"></com> -->
+        <!-- 使用.sync 会自动生成一个@update:msg="updatedMsg" -->
+        <!-- updateMsg函数内的操作是 将传递回来的值 直接赋值给 msg -->
+        <com :msg.sync="msg" @click.native="clickHandler()"></com> 
+    </div>
+<template id="com">
+    <div>
+        子：{{msg}}
+        <button @click="add()">+</button>
+        <button @click="reduce()">-</button>
+    </div>
+</template>
+    <script>
+        // 父组件监听update:msg 事件  执行赋值操作   
+        // 子组件通过$emit 发射update:msg事件 并传回数据 不能进行赋值操作 
+        // 通过.sync 等价于 父组件监听事件
+        // .native给组件绑定原生事件 会绑定到组件的根元素上 类似透传
+        let com={
+            props:['msg'],
+            template:"#com",
+            methods:{
+                add(){
+                    this.$emit('update:msg',this.msg+1)
+                },
+                reduce(){
+                    this.$emit('update:msg',this.msg-1)
+                }
+            },
+            mounted() {
+                console.log(this);
+            },
+        }
+        const app = new Vue({
+            data() {
+                return{
+                    msg:11
+                }
+            },
+            methods: {
+                // 父组件定义对msg的处理  val 是组件传递过来的值
+                // updateMsg(val){
+                //     this.msg=val
+                // }
+                clickHandler(){
+                    console.log(1111);
+                }
+            },
+            
+            components:{
+                com
+            }
+        });
+       app.$mount('#app')
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        line-height: 1;
+    }
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+    }
+
+    body {
+        font-size: 16px;
+    }
+
+    ul,
+    li {
+        list-style: none;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    #app {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+    }
+
+    .box {
+        flex: 1;
+    }
+
+    .foot {
+        height: 4rem;
+        background-color: antiquewhite;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    header {
+        height: 4rem;
+        text-align: center;
+        background-color: antiquewhite;
+        line-height: 4rem;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <keep-alive include="home">
+            <component :is="comName"></component>
+        </keep-alive>
+        <div class='foot'>
+            <a href="#/">首页</a>
+            <a href="#/list">列表</a>
+            <a href="#/car">购物车</a>
+            <a href="#/mine">我的</a>
+        </div>
+    </div>
+    <!-- 内容组件 -->
+    <template id="home">
+        <div class="mainContentBox">
+            <header>首页</header>
+            <section>首页</section>
+        </div>
+    </template>
+    <template id="list">
+        <div class="box">
+            <header>列表</header>
+            <section>列表</section>
+        </div>
+    </template>
+    <template id="car">
+        <div class="box">
+            <header>购物车</header>
+            <section>购物车</section>
+        </div>
+    </template>
+    <template id="mine">
+        <div class="box">
+            <header>我的</header>
+            <section>我的</section>
+        </div>
+    </template>
+    <template id="notFound">
+        <div class="box">
+            <header>404</header>
+            <section>404</section>
+        </div>
+    </template>
+    <script>
+        // history 和hash模式 锚点
+        // 移动端 底部导航栏切换 控制头部和中间内容部分的修改  
+        // 利用comName 来切换组件  每次刷新后  comName的值会被重置 
+        // 引入路由的概念 利用hash 值 去匹配路由中的name 以此来切换组件  这种方式获取了 刷新可以被保存
+        //  使用keep-alive的组件不会被销毁   使用include 选择需要缓存的组件 接受字符串的组件名或者正则
+        // exclude 选择不需要缓存的组件 接受组件名和正则 max 最大缓存的组件个数 
+        let home = {
+            template: '#home',
+            activated() {
+                console.log('home1激活');
+            },
+            deactivated() {
+                console.log('home1失活');
+            },
+            destroyed() {
+                console.log('home1被销毁');
+            },
+        }
+        let list = {
+            template: '#list',
+            destroyed() {
+                console.log('lsit1被销毁');
+            },
+        }
+        let car = {
+            template: '#car'
+        }
+        let mine = {
+            template: '#mine'
+        }
+        let notFound = {
+            template: '#notFound'
+        }
+        // 
+        let routes = [
+            {
+                path: '/',
+                name: 'home',
+                component: 'home'
+            },
+            {
+                path: '/list',
+                name: 'list',
+                component: 'list'
+            },
+            {
+                path: '/car',
+                name: 'car',
+                component: 'car'
+            },
+            {
+                path: '/mine',
+                name: 'mine',
+                component: 'mine'
+            },
+            {
+                path: '/notFound',
+                name: 'notFound',
+                component: 'notFound'
+            }
+        ]
+        const app = new Vue({
+            data() {
+                return {
+                    comName: 'home'
+                }
+            },
+            methods: {
+                hashChange() {
+                    window.addEventListener("hashchange", () => {
+                        let hash = location.hash.replace('#', '')
+                        this.comName = routes.find(item => item.path == hash)?.name || 'notFound'
+                    })
+                }
+            },
+            mounted() {
+                this.hashChange()
+            },
+            components: {
+                home, car, list, mine, notFound
+            }
+        });
+        app.$mount('#app')
+    </script>
+</body>
+
+</html>

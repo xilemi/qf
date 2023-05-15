@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- <script src="../vue.global.js"></script> -->
+</head>
+
+<style>
+
+
+</style>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="msgs">
+        <inp v-model="msgs"></inp>
+    </div>
+    <template id="inp">
+        <div>
+            <input type="text" :value="modelValue" @change="$emit('update:modelValue',$event.target.value)">
+        </div>
+    </template>
+    <script type="module">
+        //父组件 输入筐的值 同步显示到子组件  
+        import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+        let inp = {
+            template: "#inp",
+            props: ['modelValue'],
+            emits:['update:modelValue']
+        }
+        const app = createApp({
+            data() {
+                return {
+                    msgs: 'xile'
+                }
+            },
+            methods: {
+
+            },
+            components: {
+                inp
+            }
+        });
+        app.mount('#app')
+    </script>
+</body>
+
+</html>

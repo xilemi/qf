@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+
+</style>
+
+<body>
+    <div id="app">
+        <label>单价：<input type="text" v-model="price"></label>
+        <label>数量：<input type="text" v-model="num"></label>
+        <com :price="price" :num="num"></com>
+    </div>
+    <template id="com">
+        <div>
+            总价{{total}}
+        </div>
+    </template>
+    <script>
+        // 在data内赋值 父传子的组件只能作为初始值使用 
+        // 使用计算属性 可以动态使用父组件传递过来的值  这里是使用的get
+        // 如果使用set 进行操控父组件的值  那么同样也是直接修改了传递的值
+        // 所以 想动态使用父组件传递过来的值 就不可能达到暂存的操作
+        let com = {
+            template: '#com',
+            props: ["num","price"],
+            computed: {
+                total:{
+                    get(){
+                        return new Intl.NumberFormat().format(this.price*this.num)
+                    },
+                    set(val){
+                        console.log('赋值');
+                        this.price=val
+                    }
+                }
+            },
+            methods: {
+              
+            }
+        }
+        const app = new Vue({
+            props: ['com'],
+            data() {
+                return {
+                    price:0,
+                    num:0
+                }
+            },
+            methods: {
+
+            },
+            components: {
+                com
+            }
+        });
+        app.$mount('#app')
+    </script>
+</body>
+
+</html>

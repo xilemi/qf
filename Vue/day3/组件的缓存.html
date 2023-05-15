@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+
+</style>
+
+<body>
+    <div id="app">
+        <button @click="comName='com-a'">组件A</button>
+        <button @click="comName='com-b'">组件B</button>
+        <button @click="comName='com-c'">组件c</button>
+        <button @click="comName='com-d'">组件D</button>
+        <!-- 动态显示组件 -->
+        <!-- 默认是全部组件都会缓存 include可选缓存组件  可以是字符串或者数组
+            exclude  不被缓存的组件 
+            max 最大可缓存的数量
+        -->
+        <keep-alive>
+            <component :is="comName"></component>
+        </keep-alive>
+    </div>
+    <template id="comA">
+        <div>
+            <h1>组件A</h1>
+        </div>
+    </template>
+    <template id="comB">
+        <div>
+            <h1>组件B</h1>
+        </div>
+    </template>
+    <template id="comC">
+        <div>
+            <h1>组件C</h1>
+        </div>
+    </template>
+    <template id="comD">
+        <div>
+            <h1>组件D</h1>
+        </div>
+    </template>
+
+    <script>
+        // component 动态组件 对应组件名渲染组件 is 属性 （全局组件  当前组件下得子组件） 也可以动态绑定
+        // 组件缓存 keep-alive  不会被销毁    生命周期 activated() deactivated() 和keep-alive  搭配使用         
+        // keep-alive属性 include=''
+        let comA = {
+            template: '#comA'
+        }
+        let comB = {
+            template: '#comB'
+        }
+        let comC = {
+            template: '#comC'
+        }
+        let comD = {
+            template: '#comD'
+        }
+        const app = new Vue({
+            data() {
+                return {
+                    comName: 'com-a'
+                }
+            },
+            methods: {
+
+            },
+            components: {
+                comA,
+                comB,
+                comC,
+                comD
+            }
+        });
+        app.$mount('#app')
+    </script>
+</body>
+
+</html>

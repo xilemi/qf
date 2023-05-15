@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+
+</style>
+<body>
+    <div id="app">
+
+    </div>
+
+    <script>
+        // 兄弟组件的通信 
+        // 1.通过parent 组件作为中间人  将两者关联起来
+        // 2.通过 $parent $children  $refs 进行访问
+        // 3.给vue原型对象上添加一个属性，属性值为 vue实例化对象
+        Vue.prototype.$bus=new Vue()
+        // 让所有的vue实例化对象都可以访问vue实例化对象   使用$on $emit
+        const app = new Vue({
+            data() {
+                return{
+                    
+                }
+            },
+            methods: {
+
+            },
+        });
+       app.$mount('#app')
+    </script>
+</body>
+
+</html>

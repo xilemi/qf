@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+
+</style>
+<body>
+    <div id="app">
+        {{res}}
+        <com @count-click="resCount"></com>
+    </div>
+    <template id="com">
+        <div>
+            <button @click="add()">+</button>
+            <button @click="reduce()">-</button>
+        </div>
+    </template>
+    <script>
+        // 场景需要  子组件内 进行修改count 将结构传递给父组件进行展示
+        // 发送自定义事件和原生事件有什么区别 ？
+        let com={
+            data() {
+                return {
+                    count:10
+                }
+            },
+            template:'#com',
+            methods: {
+                add(){
+                    this.count++
+                    this.$emit('count-click',this.count)
+                },
+                reduce(){
+                    this.count--
+                    this.$emit('count-click',this.count)
+                }
+            },
+            // 在挂载完成后就进行事件发送获取初始值
+            mounted() {
+                this.$emit('count-click',this.count)
+            },
+        }
+        const app = new Vue({
+            data() {
+                return{
+                    res:0
+                }
+            },
+            methods: {
+                resCount(item){
+                    console.log(1111);
+                    this.res=item
+                }
+            },
+            components:{
+                com
+            }
+        });
+       app.$mount('#app')
+    </script>
+</body>
+
+</html>

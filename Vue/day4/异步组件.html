@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+
+</style>
+<body>
+    <div id="app">
+
+    </div>
+
+    <script>
+        // 对于不常用的组件 可以作为异步组件 首次加载回慢 并且会缓存结果 但是刷新后会被销毁
+        // 使用箭头函数 配合import 使用  ()=> import('组件地址')
+        const app = new Vue({
+            data() {
+                return{
+                    
+                }
+            },
+            methods: {
+
+            },
+        });
+       app.$mount('#app')
+    </script>
+</body>
+
+</html>

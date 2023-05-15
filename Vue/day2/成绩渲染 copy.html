@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+    table {
+        width: 1226px;
+        margin: 50px auto;
+        border-collapse: collapse;
+    }
+
+    th,
+    tr,
+    td {
+        border: 1px solid black;
+        text-align: center;
+        height: 50px;
+    }
+
+    a {
+        color: black;
+        text-decoration: none;
+    }
+
+    tbody input {
+        background-color: #fff;
+        text-align: center;
+        border: none;
+        outline: none;
+    }
+
+    .addBox,
+    .footBox,
+    .searchBox {
+        width: 1226px;
+        height: 30px;
+        margin: auto;
+    }
+
+    .addBox {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .footBox {
+        text-align: center;
+    }
+
+    .searchBox {
+        margin-top: 30px;
+        display: flex;
+        justify-content: space-around;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <div class="addBox">
+            <label>姓名: <input type="text" v-model="addGrade.name"></label>
+            <label>班级: <input type="text" v-model="addGrade.class"></label>
+            <label>语文: <input type="text" v-model="addGrade.ch"></label>
+            <label>数学: <input type="text" v-model="addGrade.mh"></label>
+            <label>英语: <input type="text" v-model="addGrade.eh"></label>
+            <button @click="add()">添加</button>
+        </div>
+        <div class="searchBox">
+            <div><input type="text" v-model="wd"><button @click="search()">搜索</button></div>
+            <div>
+                排序:
+                <label>id<input type="radio" name="col" value="id" v-model="params.col"></label>
+                <label>语文<input type="radio" name="col" value="chinese" v-model="params.col"></label>
+                <label>数学<input type="radio" name="col" value="math" v-model="params.col"></label>
+                <label>英语<input type="radio" name="col" value="english" v-model="params.col"></label>
+                <label>总分<input type="radio" name="col" value="total" v-model="params.col"></label>
+
+            </div>
+            <div>
+                <label><input type="radio" value="asc" name="type" v-model="params.type">升序</label>
+                <label><input type="radio" value="desc" name="type" v-model="params.type">降序</label>
+            </div>
+            <select v-model="params.size">
+                <option value="5">每页5条</option>
+                <option value="10">每页10条</option>
+                <option value="15">每15条</option>
+                <option value="20">每20页条</option>
+            </select>
+            <button @click="reset()">重置</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th v-for="item in title">{{item}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in list">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.class}}</td>
+                    <td><input type="text" v-model="item.chinese" :disabled="item.isEdit"></td>
+                    <td><input type="text" v-model="item.math" :disabled="item.isEdit"></td>
+                    <td><input type="text" v-model="item.english" :disabled="item.isEdit"></td>
+                    <td>{{item.total}}</td>
+                    <td>
+                        <a href="" @click.prevent="edit(item)" v-if="item.isEdit">编辑</a>
+                        <a href="" @click.prevent="save(item)" v-else>保存</a>
+                        <a href="" @click.prevent="del(item)">删除</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="footBox">
+            <button @click="prev()">上一页</button>
+            <input type="text" :value='current' ref="pageSearch" @change="pageSearch()">\
+            <span>{{maxPage}}</span>
+            <button @click='next()'>下一页</button>
+        </div>
+    </div>
+    <script src="../axios.min.js"></script>
+
+    <script type="module">
+        import { searchGradeOrderLimit, deleteGradeById, updateGradeById,addGrade } from './api.js'
+        const app = new Vue({
+            data() {
+                return {
+                    title: ['编号', '姓名', '班级', '语文', '数学', '英语', '总分', '操作'],
+                    list: [],
+                    params: {
+                        wd: '',
+                        col: 'id',
+                        type: 'asc',
+                        page: 1,
+                        size: 5
+                    },
+                    addGrade: {
+                        name: null,
+                        class: null,
+                        ch: null,
+                        mh: null,
+                        eh: null
+                    },
+                    maxPage: null,
+                    current: 1,
+                    wd: null
+                }
+            },
+            methods: {
+                getData() {
+                    searchGradeOrderLimit(this.params).then(data => {
+                        data.list.forEach(item => {
+                            this.$set(item, 'isEdit', true)
+                        })
+                        this.current = data.current
+                        this.maxPage = data.maxPage
+                        this.list = data.list
+                        if (this.params.page > this.maxPage) {
+                            this.params.page = this.maxPage
+                        }
+                    })
+                },
+                del(item) {
+                    if (confirm('确认删除')) {
+                        deleteGradeById({ id: item.id }).then(data => {
+                            if (data.status) {
+                                this.getData()
+                            }
+                        })
+                    }
+                },
+                edit(item) {
+                    // 问题  使用双向绑定后  不需要失焦就能发送数据 
+                    // 解决 把保存和修改分开
+                    // 问题 当有多个处于编辑状态时   一个保存  其他都会转成编辑
+                    // 解决 每次编辑前  都转成 编辑    再开启一个 编辑  
+                    // 让每次只存在一个可编辑状态的
+                    this.list.forEach(item => {
+                        item.isEdit = true
+                    })
+                    this.$set(item, 'isEdit', !item.isEdit)
+                },
+                save(item) {
+                    // 修改失败 但是页面数据已经修改了 
+                    this.$set(item, 'isEdit', !item.isEdit)
+                    updateGradeById({ id: item.id, ch: item.chinese, mh: item.math, eh: item.english }).then(res => {
+                        return res.data
+                    }).then(data => {
+                        if (data.status) {
+                        } else {
+                            alert(data.message)
+                            this.getData()
+
+                        }
+                    })
+                },
+                add() {
+                    addGrade(this.addGrade).then(data => {
+                        if (data.status) {
+                            alert('添加成功')
+                            this.addGrade = {
+                                name: null,
+                                class: null,
+                                ch: null,
+                                mh: null,
+                                eh: null
+                            }
+                        }
+                        else {
+                            alert(data.message)
+                        }
+                    })
+                },
+                prev() {
+                    if (this.current <= 1) return this.current = 1
+                    this.params.page--
+
+                },
+                next() {
+                    if (this.current > this.maxPage) {
+                        this.current = this.maxPage
+                        this.params.page = this.maxPage
+                        return
+                    }
+                    this.params.page++
+                },
+                reset() {
+                    this.params = {
+                        wd: '',
+                        col: 'id',
+                        type: 'asc',
+                        page: 1,
+                        size: 10
+                    }
+                },
+                search() {
+                    this.params.wd = this.wd
+                },
+                pageSearch() {
+                    if (this.$refs.pageSearch.value > this.maxPage) {
+                        this.current = this.maxPage
+                        this.params.page = this.maxPage
+                        return
+                    }
+                    else {
+                        this.params.page = this.$refs.pageSearch.value
+                    }
+                },
+            },
+            // 点击改变current后  watch监听到  执行
+            watch: {
+                params: {
+                    handler() {
+                        this.getData()
+                    },
+                    deep: true
+                }
+            },
+            mounted() {
+                this.getData()
+            },
+        });
+        app.$mount('#app')
+    </script>
+</body>
+
+</html>

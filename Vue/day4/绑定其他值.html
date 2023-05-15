@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+
+
+</style>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="msg">
+        <inp v-model="msg"></inp>
+    </div>
+    <template id="inp">
+        <div>
+            <input type="text" :value="msg" @change="$emit('update:msg',$event.target.value)">
+        </div>
+    </template>
+    <script>
+        //父组件 输入筐的值 同步显示到子组件 
+        let inp = {
+            template: "#inp",
+            model: {
+                prop: 'msg',
+                event: 'update:msg'
+            },
+            props: {
+                msg: {
+                    type: String,
+                    default: 'xile'
+                }
+            },
+        }
+        const app = new Vue({
+            data() {
+                return {
+                    msg: 'xile'
+                }
+            },
+            methods: {
+
+            },
+            components: {
+                inp
+            }
+        });
+        app.$mount('#app')
+    </script>
+</body>
+
+</html>
