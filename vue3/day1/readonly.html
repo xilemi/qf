@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.global.js"></script>
+</head>
+
+<style>
+
+
+</style>
+<body>
+    <div id="app">
+        <p>{{a}}</p>
+        <p>{{copy}}</p>
+        <p>{{copy1.count}}</p>
+        <button @click="changeA()">改变只读属性</button>
+    </div>
+
+    <script>
+        const { createApp,readonly,ref } = Vue
+        // 只读
+        const app = createApp({
+            setup(props) {
+                let a=ref(10)
+                // copy是只读属性  不能对其赋值了  
+                const copy = readonly(a)
+                const copy1=readonly({count:11})
+                function changeA(){
+                    console.log("a",a);
+                    console.log("copy",copy);
+                    // ref的值还可以被改变
+                    a.value=20
+                    // readonly  不能被修改 
+                    // copy=20
+                    // 同样报错  只读
+                    copy1.count++
+                }
+                
+                return {
+                    changeA,a,copy,copy1
+                }
+            }
+        });
+       app.mount('#app')
+    </script>
+</body>
+
+</html>

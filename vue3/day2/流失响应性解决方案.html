@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.global.js"></script>
+</head>
+
+<style>
+
+
+</style>
+<body>
+    <div id="app">
+        <div>
+            <p>直接解构</p>
+            <p>name:{{name}}</p>
+            <p>age:{{age}}</p>
+        </div>
+        <div>
+            <p>toRef后</p>
+            <p>nameref:{{nameref}}</p>
+            <p>ageref{{ageref}}</p>
+        </div>
+        <button @click="change()">点击</button>
+    </div>
+
+    <script>
+        // 问题出现场景 当 对对象中的属性进行解构赋值或者赋值给一个变量,对象中属性的改变不会同步到变量上
+        // 使用 toRef 和toRefs 可以解决这个问题,变量得的是一个ref对象
+        const { createApp,reactive,toRefs } = Vue
+        const app = createApp({
+            setup(props) {
+                const obj = reactive({name:'xile',age:18})
+                const {name,age}=obj
+                const {name:nameref,age:ageref}=toRefs(obj)
+                // 改变name 和age 看解构后的值谁能被改变
+                // 当然是被toRefs 后的值
+                function change(){
+                    obj.name="hhhhh"
+                    obj.age++
+                    console.log(nameref.value);
+                    console.log(ageref.value);
+                }
+                return{
+                    change,name,age,nameref,ageref
+                }
+
+            }
+        });
+       app.mount('#app')
+    </script>
+</body>
+
+</html>

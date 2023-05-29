@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.global.js"></script>
+</head>
+
+<style>
+
+
+</style>
+
+<body>
+    <div id="app">
+        <p>count:{{count}}</p>
+        <p>{{obj.name}}</p>
+        <p>{{obj.age}}</p>
+        <button @click="addCount()">点击</button>
+    </div>
+
+    <script>
+        const { createApp, watch, ref, reactive, computed } = Vue
+        // 默认是深度的 三个参数  监听的数据 如果只监听对象中的一个属性使用箭头函数  监听多个使用数组
+        // 第二参数 callback 
+        // 第三参数  配置项目  deep  默认是深度监听 
+        // flush 调整回调函数刷新的时机 'pre' | 'post' | 'sync 默认是pre
+        const app = createApp({
+            setup(props) {
+                let count = ref(20)
+                const obj = reactive({name:"xile",age:18})
+                const cmp=computed({
+                    set(val){
+                        count.value=val
+                    },
+                    get(){
+                        return count.value
+                    }
+                })
+                function addCount(){
+                    obj.age++
+                    count.value++
+                }
+                // 监听多个 新旧值为数组
+                watch([count,()=>obj.age],(oldValue,newValue)=>{
+                    console.log("oldValue",oldValue);
+                    console.log("newValue",newValue);
+                })
+                return {
+                    obj,count,addCount
+                }
+            }
+        });
+        app.mount('#app')
+    </script>
+</body>
+
+</html>

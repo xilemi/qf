@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.global.js"></script>
+</head>
+
+<style>
+
+
+</style>
+<body>
+    <div id="app">
+        <p>{{obj.name}}</p>
+        <p>{{obj.age}}</p>
+        <!-- 插值语法中会自动解包 -->
+        <p>{{cmp}}</p>
+    </div>
+
+    <script>
+        // reactive 返回对象的响应式代理 但是  响应式数组中的ref 或者map 不会被解包  需要.value 进行取值
+
+        const { createApp,reactive,computed,ref } = Vue
+        const app = createApp({
+            setup(props) {
+                const obj = reactive({name:"xile",age:18})
+                const obj1= reactive([ref(10)])
+                const cmp=computed(()=>{
+                    //不会被自动解包
+                    console.log(obj1[0].value);
+                    return obj1[0]
+                })
+                return{
+                    obj,obj1,cmp
+                }
+
+            }
+        });
+       app.mount('#app')
+    </script>
+</body>
+
+</html>

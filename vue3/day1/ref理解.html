@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.global.js"></script>
+</head>
+
+<style>
+
+
+</style>
+
+<body>
+    <div id="app">
+        <p>{{obj.name}}</p>
+        <p>{{obj.age}}</p>
+        <button @click="change()">点击</button>
+        <button @click="stop()">停止</button>
+    </div>
+
+    <script>
+        // ref 也可以传入 对象 那么ref和reactive的区别在哪里  
+        // 对ref.value赋值 可以覆盖 ref 的原值 但是  reactive 只能对代理的值进行操作 
+        const { createApp, ref, watchEffect } = Vue
+        const app = createApp({
+            setup(props) {
+                const obj = ref({ name: 'xile', age: 18 })
+                function change() {
+                    obj.value.age++
+                }
+                // 使用一个值来接受 watchEffect的返回值   然后调用即可停止监听
+                // 后续引用的数据类型发生改变  不会在被监听到 
+                // computed  watch watchEffect 对比
+                /* 
+                    computed 计算属性,根据引用的值返回新的衍生值,引用的值发生改变才会触发,并且初始化会执行一次
+                    watch 监听,监听一个或者多个,当监听的值发生改变时才能触发,如果想要初始化时执行一次,需要配置immediate,
+                    watchEffect 像是两者的结合,不用选择监听的对象,触发的函数内使用的数据当做监听对象,当发生变化时触发.同时也可以停止监听,用stop接受 watchEffect的返回值,使用stop()即可停止监听      
+                
+                
+                
+                
+                */
+                const stop = watchEffect(() => {
+                    console.log(obj.value.age);
+                })
+                // stop()
+                return {
+                    obj, change, stop
+                }
+
+            }
+        });
+        app.mount('#app')
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.global.js"></script>
+</head>
+
+<style>
+
+
+</style>
+<body>
+    <div id="app">
+
+    </div>
+
+    <script>
+        // isProxy 检测一个对象是否是由 reactive readonly 创建  ref 不是代理对象
+        const { createApp,ref,reactive,readonly,isRef,isReactive,isProxy,isReadonly } = Vue
+        const app = createApp({
+            setup(props) {
+                let a=ref(100)
+                let b=reactive({name:"xile",age:19})
+                let c=readonly(b)
+                console.log(isRef(a),"ref");
+                console.log(isReactive(b),"reactive");
+                console.log(isReadonly(c),"readonly");
+                console.log(isProxy(a),"ref");
+                console.log(isProxy(b),"reactive");
+                console.log(isProxy(c),"readonly");
+                return{
+
+                }
+
+            }
+        });
+       app.mount('#app')
+    </script>
+</body>
+
+</html>

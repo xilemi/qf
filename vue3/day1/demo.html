@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.global.js"></script>
+</head>
+
+<style>
+
+
+</style>
+
+<body>
+    <div id="app">
+        {{a}}
+    </div>
+
+    <script>
+        /* 
+        methods computed watch存放在代理对象上   this 指向代理对象上
+        */
+        let data = {
+            name: 'xile',
+            age: 19,
+            height: 197
+        }
+        // target 源  {}配置取值拦截 赋值拦截
+        const proxy=new Proxy(data,{
+            get(target,key){
+                console.log("取值");
+                return target[key]
+            },
+            set(target,key,val){
+                console.log("赋值");
+                return target[key]=val;
+            }
+        })
+        console.log(proxy.age);
+        console.log(proxy.age=20);
+        console.log(proxy.age);
+        const { createApp } = Vue
+        Object.defineProperty(data,)
+        createApp({
+            data() {
+                return {
+                    a: 11
+                }
+            },
+        }).mount("#app")
+    </script>
+</body>
+
+</html>

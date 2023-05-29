@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.global.js"></script>
+</head>
+
+<style>
+
+
+</style>
+<body>
+    <div id="app">
+        <p>{{obj.name}}</p>
+        <p>obj:{{obj.hhh}}</p>
+        <p>obj1:{{obj1.body.weight}}</p>
+        <p>{{obj2.age}}</p>
+        <button @click="changeAge()">修改age</button>
+        <button @click="changeObj()">修改obj</button>
+    </div>
+
+    <script>
+        // shallowRef 只会响应浅层的数据变化,vue的视图响应的深层的
+        // 如果要强制更新 使用triggerRef  会让整个视图都进行更新 不只是对于  shallowRef的内容
+        // 对于  reactive 没有 像 triggerRef一样的工具 可以看看  vue 实例上的内容
+        const { createApp,shallowRef,shallowReactive,shallowReadonly,triggerRef,getCurrentInstance } = Vue
+        const app = createApp({
+            setup(props) {
+                var app=getCurrentInstance()
+                console.log(app);
+                // 从app 中解构出ctx 
+                const {ctx}=app
+                // 使用ctx 中的$forceUpdate 进行强制更新
+                // 浅层监听ref的变化
+                const obj=shallowRef({name:"xile",hhh:18})
+                // 浅层监听reactive根属性的变化 
+                const obj1=shallowReactive({name:"tansuqin",age:20,body:{weight:100,height:10}})
+                const obj2=shallowReadonly({name:"tansuqin",age:20,body:{weight:100,height:10}})
+                function changeAge(){
+                    // 深层修改 不会被视图响应
+                    obj.value.hhh++
+                    // 让shallowRef 也可以视图更新 
+                    triggerRef(obj)
+                    // ctx.$forceUpdate()
+                    obj1.body.weight++
+                    // 根属性不能被修改 
+                    obj2.age++
+                    obj2.body.weight++
+                    console.log("age",obj.value.age);
+                    console.log("weight",obj1.body.weight);
+                }
+                function changeObj(){
+                    // 浅层修改 可以视图响应
+                    obj.value={name:'tansuqin',age:99}
+                    obj1.body={weight:900,height:10}
+                }
+                return{
+                    obj,changeAge,changeObj,obj1,obj2
+                }
+
+            }
+        });
+       app.mount('#app')
+    </script>
+</body>
+
+</html>

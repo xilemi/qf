@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.global.js"></script>
+</head>
+
+<style>
+
+
+</style>
+
+<body>
+    <div id="app">
+        <p>a:{{a}}</p>
+        <p>comp:{{comp}}</p>
+        <p>comp1:{{comp1=8}}</p>
+    </div>
+
+    <script>
+        const { createApp, computed, ref } = Vue
+        const app = createApp({
+            setup(props) {
+                let a = ref(10)
+                // 箭头函数的写法  只读
+                const comp = computed(() => {
+                    return a.value + 10
+                })
+                // 对象写法  配置set 和get 
+                const comp1=computed({
+                    set(val){
+                        console.log(11,val);
+                        a.value=val
+                    },
+                    get(){
+                        return a.value+10
+                    }
+                })
+                return {
+                    comp, a,comp1
+                }
+            }
+        });
+        app.mount('#app')
+    </script>
+</body>
+
+</html>

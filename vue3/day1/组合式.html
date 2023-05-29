@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.global.js"></script>
+</head>
+
+<style>
+
+
+</style>
+
+<body>
+    <div id="app">
+        <p v-color="color">a:{{a}}</p>
+        <p>b:{{b}}</p>
+        <button @click="addA">a++</button>
+    </div>
+
+    <script>
+        // setup() 执行在生命值周期函数之前
+        // ref 创建对数值的引用 存在value 属性中
+        // 不使用 vue 不监听到数值的变化   会导致  b改变了  页面不会刷新 
+        // 使用ref对象来存放数值类型  会存放在ref的value 放在{{}}中会自动解包
+        //  const obj = reactive()  创建对  对象的引用 返proxy对象
+        // vue3 使用的组合式  vue2 使用的选项式 vue3 对两种方式都是支持的 
+        const { createApp, ref } = Vue
+        const app = createApp({
+            setup(props) {
+                console.log(props);
+                let a = ref(10)
+                let b = ref(1000)
+                let color = "red"
+                function addA() {
+                    console.log(a, b);
+                    a.value++
+                    b.value
+                }
+                return {
+                    a,
+                    b,
+                    color,
+                    addA
+                }
+            },
+            methods: {
+
+            },
+        });
+        // 添加全局属性 存放在config中的globalProperties
+        // app.config.globalProperties.$a = 1111
+        // // 自定义指令
+        // app.directive("color", (el, binding) => {
+        //     el.style.color = binding.value
+        // })
+        // 自定义插件
+        app.use({
+            install() {
+                app.config.globalProperties.$a = 1111
+                // 自定义指令
+                app.directive("color", (el, binding) => {
+                    el.style.color = binding.value
+                })
+            }
+        })
+
+        app.mount('#app')
+        console.log(app);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.global.js"></script>
+</head>
+
+<style>
+
+
+</style>
+
+<body>
+    <div id="app">
+
+    </div>
+
+    <script>
+        const { createApp, toRaw,ref,reactive,isProxy } = Vue
+        const app = createApp({
+            setup(props) {
+                // toRaw 根据vue代理对象返回原始值
+                // ref中的参数是基本数据类型就是使用的 Object.defineProperties 中的set 和get 完成响应式的,如果是使用的引用数据类型,就是使用的借助reactive使用的proxy 完成的代理,但是本质还是ref 对象  使用isproxy检测任然是false
+                // 所有ref 和reactive readonly 这些是一个proxy 还是有本质区别的
+                const a = ref(10)
+                console.log(isProxy(a));
+                const c=ref({name:'xile',age:19})
+                console.log(isProxy(c));
+                const obj = reactive({ name: "xile", age: 19 })
+                let res = toRaw(a)
+                let res1 = toRaw(obj)
+                console.log(res);
+                console.log(res1);
+
+                return {
+                    res, res1
+                }
+
+            }
+        });
+        app.mount('#app')
+    </script>
+</body>
+
+</html>
