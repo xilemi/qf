@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /* 
+            class
+            静态属性
+            静态方法
+            继承
+            super
+            底层还是通过构造函数实现 类的所有方法都是在prototype属性里
+            constructor 构造函数 通过new 实例化对象的时候,会自动调用该方法,默认返回实例对象
+            类中定义的方法:静态方法和方法 静态方法不会被实例继承 但是可以被子类继承 通过类直接调用 并且this 指向类
+            静态属性:也只能被类访问,类的实例上不会有,但是子类是可以继承
+            super() 作为函数  指向父类的构造函数
+                    作为对象  普通方法中指向父类的原型属性 静态方法中指向父类
+        */
+      class A {
+        static a = 10;
+        constructor() {
+            // 在实例化的对象身上
+            this.name = "xile";
+            this.hhh = () => {
+                console.log(33);
+            };
+        }
+        // 实例方法 实例属性   
+        b = 100;
+        // 普通方法 prototype上 
+        say() {
+          console.log(11);
+        }
+        static who() {
+          console.log(22);
+        }
+      }
+      console.log(A.prototype);
+      let one = new A();
+      one.say(); //ok
+      one.hhh(); //ok
+      //   静态方式 不能被继承
+    //   one.who(); //no
+      console.log(one.b);
+      class B extends A {}
+      console.log(B.a);
+      /* 
+        class是一个语法糖，其底层还是通过 构造函数 去创建的。
+        类的所有方法都定义在类的prototype属性上面。
+        静态方法：在方法前加static，表示该方法不会被实例继承，而是直接通过类来调用。
+        静态属性：在属性前加static，指的是 Class 本身的属性，而不是定义在实例对象（this）上的属性。
+        es5 的构造函数在调用父构造函数前可以访问 this, 但 es6 的构造函数在调用父构造函数(即 super)前不能访问 this。
+        super
+
+        作为函数调用，代表父类的构造函数
+        作为对象调用，在普通方法中，指向父类的原型对象；在静态方法中，指向父类。
+
+
+        
+        
+        */
+    </script>
+  </body>
+</html>
